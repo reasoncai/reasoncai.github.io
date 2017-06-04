@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>100亿数据平滑数据迁移,不影响服务 | Reason&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="100亿数据平滑数据迁移,不影响服务">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="100亿数据平滑数据迁移,不影响服务">
+<meta property="og:url" content="https://reasoncai.github.io/2017/04/26/100亿数据平滑数据迁移-不影响服务/index.html">
+<meta property="og:site_name" content="Reason&#39;s blog">
+<meta property="og:description" content="100亿数据平滑数据迁移,不影响服务">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy1.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy2.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy3.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy4.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy5.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy6.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy7.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy8.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy9.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy10.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy11.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy12.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy13.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy14.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy15.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy16.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy17.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy18.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy19.png">
+<meta property="og:updated_time" content="2017-05-06T06:11:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="100亿数据平滑数据迁移,不影响服务">
+<meta name="twitter:description" content="100亿数据平滑数据迁移,不影响服务">
+<meta name="twitter:image" content="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy1.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Reason&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Reason</h2>
+            <h3 id="title">Web Developer &amp; Designer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span><br>
+			<h3 id="contact">WeChat&amp;QQ : 403411876</h3>
+            <!--<a id="follow" target="_blank" href="https://github.com/reasoncai/">FOLLOW</a> -->
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                24
+                <span>tags</span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-100亿数据平滑数据迁移-不影响服务" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            100亿数据平滑数据迁移,不影响服务
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/26/100亿数据平滑数据迁移-不影响服务/">
+            <time datetime="2017-04-25T16:13:44.000Z" itemprop="datePublished">2017-04-26</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/转载/">转载</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/数据库/">数据库</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>100亿数据平滑数据迁移,不影响服务</p>
+<a id="more"></a>
+<p>2017-03-23 58沈剑 架构师之路</p>
+<p><strong>一、问题的提出</strong></p>
+<p>互联网有很多“数据量较大，并发量较大，业务复杂度较高”的业务场景，其典型系统分层架构如下：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy1.png" alt=""><br>（1）上游是<strong>业务层biz</strong>，实现个性化的业务逻辑</p>
+<p>（2）中游是<strong>服务层service</strong>，封装数据访问</p>
+<p>（3）下游是<strong>数据层db</strong>，存储固化的业务数据</p>
+<p>服务化分层架构的好处是，服务层屏蔽下游数据层的复杂性，例如缓存、分库分表、存储引擎等存储细节不需要向调用方暴露，而只向上游提供方便的RPC访问接口，当有一些数据层变化的时候，所有的调用方也不需要升级，只需要服务层升级即可。</p>
+<p>互联网架构，很多时候面临着这样一些需求：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy2.png" alt=""></p>
+<p><strong>需求1-&gt;底层表结构变更</strong>：数据量非常大的情况下，数据表增加了一些属性，删除了一些属性，修改了一些属性。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy3.png" alt=""></p>
+<p><strong>需求2-&gt;分库个数变换</strong>：由于数据量的持续增加，底层分库个数非成倍增加。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy4.png" alt=""></p>
+<p><strong>需求3-&gt;底层存储介质变换</strong>：底层存储引擎由一个数据库换为另一个数据库。</p>
+<p>种种需求，都需要进行数据迁移，如何平滑迁移数据，迁移过程不停机，保证系统持续服务，是文本将要讨论的问题。</p>
+<p><strong>二、停机方案</strong></p>
+<p>在讨论平滑迁移数据方案之前，先看下不平滑的停机数据迁移方案，主要分三个步骤。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy5.png" alt=""></p>
+<p><strong>步骤一</strong>：<strong>挂</strong>一个类似“为了给广大用户提供更好的服务，服务器会在凌晨0:00-0:400进行停机维护”的<strong>公告</strong>，并在对应时段进行<strong>停机</strong>，这个时段系统没有流量进入。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy6.png" alt=""></p>
+<p><strong>步骤二</strong>：停机后，研发一个<strong>离线</strong>的数据迁移工具，进行<strong>数据迁移</strong>。针对第一节的三类需求，会分别开发不同的数据迁移工具。</p>
+<p>（1）底层表结构变更需求：开发旧表导新表的工具</p>
+<p>（2）分库个数变换需求：开发2库导3库的工具</p>
+<p>（3）底层存储介质变换需求：开发Mongo导Mysql工具<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy7.png" alt=""></p>
+<p><strong>步骤三</strong>：<strong>恢复服务</strong>，并将流量切到新库，不同的需求，可能会涉及不同服务升级。</p>
+<p>（1）底层表结构变更需求：服务要升级到访问新表</p>
+<p>（2）分库个数变换需求：服务不需要升级，只需要改寻库路由配置</p>
+<p>（3）底层存储介质变换需求：服务升级到访问新的存储介质</p>
+<p>总的来说，停机方案是相对直观和简单的，但对服务的可用性有影响，许多游戏公司的服务器升级，游戏分区与合区，可能会采用类似的方案。</p>
+<p>除了影响服务的可用性，这个方案还有一个缺点，就是必须在指定时间完成升级，这个对研发、测试、运维同学来说，<strong>压力会非常大</strong>，一旦出现问题例如数据不一致，必须在规定时间内解决，否则只能回滚。根据经验，<strong>人压力越大越容易出错</strong>，这个缺点一定程度上是致命的。</p>
+<p>无论如何，停机方案并不是今天要讨论的重点，接下来看一下常见的平滑数据迁移方案。</p>
+<p><strong>三、平滑迁移-追日志法</strong></p>
+<p>平滑迁移方案一，追日志法，这个方案主要分为五个步骤。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy8.png" alt=""></p>
+<p>数据迁移前，上游业务应用通过旧的服务访问旧的数据。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy9.png" alt=""></p>
+<p><strong>步骤一</strong>：服务进行升级，记录“对旧库上的数据修改”的日志（这里的修改，为数据的insert, delete, update），这个日志不需要记录详细数据，主要记录：</p>
+<p>（1）被修改的库</p>
+<p>（2）被修改的表</p>
+<p>（3）被修改的唯一主键</p>
+<p>具体新增了什么行，修改后的数据格式是什么，不需要详细记录。这样的好处是，不管业务细节如何变化，日志的格式是固定的，这样能保证方案的通用性。</p>
+<p>这个服务升级风险较小：<br>（1）写接口是少数接口，改动点较少<br>（2）升级只是增加了一些日志，对业务功能没有任何影响<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy10.png" alt=""></p>
+<p><strong>步骤二</strong>：研发一个数据迁移工具，进行数据迁移。这个数据迁移工具和离线迁移工具一样，把旧库中的数据转移到新库中来。</p>
+<p>这个小工具的风险较小：</p>
+<p>（1）整个过程依然是旧库对线上提供服务<br>（2）小工具的复杂度较低<br>（3）任何时间发现问题，都可以把新库中的数据干掉重来<br>（4）可以限速慢慢迁移，技术同学没有时间压力</p>
+<p><strong>数据迁移完成之后，就能够切到新库提供服务了么？</strong></p>
+<p>答案是否定的，在数据迁移的过程中，旧库依然对线上提供着服务，库中的数据随时可能变化，这个变化并没有反映到新库中来，于是旧库和新库的数据并不一致，所以不能直接切库，需要将数据追平。</p>
+<p>哪些数据发生了变化呢？</p>
+<p>步骤一中日志里记录的不就是么？<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy11.png" alt=""></p>
+<p><strong>步骤三</strong>：研发一个读取日志并迁移数据的小工具，要把步骤二迁移数据过程中产生的差异数据追平。这个小工具需要做的是：</p>
+<p>（1）读取日志，得到哪个库、哪个表、哪个主键发生了变化</p>
+<p>（2）把旧库中对应主键的记录读取出来</p>
+<p>（3）把新库中对应主键的记录替换掉</p>
+<p>无论如何，原则是数据以旧库为准。</p>
+<p>这个小工具的风险也很小：</p>
+<p>（1）整个过程依然是旧库对线上提供服务</p>
+<p>（2）小工具的复杂度较低</p>
+<p>（3）任何时间发现问题，大不了从步骤二开始重来</p>
+<p>（4）可以限速慢慢重放日志，技术同学没有时间压力</p>
+<p><strong>日志重放之后，就能够切到新库提供服务了么？</strong></p>
+<p>答案依然是否定的，在日志重放的过程中，旧库中又可能有数据发生了变化，导致数据不一致，所以还是不能切库，需要进一步读取日志，追平记录。可以看到，重放日志追平数据的程序是一个while(1)的程序，新库与旧库中的数据追平也会是一个“无限逼近”的过程。</p>
+<p><strong>什么时候数据会完全一致呢？</strong><br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy12.png" alt=""></p>
+<p><strong>步骤四</strong>：在持续重放日志，追平数据的过程中，研发一个数据校验的小工具，将旧库和新库中的数据进行比对，直到数据完全一致。</p>
+<p>这个小工具的风险依旧很小：</p>
+<p>（1）整个过程依然是旧库对线上提供服务</p>
+<p>（2）小工具的复杂度较低</p>
+<p>（3）任何时间发现问题，大不了从步骤二开始重来</p>
+<p>（4）可以限速慢慢比对数据，技术同学没有时间压力<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy13.png" alt=""></p>
+<p><strong>步骤五</strong>：在数据比对完全一致之后，将流量迁移到新库，新库提供服务，完成迁移。</p>
+<p>如果步骤四数据一直是99.9%的一致，不能完全一致，也是正常的，可以做一个秒级的旧库readonly，等日志重放程序完全追上数据后，再进行切库切流量。</p>
+<p>至此，升级完毕，整个过程能够持续对线上提供服务，不影响服务的可用性。</p>
+<p><strong>四、平滑迁移-双写法</strong></p>
+<p>平滑迁移方案二，双写法，这个方案主要分为四个步骤。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy14.png" alt=""></p>
+<p>数据迁移前，上游业务应用通过旧的服务访问旧的数据。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy15.png" alt=""></p>
+<p><strong>步骤一</strong>：服务进行升级，对“对旧库上的数据修改”（这里的修改，为数据的insert, delete, update），在新库上进行相同的修改操作，这就是所谓的“双写”，主要修改操作包括：</p>
+<p>（1）旧库与新库的同时insert</p>
+<p>（2）旧库与新库的同时delete</p>
+<p>（3）旧库与新库的同时update</p>
+<p>由于新库中此时是没有数据的，所以双写旧库与新库中的affect rows可能不一样，不过这完全不影响业务功能，只要不切库，依然是旧库提供业务服务。</p>
+<p>这个服务升级风险较小：</p>
+<p>（1）写接口是少数接口，改动点较少</p>
+<p>（2）新库的写操作执行成功与否，对业务功能没有任何影响<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy16.png" alt=""></p>
+<p><strong>步骤二</strong>：研发一个数据迁移工具，进行数据迁移。这个数据迁移工具在本文中已经出现第三次了，把旧库中的数据转移到新库中来。</p>
+<p>这个小工具的风险较小：</p>
+<p>（1）整个过程依然是旧库对线上提供服务</p>
+<p>（2）小工具的复杂度较低</p>
+<p>（3）任何时间发现问题，都可以把新库中的数据干掉重来</p>
+<p>（4）可以限速慢慢迁移，技术同学没有时间压力</p>
+<p><strong>数据迁移完成之后，就能够切到新库提供服务了么？</strong></p>
+<p>答案是肯定的，因为前置步骤进行了双写，所以理论上数据迁移完之后，新库与旧库的数据应该完全一致。</p>
+<p>由于迁移数据的过程中，旧库新库双写操作在同时进行，<strong>怎么证明数据迁移完成之后数据就完全一致了呢？</strong><br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy17.png" alt=""></p>
+<p>如上图所示：</p>
+<p>（1）左侧是旧库中的数据，右侧是新库中的数据</p>
+<p>（2）按照primary key从min到max的顺序，分段，限速进行数据的迁移，假设已经迁移到now这个数据段</p>
+<p>数据迁移过程中的修改操作分别讨论：</p>
+<p>（1）假设迁移过程中进行了一个<strong>双insert操作</strong>，旧库新库都插入了数据，数据一致性没有被破坏</p>
+<p>（2）假设迁移过程中进行了一个<strong>双delete操作</strong>，这又分为两种情况</p>
+<pre><code>（2.1）假设这delete的数据属于[min,now]范围，即已经完成迁移，则旧库新库都删除了数据，数据一致性没有被破坏
+
+（2.2）假设这delete的数据属于[now,max]范围，即未完成迁移，则旧库中删除操作的affect rows为1，新库中删除操作的affect rows为0，但是数据迁移工具在后续数据迁移中，并不会将这条旧库中被删除的数据迁移到新库中，所以数据一致性仍没有被破坏
+</code></pre><p>（3）假设迁移过程中进行了一个<strong>双update操作</strong>，可以认为update操作是一个delete加一个insert操作的复合操作，所以数据仍然是一致的</p>
+<p>除非除非除非，在一种非常非常非常极限的情况下：</p>
+<p>（1）date-migrate-tool<strong>刚好</strong>从旧库中将某一条数据X取出</p>
+<p>（2）在X插入到新库中之前，旧库与新库中<strong>刚好</strong>对X进行了双delete操作</p>
+<p>（3）date-migrate-tool再将X插入到新库中</p>
+<p>这样，会出现新库比旧库多出一条数据X。</p>
+<p>但无论如何，为了保证数据的一致性，切库之前，还是需要进行数据校验的。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy18.png" alt=""></p>
+<p><strong>步骤三</strong>：在数据迁移完成之后，需要使用数据校验的小工具，将旧库和新库中的数据进行比对，完全一致则符合预期，如果出现步骤二中的极限不一致情况，则以旧库中的数据为准。</p>
+<p>这个小工具的风险依旧很小：</p>
+<p>（1）整个过程依然是旧库对线上提供服务</p>
+<p>（2）小工具的复杂度较低</p>
+<p>（3）任何时间发现问题，大不了从步骤二开始重来</p>
+<p>（4）可以限速慢慢比对数据，技术同学没有时间压力<br><img src="http://ooxz0ztfx.bkt.clouddn.com/shujuqianyi/sjqy19.png" alt=""></p>
+<p><strong>步骤四</strong>：数据完全一致之后，将流量切到新库，完成平滑数据迁移。</p>
+<p>至此，升级完毕，整个过程能够持续对线上提供服务，不影响服务的可用性。</p>
+<p><strong>五、总结</strong></p>
+<p>针对互联网很多“数据量较大，并发量较大，业务复杂度较高”的业务场景，在</p>
+<p>（1）底层表结构变更</p>
+<p>（2）分库个数变换</p>
+<p>（3）底层存储介质变换</p>
+<p>的众多需求下，需要进行数据迁移，完成<strong>“平滑迁移数据，迁移过程不停机，保证系统持续服务”</strong>有两种常见的解决方案。</p>
+<p><strong>追日志法</strong>，五个步骤：</p>
+<p>（1）<strong>服务进行升级</strong>，记录“对旧库上的数据修改”的日志</p>
+<p>（2）研发一个数据迁移<strong>小工具</strong>，进行数据迁移</p>
+<p>（3）研发一个读取日志<strong>小工具</strong>，追平数据差异</p>
+<p>（4）研发一个数据比对<strong>小工具</strong>，校验数据一致性</p>
+<p>（5）流量切到新库，完成平滑迁移</p>
+<p><strong>双写法</strong>，四个步骤：</p>
+<p>（1）<strong>服务进行升级</strong>，记录“对旧库上的数据修改”进行新库的双写</p>
+<p>（2）研发一个数据迁移<strong>小工具</strong>，进行数据迁移</p>
+<p>（3）研发一个数据比对<strong>小工具</strong>，校验数据一致性</p>
+<p>（4）流量切到新库，完成平滑迁移</p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/04/26/100亿数据平滑数据迁移-不影响服务/" data-id="cj3iw6w8v000067xdfkxbqtrx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/04/26/Springboot中使用AOP统一处理Web请求日志/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Springboot中使用AOP统一处理Web请求日志
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/04/25/logback使用配置详解/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">logback使用配置详解</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
+                            <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/31/Docker实践系列2-制作镜像/" class="title">Docker实践系列2-制作镜像</a></p>
+                            <p class="item-date"><time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Docker实践系列1-基本命令/" class="title">Docker实践系列1-基本命令</a></p>
+                            <p class="item-date"><time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/架构/">架构</a></p>
+                            <p class="item-title"><a href="/2017/05/28/一种简单的微服务架构拆分方案/" class="title">一种简单的微服务架构拆分方案</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:31:48.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a></p>
+                            <p class="item-title"><a href="/2017/05/28/Java方法参数传递/" class="title">Java方法参数传递</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:06:25.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 reason<br>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

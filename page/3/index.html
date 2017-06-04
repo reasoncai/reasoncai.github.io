@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Reason&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Reason&#39;s blog">
+<meta property="og:url" content="https://reasoncai.github.io/page/3/index.html">
+<meta property="og:site_name" content="Reason&#39;s blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reason&#39;s blog">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Reason&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Reason</h2>
+            <h3 id="title">Web Developer &amp; Designer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span><br>
+			<h3 id="contact">WeChat&amp;QQ : 403411876</h3>
+            <!--<a id="follow" target="_blank" href="https://github.com/reasoncai/">FOLLOW</a> -->
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                24
+                <span>tags</span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main">
+    <article id="post-Spring缓存使用方法(基于注解)" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/10/Spring缓存使用方法(基于注解)/">Spring缓存使用方法(基于注解)</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/10/Spring缓存使用方法(基于注解)/">
+            <time datetime="2017-05-10T15:24:19.000Z" itemprop="datePublished">2017-05-10</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/spring/">spring</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/redis/">redis</a>, <a class="tag-link" href="/tags/spring/">spring</a>, <a class="tag-link" href="/tags/缓存/">缓存</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-启用Spring对缓存的支持。"><a href="#1-启用Spring对缓存的支持。" class="headerlink" title="1.启用Spring对缓存的支持。"></a>1.启用Spring对缓存的支持。</h3><p>Spring对缓存的支持有两种方式：</p>
+<ul>
+<li>注解驱动的缓存</li>
+<li>XML声明的缓存<h4 id="1-1-通过使用-EnableCaching启用注解驱动的缓存"><a href="#1-1-通过使用-EnableCaching启用注解驱动的缓存" class="headerlink" title="1.1.通过使用@EnableCaching启用注解驱动的缓存"></a>1.1.通过使用@EnableCaching启用注解驱动的缓存</h4></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.springcache.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.concurrent.ConcurrentMapCacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/5/11.</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableCaching</span>  <span class="comment">//启用缓存</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheConfig</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 声明缓存管理器</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ConcurrentMapCacheManager();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="1-2-通过使用-lt-cache-annotation-driven-gt-启用注解式缓存"><a href="#1-2-通过使用-lt-cache-annotation-driven-gt-启用注解式缓存" class="headerlink" title="1.2.通过使用&lt;cache:annotation-driven/&gt;启用注解式缓存"></a>1.2.通过使用<code>&lt;cache:annotation-driven/&gt;</code>启用注解式缓存</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">"http://www.springframework.org/schema/beans"</span></span></div><div class="line">       <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span> <span class="attr">xmlns:cache</span>=<span class="string">"http://www.springframework.org/schema/cache"</span></div><div class="line">       <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"</span>&gt;</div><div class="line">    <span class="comment">&lt;!--启用注解式缓存--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">cache:annotation-driven</span>/&gt;</span> </div><div class="line">    <span class="comment">&lt;!--声明缓存管理器--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span> = <span class="string">"cacheManager"</span> <span class="attr">class</span>=</span></div><div class="line">            <span class="string">"org.springframework.cache.concurrent.ConcurrentMapCacheManager"</span>/&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上两种方式的工作原理是相同的，都是创建一个切面(aspect)并触发Spring缓存注解的切点(pointcut)。根据所使用的注解以及缓存的状态，切面会从缓存中获取数据，将数据添加到缓存中或者从缓存中移除某个值。例子中出了启用了注解驱动的缓存，还声明了一个缓存管理器(cache manager)的bean。缓存管理器是Spring缓存的抽象核心，它能够与多个流行的缓存实现(Ehcache,Redis等等)进行集成。例子中用了ConcurrentMapCacheManager这个简单的缓存管理器，底层其实就是用了ConcurrentHashMap作为存储，其存储是基于内存额，适用于开发，测试或简单的应用。</p>
+<h4 id="1-3-配置缓存管理器"><a href="#1-3-配置缓存管理器" class="headerlink" title="1.3.配置缓存管理器"></a>1.3.配置缓存管理器</h4><p>可用的缓存管理器：</p>
+<ul>
+<li>SimpleCacheManager</li>
+<li>NoOpCacheManager</li>
+<li>ConcurrentMapCacheManager</li>
+<li>CompositeCacheManager</li>
+<li>EhCacheCacheManager</li>
+<li>JCacheCacheManager</li>
+<li>RedisCacheManager</li>
+<li>GemfireCacheManager</li>
+</ul>
+<p><strong>使用Ehcache缓存</strong></p>
+<p>需要依赖ehcache</p>
+<h5 id="1-3-1-以Java配置的方式设置EhCacheCacheManager"><a href="#1-3-1-以Java配置的方式设置EhCacheCacheManager" class="headerlink" title="1.3.1.以Java配置的方式设置EhCacheCacheManager"></a>1.3.1.以Java配置的方式设置EhCacheCacheManager</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.springcache.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> net.sf.ehcache.CacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.ehcache.EhCacheCacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.ehcache.EhCacheManagerFactoryBean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.core.io.ClassPathResource;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/5/11.</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableCaching</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EhCacheConfig</span> </span>&#123;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> EhCacheCacheManager <span class="title">cacheCacheManager</span><span class="params">(CacheManager cm)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EhCacheCacheManager(cm);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> EhCacheManagerFactoryBean <span class="title">ehcache</span><span class="params">()</span></span>&#123;</div><div class="line">        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = <span class="keyword">new</span> EhCacheManagerFactoryBean();</div><div class="line">        ehCacheManagerFactoryBean.setConfigLocation(<span class="keyword">new</span> ClassPathResource(<span class="string">"ehcache.xml"</span>));</div><div class="line">        <span class="keyword">return</span> ehCacheManagerFactoryBean;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>说明：EhCache的CacheManager要被注入到Spring的EhCacheCacheManager之中。Spring提供了EhCacheManagerFactoryBean来生成EhCache的CacheManager。方法ehcache()会创建并返回一个EhCacheManagerFactoryBean实例。因为它是一个工厂bean（实现了Spring的FactoryBean接口），所以注册在Spring应用上下文中的并不是EhCacheManagerFactoryBean的实例，而是CacheManager的一个实例。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ehcache</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">cache</span> <span class="attr">name</span>=<span class="string">"test"</span> <span class="attr">maxBytesLocalHeap</span>=<span class="string">"50m"</span> <span class="attr">timeToLiveSeconds</span>=<span class="string">"100"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">cache</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">ehcache</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>ehcache.xml的配置示例</p>
+<p><strong>使用Redis缓存</strong></p>
+<p>需要依赖spring-data-redis</p>
+<p>spring-data-redis提供了RedisCacheManager,这是CacheManager的一个实现。RedisCacheManager通过RedisTemplate将缓存存到Redis中。为了使用<br>RedisCacheManager,需要RedisTemplate和RedisConnectionFactory实现类(如JedisConnectionFactory)的一个bean.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.springcache.config;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</div><div class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.jedis.JedisConnectionFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/5/11.</div><div class="line"> */</div><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableCaching</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisCacheConfig</span> </span>&#123;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Redis缓存管理器</div><div class="line">     * <span class="doctag">@param</span> redisTemplate</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">(RedisTemplate redisTemplate)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RedisCacheManager(redisTemplate);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * RedisTemplate</div><div class="line">     * <span class="doctag">@param</span> redisConnectionFactory</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> RedisTemplate&lt;String,String&gt; <span class="title">redisTemplate</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span></span>&#123;</div><div class="line">        RedisTemplate&lt;String, String&gt; redisTemplate = <span class="keyword">new</span> RedisTemplate&lt;String, String&gt;();</div><div class="line">        redisTemplate.setConnectionFactory(redisConnectionFactory);</div><div class="line">        redisTemplate.afterPropertiesSet();</div><div class="line">        <span class="keyword">return</span> redisTemplate;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Redis连接工厂</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> JedisConnectionFactory <span class="title">jedisConnectionFactory</span><span class="params">()</span></span>&#123;</div><div class="line">        JedisConnectionFactory jedisConnectionFactory = <span class="keyword">new</span> JedisConnectionFactory();</div><div class="line">        jedisConnectionFactory.afterPropertiesSet();</div><div class="line">        <span class="keyword">return</span> jedisConnectionFactory;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用多个缓存管理器</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableCaching</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CompositeCacheConfig</span> </span>&#123;</div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> CacheManager <span class="title">cacheManager</span><span class="params">()</span></span>&#123;</div><div class="line">        CompositeCacheManager cacheManager = <span class="keyword">new</span> CompositeCacheManager();</div><div class="line">        ArrayList&lt;CacheManager&gt; managers = <span class="keyword">new</span> ArrayList&lt;CacheManager&gt;();</div><div class="line">        managers.add(<span class="keyword">new</span> JCacheCacheManager());</div><div class="line">        managers.add(<span class="keyword">new</span> EhCacheCacheManager());</div><div class="line">        managers.add(<span class="keyword">new</span> RedisCacheManager(<span class="keyword">new</span> RedisTemplate()));</div><div class="line">        cacheManager.setCacheManagers(managers);</div><div class="line">        <span class="keyword">return</span> cacheManager;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>当查找缓存时，CompositeCacheManager会先检查jcache,接着ehcache,最后redis来查找缓存。</p>
+<h3 id="2-为方法添加注解以支持缓存"><a href="#2-为方法添加注解以支持缓存" class="headerlink" title="2.为方法添加注解以支持缓存"></a>2.为方法添加注解以支持缓存</h3><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@Cacheable</td>
+<td>适用于查询。 表明在调用方法之前，首先在缓存中查找方法的返回值，如果找到，则返回缓存的值。否则这个方法就会被调用，返回值放到缓存中。</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td>适用于新增。表明将方法的返回值放到缓存中。调用前并不会检查缓存，方法始终会被调用。</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td>适用于删除。表明在缓存中删除一个或多个条目。</td>
+</tr>
+<tr>
+<td>@Caching</td>
+<td>这是一个分组注解，能够同时应用多个其他的缓存注解。</td>
+</tr>
+</tbody>
+</table>
+<p>以上注解都能运用在方法或类上。当将其放在单个方法上时，注解所描述的行为只会作用到这个方法上。如果放在类级别的话，那么缓存行为就会应用到这个类的所有方法上。</p>
+<h4 id="2-1填充缓存"><a href="#2-1填充缓存" class="headerlink" title="2.1填充缓存"></a>2.1填充缓存</h4><p>@Cacheable和CachePut的一些共有的属性。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>String[]</td>
+<td>要使用的缓存名称</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>String</td>
+<td>SpEl表达式，false不会将缓存应用到方法调用上</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>SpEl表达式，用来计算自定义的缓存key</td>
+</tr>
+<tr>
+<td>unless</td>
+<td>String</td>
+<td>SpEl表达式,true，返回值不会放到缓存中</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cacheable</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Cacheable</span>(<span class="string">"userCache"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> User <span class="title">findOne</span><span class="params">(<span class="keyword">long</span> id)</span></span>&#123;</div><div class="line">    <span class="keyword">return</span> jdbc.queryById(id);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当findOne()被调用时，缓存切面会拦截调用并在缓存中查找，缓存的key是传递到findOne方法中的id参数。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Cacheable</span>(<span class="string">"userCache"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> User <span class="title">findOne</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>当注解放在实现类时，作用只限于这个实现类，但如果放在接口的方法上，那么所有实现类都会应用相同的缓存规则</p>
+<p><strong>CachePut</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CachePut</span>(<span class="string">"userCache"</span>)</div><div class="line"><span class="function">User <span class="title">save</span><span class="params">(User user)</span></span>;</div></pre></td></tr></table></figure></p>
+<p><strong>++当save()方法被调用时，首先会保存user,然后返回的User会放到缓存中。那么问题来了，缓存的key默认是方法的参数即user,缓存的value是方法的返回值User。但是我们的查询方法是根据id作为key的。所以这里我们需要缓存的key也应该是User的id。因此我们需要自定义缓存的key.++</strong></p>
+<p><strong>自定义缓存key</strong></p>
+<p>@Cacheable和@CachePut的key属性能替换掉默认的key，它是根据SpEL表达式计算得到的。常见的用法是定义的表达式与存储在缓存中的值有关。具体到我们上面的例子，需要将key设置为所保存的user的id,但参数中user还没保存，因此没有id，只能通过save()返回的保存后的user得到id。</p>
+<p>Spring提供了多个用来定义缓存规则的SpEL扩展</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#root.args</td>
+<td>传递给缓存方法的参数，形式为数组</td>
+</tr>
+<tr>
+<td>#root.caches</td>
+<td>该方法执行时所对应的缓存，形式为数组</td>
+</tr>
+<tr>
+<td>#root.target</td>
+<td>目标对象</td>
+</tr>
+<tr>
+<td>#root.targetClass</td>
+<td>目标对象的类，是#root.target.class的缩写</td>
+</tr>
+<tr>
+<td>#root.method</td>
+<td>缓存方法</td>
+</tr>
+<tr>
+<td>#root.methodName</td>
+<td>缓存方法的名字，是#root.method.name的缩写</td>
+</tr>
+<tr>
+<td>#result</td>
+<td>方法调用的返回值(不能用在@Cacheable注解上)</td>
+</tr>
+<tr>
+<td>#Argument</td>
+<td>任意的方法参数名（如#argName）或参数索引（如#a0或#p0）</td>
+</tr>
+</tbody>
+</table>
+<p>解决上面遇到的问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CachePut</span>(value=<span class="string">"userCache"</span>,key=<span class="string">"#result.id"</span>)</div><div class="line"><span class="function">User <span class="title">save</span><span class="params">(User user)</span></span>;</div></pre></td></tr></table></figure>
+<p>返回的User会保存在缓存中，key会返回的User的id属性。</p>
+<p><strong>条件化缓存</strong></p>
+<p>通过为方法添加Spring的缓存注解，Spring就会围绕这个方法创建一个缓存切面。但是有些场景下我们希望将缓存功能关闭。@Cacheable和@CachePut的属性unless和condition就可以做到。如果unless表达式计算为true，那么返回的数据就不会放到缓存中，只是禁止放缓存，依然会找缓存。如果condition表达式计算为false，那么对这个方法的缓存就会被禁掉，即既不会找也不会放缓存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Cacheable</span>(value=<span class="string">"userCache"</span>,unless=<span class="string">"#result.message.contains('NoCache')"</span>)</div><div class="line"><span class="function">User <span class="title">findOne</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</div></pre></td></tr></table></figure>
+<p>示例中为unless设置的SpEL表达式会表示检查返回的User对象的message属性，如果包含’NoCache’文本neirong,则这个表达式为true,所以这个返回值不会放到缓存中。否则如果为false,则这个返回值会被缓存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Cacheable</span>(value=<span class="string">"userCache"</span>,unless=<span class="string">"#result.message.contains('NoCache')"</span>,condition=<span class="string">"#id&gt;=10"</span>)</div><div class="line"><span class="function">User <span class="title">findOne</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</div></pre></td></tr></table></figure>
+<p>如果参数值id小于10，那么缓存就会被禁用，像没有加这个注解一样。</p>
+<h4 id="2-2移除缓存条目（-CacheEvict）"><a href="#2-2移除缓存条目（-CacheEvict）" class="headerlink" title="2.2移除缓存条目（@CacheEvict）"></a>2.2移除缓存条目（@CacheEvict）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@CacheEvict</span>(<span class="string">"userCache"</span>)</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">remove</span><span class="params">(<span class="keyword">long</span> id)</span></span>;</div></pre></td></tr></table></figure>
+<p>当remove()方法调用时，会从缓存中删除一个条目。被删除条目的key与传递进来的id参数的值相等。<br>与@Cacheable和@CachePut不同，@CacheEvict能够应用于返回值为void的方法上。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>value</td>
+<td>String[]</td>
+<td>要使用的缓存名称</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>String</td>
+<td>SpEl表达式，false不会将缓存应用到方法调用上</td>
+</tr>
+<tr>
+<td>key</td>
+<td>String</td>
+<td>SpEl表达式，用来计算自定义的缓存key</td>
+</tr>
+<tr>
+<td>allEntries</td>
+<td>boolean</td>
+<td>如果为true，特定缓存的所有条目都会被移除</td>
+</tr>
+<tr>
+<td>beforeInvocation</td>
+<td>boolean</td>
+<td>如果为true,在方法调用之前移除条目，如果为fasle(默认)的话，在方法成功调用之后再移除条目</td>
+</tr>
+</tbody>
+</table>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/10/Spring缓存使用方法(基于注解)/" data-id="cj3iw6w9s000t67xd7d1akdzs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-关于应用集群化部署的可行性分析" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/09/关于应用集群化部署的可行性分析/">关于应用集群化部署的可行性分析</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/09/关于应用集群化部署的可行性分析/">
+            <time datetime="2017-05-09T07:59:10.000Z" itemprop="datePublished">2017-05-09</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/架构/">架构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/并发/">并发</a>, <a class="tag-link" href="/tags/负载均衡/">负载均衡</a>, <a class="tag-link" href="/tags/集群/">集群</a>, <a class="tag-link" href="/tags/高可用/">高可用</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-问题背景"><a href="#1-问题背景" class="headerlink" title="1.问题背景"></a>1.问题背景</h3><p>Center经常在高峰期（一般在下午2点到5点）出现卡顿，请求堵塞在MQ的情况，严重影响业务和用户体验。</p>
+<h3 id="2-初步分析"><a href="#2-初步分析" class="headerlink" title="2.初步分析"></a>2.初步分析</h3><p>目前的部署架构如图所示：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/pssnow.png" alt=""><br>可以看出只有一个消费者（Center应用）在处理业务请求。在高峰期，处理速度远小于生产者将请求放入MQ的速度，导致请求在MQ中堆积，不能及时消费处理，结果就是系统响应缓慢，各种接口调用超时。</p>
+<h3 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3.解决方案"></a>3.解决方案</h3><p>将Center集群化部署，提高消息的处理能力，并增强服务的高可用性。如图所示，目前先再部署多一个，后面根据业务的增长可以水平再扩展到N个。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/pssfuture.png" alt=""></p>
+<h3 id="4-解决方案的可行性分析"><a href="#4-解决方案的可行性分析" class="headerlink" title="4.解决方案的可行性分析"></a>4.解决方案的可行性分析</h3><p>Center可以轻松地水平扩展主要依赖于以下几点：</p>
+<ul>
+<li><strong>请求消息的无状态性</strong></li>
+</ul>
+<p>无状态服务(stateless service)指的是对单次请求的处理，不依赖其他请求，也就是说，处理一次请求所需的全部信息，要么都包含在这个请求里，要么可以从外部获取到（比如说数据库），服务器本身不存储任何信息 。</p>
+<ul>
+<li><strong>请求消息的无序性</strong></li>
+</ul>
+<p>无序性指的是请求消息不必按顺序依次消费处理。Center使用线程池来处理请求可以得出这个结论，因为每个线程获得CPU时间是随机的，所以对请求的处理是无序的。</p>
+<ul>
+<li><strong>其他</strong></li>
+</ul>
+<p>Center自身没有任何的定时任务需要执行，不用考虑定时任务重复执行的问题。</p>
+<h3 id="5-方案实施"><a href="#5-方案实施" class="headerlink" title="5.方案实施"></a>5.方案实施</h3><h4 id="5-1单机多应用部署"><a href="#5-1单机多应用部署" class="headerlink" title="5.1单机多应用部署"></a>5.1单机多应用部署</h4><p>即拷贝多一份完整应用，并修改相关的脚本<br>此方案的优点是简单，不用占用新服务器资源，IP没有变化，不用考虑外部接口对IP的限制问题。缺点是共用服务器资源，性能效果没有最优。</p>
+<h4 id="5-2多机部署"><a href="#5-2多机部署" class="headerlink" title="5.2多机部署"></a>5.2多机部署</h4><p>在新的服务器上部署。此方案的优点是独占服务器资源，缺点是IP变化了，要考虑外部接口对IP限制的问题。</p>
+<h3 id="6-拓展：高可用部署"><a href="#6-拓展：高可用部署" class="headerlink" title="6.拓展：高可用部署"></a>6.拓展：高可用部署</h3><p>考虑到业务的日益增长，当前的瓶颈是Center的处理速度,以后的瓶颈可能是Web服务器，MQ，数据库,网络等等，对此提供一份部署方案参考。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/pssha2.png" alt=""></p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/09/关于应用集群化部署的可行性分析/" data-id="cj3iw6wa5001a67xdz5t6ri5s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-npm-install安装时忘记-save解决方法" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/07/npm-install安装时忘记-save解决方法/">npm install安装时忘记--save解决方法</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/07/npm-install安装时忘记-save解决方法/">
+            <time datetime="2017-05-07T12:17:54.000Z" itemprop="datePublished">2017-05-07</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/npm/">npm</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><img src="http://ooxz0ztfx.bkt.clouddn.com/npminit.png" alt=""><br>网上还有一个解决方案就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install `ls node_modules` --save</div></pre></td></tr></table></figure></p>
+<p>或<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save $(ls node_modules)</div></pre></td></tr></table></figure></p>
+<p><strong>假如忘记保存的包太多，上面的方法都太麻烦了，直接<code>npm init</code> 重新生成package.json搞定。</strong></p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/07/npm-install安装时忘记-save解决方法/" data-id="cj3iw6wa1001367xdhi8hovsv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-Java序列化小结" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/06/Java序列化小结/">Java序列化小结</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/06/Java序列化小结/">
+            <time datetime="2017-05-06T12:07:59.000Z" itemprop="datePublished">2017-05-06</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/序列化/">序列化</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>Java序列化就是将一个对象转化成一串二进制表示的字节数组，通过保存或传递这些字节数据来带到持久化或通讯的目的。要序列化，对象必须实现java.io.Serializable接口。反序列化则是将这个字节数组再重新构造成对象，需要原始类作为模板，所以序列化的数据并不像class文件那样保存类的完整的结构信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FileOutPutStream fos = <span class="keyword">new</span> FileOutPutStream(<span class="string">"serv.dat"</span>);</div><div class="line">ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(fos);</div><div class="line">SerialableObject object = <span class="keyword">new</span> SerialableObject();</div><div class="line">oos.writeObject(object);</div><div class="line">oos.flush();</div></pre></td></tr></table></figure>
+<ul>
+<li>当父类继承Serializable接口时，所有子类都可以被序列化。</li>
+<li>子类实现了Serializable接口，父类没有，父类中的属性不能序列化（不报错，数据会丢失），但是在子类中属性仍能正确序列化。</li>
+<li>如果序列化的属性是对象，则这个对象也必须实现Serializable接口，否则会报错。</li>
+<li>在反序列化时，如果对象有属性的修改或删减，则修改的部分属性会丢失，但不会报错。</li>
+<li>在反序列化时，如果serialVersionUID被修改，则反序列化会失败。</li>
+</ul>
+<p>在纯java环境下，java序列化可以用。但<strong>个人认为还不如用fastjson序列化和反序列化（效率有人测试过比jdk序列化的高</strong>）。如果是多语言环境，尽量用通用的数据结构传递和保存信息，如json或者xml,也可以考虑其他序列化技术protobuf,thrift,avro等等。</p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/06/Java序列化小结/" data-id="cj3iw6w9g000c67xd842574jx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-Java并发编程的艺术读书笔记-2-并发编程模型" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/">Java并发编程的艺术读书笔记(2)-并发编程模型</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/">
+            <time datetime="2017-05-05T15:37:20.000Z" itemprop="datePublished">2017-05-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/并发/">并发</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-并发编程模型的两个关键问题"><a href="#1-并发编程模型的两个关键问题" class="headerlink" title="1.并发编程模型的两个关键问题"></a>1.并发编程模型的两个关键问题</h3><h4 id="1-1线程之间如何通信。"><a href="#1-1线程之间如何通信。" class="headerlink" title="1.1线程之间如何通信。"></a>1.1线程之间如何通信。</h4><p>通信是指线程之间以何种机制来交换信息。有两种：共享内存和消息传递。在共享内存的并发模型里，线程之间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信。在消息传递的并发模型里，线程之间没有公共状态，线程之间必须通过发送消息来显示进行通信。java的并发采用的是共享内存模型。</p>
+<h4 id="1-2线程之间如何同步。"><a href="#1-2线程之间如何同步。" class="headerlink" title="1.2线程之间如何同步。"></a>1.2线程之间如何同步。</h4><p>同步是指程序中用于控制不同线程间操作发生相对顺序的机制。在共享内存并发模型中，同步是显式进行的。程序员必须显式指定某个方法或某段代码需要在线程之间互斥执行。在消息传递的并发模型里，由于消息的发送必须在消息的接收之前，因此同步是隐式进行的。</p>
+<h3 id="2-happens-before简介"><a href="#2-happens-before简介" class="headerlink" title="2.happens-before简介"></a>2.happens-before简介</h3><p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系。这里提到的两个操作既可以是一个线程之内的，也可以是在不同线程之间的。两个操作之间具有happens-before关系，并不意味着前一个操作必须要在后一个操作之前执行。happens-before仅仅要求前一个操作（执行的结果）对后一个操作可见，且前一个操作按顺序排在第二个操作之前（the first is visible to and ordered before the second）。</p>
+<h4 id="2-1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。"><a href="#2-1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。" class="headerlink" title="2.1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。"></a>2.1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。</h4><h4 id="2-2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。"><a href="#2-2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。" class="headerlink" title="2.2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。"></a>2.2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</h4><h4 id="2-3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。"><a href="#2-3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。" class="headerlink" title="2.3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。"></a>2.3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</h4><h4 id="2-4传递性：如果A-happens-before-B，且B-happens-before-C-那么A-happens-before-C。"><a href="#2-4传递性：如果A-happens-before-B，且B-happens-before-C-那么A-happens-before-C。" class="headerlink" title="2.4传递性：如果A happens-before B，且B happens-before C,那么A happens-before C。"></a>2.4传递性：如果A happens-before B，且B happens-before C,那么A happens-before C。</h4>
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/" data-id="cj3iw6w9j000f67xd1fdxv7ms" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    </nav>
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
+                            <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/31/Docker实践系列2-制作镜像/" class="title">Docker实践系列2-制作镜像</a></p>
+                            <p class="item-date"><time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Docker实践系列1-基本命令/" class="title">Docker实践系列1-基本命令</a></p>
+                            <p class="item-date"><time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/架构/">架构</a></p>
+                            <p class="item-title"><a href="/2017/05/28/一种简单的微服务架构拆分方案/" class="title">一种简单的微服务架构拆分方案</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:31:48.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a></p>
+                            <p class="item-title"><a href="/2017/05/28/Java方法参数传递/" class="title">Java方法参数传递</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:06:25.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 reason<br>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

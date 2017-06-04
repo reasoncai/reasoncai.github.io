@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Docker实践系列1-基本命令 | Reason&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1.如何使用Docker1.1.Docker镜像常用操作1.1.1.列出本地可用镜像1$ docker images 1.1.2.拉取镜像1$ docker pull centos 执行以上命令后，docker客户端将连接docker hub，并自动从centos镜像仓库中下载最新版本的centos镜像。下载完后可再次通过docker images命令列出镜像：    REPOSITORY TAG">
+<meta name="keywords" content="DOCKER">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker实践系列1-基本命令">
+<meta property="og:url" content="https://reasoncai.github.io/2017/05/30/Docker实践系列1-基本命令/index.html">
+<meta property="og:site_name" content="Reason&#39;s blog">
+<meta property="og:description" content="1.如何使用Docker1.1.Docker镜像常用操作1.1.1.列出本地可用镜像1$ docker images 1.1.2.拉取镜像1$ docker pull centos 执行以上命令后，docker客户端将连接docker hub，并自动从centos镜像仓库中下载最新版本的centos镜像。下载完后可再次通过docker images命令列出镜像：    REPOSITORY TAG">
+<meta property="og:updated_time" content="2017-06-04T15:56:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker实践系列1-基本命令">
+<meta name="twitter:description" content="1.如何使用Docker1.1.Docker镜像常用操作1.1.1.列出本地可用镜像1$ docker images 1.1.2.拉取镜像1$ docker pull centos 执行以上命令后，docker客户端将连接docker hub，并自动从centos镜像仓库中下载最新版本的centos镜像。下载完后可再次通过docker images命令列出镜像：    REPOSITORY TAG">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Reason&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Reason</h2>
+            <h3 id="title">Web Developer &amp; Designer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span><br>
+			<h3 id="contact">WeChat&amp;QQ : 403411876</h3>
+            <!--<a id="follow" target="_blank" href="https://github.com/reasoncai/">FOLLOW</a> -->
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                24
+                <span>tags</span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Docker实践系列1-基本命令" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Docker实践系列1-基本命令
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/30/Docker实践系列1-基本命令/">
+            <time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/DOCKER/">DOCKER</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/DOCKER/">DOCKER</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="1-如何使用Docker"><a href="#1-如何使用Docker" class="headerlink" title="1.如何使用Docker"></a>1.如何使用Docker</h2><h3 id="1-1-Docker镜像常用操作"><a href="#1-1-Docker镜像常用操作" class="headerlink" title="1.1.Docker镜像常用操作"></a>1.1.Docker镜像常用操作</h3><h4 id="1-1-1-列出本地可用镜像"><a href="#1-1-1-列出本地可用镜像" class="headerlink" title="1.1.1.列出本地可用镜像"></a>1.1.1.列出本地可用镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker images</div></pre></td></tr></table></figure>
+<h4 id="1-1-2-拉取镜像"><a href="#1-1-2-拉取镜像" class="headerlink" title="1.1.2.拉取镜像"></a>1.1.2.拉取镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker pull centos</div></pre></td></tr></table></figure>
+<p>执行以上命令后，docker客户端将连接docker hub，并自动从centos镜像仓库中下载最新版本的centos镜像。下载完后可再次通过docker images命令列出镜像：</p>
+<table>
+<thead>
+<tr>
+<th>REPOSITORY</th>
+<th>TAG</th>
+<th>IMAGE ID</th>
+<th>CREATED</th>
+<th>SIZE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>centos</td>
+<td>lastest</td>
+<td>d0e7f81ca65c</td>
+<td>3 months ago</td>
+<td>196.6 MB</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>IMAGE ID:表示镜像的标识符，具备唯一性。这里看到的是一串12位的字符串，实际上它是64位完整镜像ID的缩略表达形式。</li>
+</ul>
+<h4 id="1-1-3-搜索镜像"><a href="#1-1-3-搜索镜像" class="headerlink" title="1.1.3.搜索镜像"></a>1.1.3.搜索镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker search centos</div></pre></td></tr></table></figure>
+<h4 id="1-1-4-删除镜像"><a href="#1-1-4-删除镜像" class="headerlink" title="1.1.4.删除镜像"></a>1.1.4.删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker rmi centos</div><div class="line">$ docker rmi <span class="_">-f</span> centos <span class="comment">#强制删除有容器在跑的镜像</span></div><div class="line">$ docker rmi <span class="_">-f</span> `docker images <span class="_">-a</span> -q` <span class="comment">#一次性删除所有镜像</span></div></pre></td></tr></table></figure>
+<p>使用以上命令在Docker hub中搜索centos镜像。</p>
+<h4 id="1-1-5-导出与导入镜像"><a href="#1-1-5-导出与导入镜像" class="headerlink" title="1.1.5.导出与导入镜像"></a>1.1.5.导出与导入镜像</h4><p>使用以下命令导出centos镜像为一个tar文件（镜像包）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker save centos &gt; centos.tar</div></pre></td></tr></table></figure></p>
+<p>若不指定导出的tar文件路径，则导出的centos.tar文件在当前目录上。</p>
+<p>导出的centos.tar镜像包文件可随时在另一台Docker机器上导入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker load &lt; centos.tar</div></pre></td></tr></table></figure></p>
+<p>当我们获取了centos镜像后，就能基于该镜像启动相应的容器。</p>
+<h3 id="1-2-Docker容器常用操作"><a href="#1-2-Docker容器常用操作" class="headerlink" title="1.2.Docker容器常用操作"></a>1.2.Docker容器常用操作</h3><h4 id="1-2-1-创建并启动容器"><a href="#1-2-1-创建并启动容器" class="headerlink" title="1.2.1.创建并启动容器"></a>1.2.1.创建并启动容器</h4><p>使用以下命令在运行centos镜像，从而创建并启动centos容器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -i -t centos /bin/bash</div></pre></td></tr></table></figure></p>
+<p>需要注意的是该命令实际上首先从本地获取centos镜像，若本地没有，则从docker hub拉取centos镜像并放入本地，随后才根据镜像创建并启动centos容器。</p>
+<ul>
+<li>-i选项：表示启动容器后，打开标准输入设备（STDIN）,可使用键盘进行输入。</li>
+<li>-t选项：表示启动容器后，分配一个伪终端（pseudo-TTY）,将于服务器建立一个会话。</li>
+<li>centos参数：表示需要运行的镜像名称，标准格式为centos:latest,若为latest版本，则可省略。</li>
+<li>/bin/bash参数：表示运行容器中的bash应用程序，因为我们此时并不需要运行其他程序，只想进入到容器中。<h4 id="1-2-2-列出容器"><a href="#1-2-2-列出容器" class="headerlink" title="1.2.2.列出容器"></a>1.2.2.列出容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker ps</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>CONTAINER ID</th>
+<th>IMAGE</th>
+<th>COMMAND</th>
+<th>CREATED</th>
+<th>STATUS</th>
+<th>PROTS</th>
+<th>NAMES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21e21e1j212j</td>
+<td>centos</td>
+<td>“/bin/bash”</td>
+<td>8 hours age</td>
+<td>Up 5 seconds</td>
+<td></td>
+<td>ekdsaf_dfds</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>COMMAND:表示启动容器时运行的命令。</li>
+<li>NAMES:表示容器的名称，由docker引擎自动生成，也可以在docker run命令中通过–name选项来指定。</li>
+</ul>
+<h4 id="1-2-3-进入容器"><a href="#1-2-3-进入容器" class="headerlink" title="1.2.3.进入容器"></a>1.2.3.进入容器</h4><p>使用以下命令进入运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker attach 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>只能进入运行中的容器，不能进入已停止的容器。此外，当打开多个终端并进入容器时，在一个终端中执行了某命令，该命令自动同步到其他终端中。例如在一个终端中执行了exit命令，将从终端中退出容器，此时其他终端也会自动退出容器。</p>
+<h4 id="1-2-4-执行命令"><a href="#1-2-4-执行命令" class="headerlink" title="1.2.4.执行命令"></a>1.2.4.执行命令</h4><p>使用以下命令向运行中的容器执行具体的命令(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">exec</span> -i -t 21e21e1j212j ls <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+<h4 id="1-2-5-停止容器"><a href="#1-2-5-停止容器" class="headerlink" title="1.2.5.停止容器"></a>1.2.5.停止容器</h4><p>使用以下命令停止运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker stop 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>使用该命令可对容器发送SIGTERM信号，将等待一段很短的时间，再对容器发送SIGKILL信号，立刻终止容器。</p>
+<h4 id="1-2-6-终止容器"><a href="#1-2-6-终止容器" class="headerlink" title="1.2.6.终止容器"></a>1.2.6.终止容器</h4><p>使用以下命令终止运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">kill</span> 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>对容器发送SIGKILL信号，立刻终止容器</p>
+<h4 id="1-2-7-启动容器"><a href="#1-2-7-启动容器" class="headerlink" title="1.2.7.启动容器"></a>1.2.7.启动容器</h4><p>使用以下命令启动已停止的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker start 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<h4 id="1-2-8-重启容器"><a href="#1-2-8-重启容器" class="headerlink" title="1.2.8.重启容器"></a>1.2.8.重启容器</h4><p>使用以下命令重启运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker restart 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>该命令实际上首先执行了docker stop，再执行docker start.</p>
+<h4 id="1-2-9-删除容器"><a href="#1-2-9-删除容器" class="headerlink" title="1.2.9.删除容器"></a>1.2.9.删除容器</h4><p>使用以下命令删除已停止的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker rm 21e21e1j212j</div><div class="line">$ docker rm <span class="_">-f</span> 21e21e1j212j <span class="comment">#强制删除运行中的容器</span></div><div class="line">或 $ docker rm <span class="_">-f</span> `docker ps <span class="_">-a</span> -q` <span class="comment">#一次性删除所有容器</span></div></pre></td></tr></table></figure></p>
+<h4 id="1-2-10-导出与导入容器"><a href="#1-2-10-导出与导入容器" class="headerlink" title="1.2.10.导出与导入容器"></a>1.2.10.导出与导入容器</h4><p>使用以下命令导出容器为一个tar文件（容器包）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">export</span> 21e21e1j212j &gt; centos.tar</div></pre></td></tr></table></figure></p>
+<p>导出的centos.tar容器包可随时在另一个docker机器上导入为镜像，命令为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker import centos.tar cai/centos:latest</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，我们之前用docker load 命令（从镜像包中导入镜像）与现在用docker import(从容器包中导入镜像)都可以导入镜像，区别是容器包不包含任何历史记录，相当于容器的当前快照，镜像包则包含所有的历史记录，因此镜像包的体积较大。</p>
+<h3 id="1-3-Docker命令汇总"><a href="#1-3-Docker命令汇总" class="headerlink" title="1.3.Docker命令汇总"></a>1.3.Docker命令汇总</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">help</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/30/Docker实践系列1-基本命令/" data-id="cj3iw6w95000467xdc3uo5bgt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/05/31/Docker实践系列2-制作镜像/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    Docker实践系列2-制作镜像
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2017/05/28/一种简单的微服务架构拆分方案/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">一种简单的微服务架构拆分方案</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
+                            <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/31/Docker实践系列2-制作镜像/" class="title">Docker实践系列2-制作镜像</a></p>
+                            <p class="item-date"><time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Docker实践系列1-基本命令/" class="title">Docker实践系列1-基本命令</a></p>
+                            <p class="item-date"><time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/架构/">架构</a></p>
+                            <p class="item-title"><a href="/2017/05/28/一种简单的微服务架构拆分方案/" class="title">一种简单的微服务架构拆分方案</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:31:48.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a></p>
+                            <p class="item-title"><a href="/2017/05/28/Java方法参数传递/" class="title">Java方法参数传递</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:06:25.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 reason<br>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

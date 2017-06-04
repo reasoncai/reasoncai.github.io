@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>redis-cluster搭建（3主3从） | Reason&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="一、搭建环境 os:centos6.4  redis:3.0.5">
+<meta name="keywords" content="redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="redis-cluster搭建（3主3从）">
+<meta property="og:url" content="https://reasoncai.github.io/2017/04/25/redis-cluster搭建（3主3从）/index.html">
+<meta property="og:site_name" content="Reason&#39;s blog">
+<meta property="og:description" content="一、搭建环境 os:centos6.4  redis:3.0.5">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/6.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/1.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/2.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/3.png">
+<meta property="og:image" content="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/4.png">
+<meta property="og:updated_time" content="2017-05-06T06:11:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="redis-cluster搭建（3主3从）">
+<meta name="twitter:description" content="一、搭建环境 os:centos6.4  redis:3.0.5">
+<meta name="twitter:image" content="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/6.png">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Reason&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Reason</h2>
+            <h3 id="title">Web Developer &amp; Designer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span><br>
+			<h3 id="contact">WeChat&amp;QQ : 403411876</h3>
+            <!--<a id="follow" target="_blank" href="https://github.com/reasoncai/">FOLLOW</a> -->
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                24
+                <span>tags</span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-redis-cluster搭建（3主3从）" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            redis-cluster搭建（3主3从）
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/04/25/redis-cluster搭建（3主3从）/">
+            <time datetime="2017-04-25T06:14:45.000Z" itemprop="datePublished">2017-04-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/中间件/">中间件</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/redis/">redis</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h3><ul>
+<li><p>os:centos6.4</p>
+</li>
+<li><p>redis:3.0.5</p>
+</li>
+</ul>
+<a id="more"></a>
+<h3 id="二、搭建步骤"><a href="#二、搭建步骤" class="headerlink" title="二、搭建步骤"></a>二、搭建步骤</h3><h4 id="1-安装必要的依赖"><a href="#1-安装必要的依赖" class="headerlink" title="1.安装必要的依赖"></a>1.安装必要的依赖</h4><ul>
+<li>安装gcc：yum install gcc</li>
+<li>安装rubygems：yum install rubygems</li>
+<li>安装ruby的redis驱动：gem install redis</li>
+</ul>
+<h4 id="2-获取安装包"><a href="#2-获取安装包" class="headerlink" title="2..获取安装包"></a>2..获取安装包</h4><p>使用下载好的包redis-3.0.5.tar.gz或直接命令下载：<br>wget <a href="http://download.redis.io/releases/redis-3.0.5.tar.gz" target="_blank" rel="external">http://download.redis.io/releases/redis-3.0.5.tar.gz</a></p>
+<p>将安装包放到/soft/目录下:mv redis-3.0.5.tar.gz /soft/</p>
+<h4 id="3-安装编译"><a href="#3-安装编译" class="headerlink" title="3.安装编译"></a>3.安装编译</h4><ul>
+<li>cd /soft</li>
+<li>tar zxvf redis-3.0.5.tar.gz </li>
+<li>cd redis-3.0.5</li>
+<li>make MALLOC=libc</li>
+<li>make install PREFIX=/usr/local/redis</li>
+</ul>
+<h4 id="4-创建文件夹"><a href="#4-创建文件夹" class="headerlink" title="4.创建文件夹"></a>4.创建文件夹</h4><ul>
+<li>mkdir /data/redis-cluster -p</li>
+<li>cd /data/redis-cluster/</li>
+<li>mkdir 7000 7001 7002 7003 7004 7005</li>
+</ul>
+<h4 id="5-拷贝及修改配置文件"><a href="#5-拷贝及修改配置文件" class="headerlink" title="5.拷贝及修改配置文件"></a>5.拷贝及修改配置文件</h4><ul>
+<li><p>cp /soft/redis-3.0.5/redis.conf  /data/redis-cluster/7000/</p>
+</li>
+<li><p>cp /soft/redis-3.0.5/redis.conf  /data/redis-cluster/7001/</p>
+</li>
+<li><p>cp /soft/redis-3.0.5/redis.conf  /data/redis-cluster/7002/</p>
+</li>
+<li><p>cp /soft/redis-3.0.5/redis.conf  /data/redis-cluster/7003/</p>
+</li>
+<li><p>cp /soft/redis-3.0.5/redis.conf  /data/redis-cluster/7004/</p>
+</li>
+<li><p>cp /soft/redis-3.0.5/redis.conf  /data/redis-cluster/7005/</p>
+</li>
+<li><p>vim /data/redis-cluster/7000/redis.conf<br>分别修改以上路径的配置文件内容项：7000-7005</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">daemonize yes</div><div class="line">pidfile /var/run/redis_7000.pid</div><div class="line">port 7000</div><div class="line">cluster-enabled yes</div><div class="line">cluster-config-file nodes_7000.conf</div><div class="line">cluster-node-timeout 15000</div><div class="line">appendonly yes</div></pre></td></tr></table></figure>
+<h4 id="6-启动6个redis实例"><a href="#6-启动6个redis实例" class="headerlink" title="6.启动6个redis实例"></a>6.启动6个redis实例</h4><ul>
+<li>/usr/local/redis/bin/redis-server /data/redis-cluster/7000/redis.conf </li>
+<li>/usr/local/redis/bin/redis-server /data/redis-cluster/7001/redis.conf </li>
+<li>/usr/local/redis/bin/redis-server /data/redis-cluster/7002/redis.conf </li>
+<li>/usr/local/redis/bin/redis-server /data/redis-cluster/7003/redis.conf </li>
+<li>/usr/local/redis/bin/redis-server /data/redis-cluster/7004/redis.conf </li>
+<li>/usr/local/redis/bin/redis-server /data/redis-cluster/7005/redis.conf </li>
+</ul>
+<h4 id="7-将集群管理程序复制到redis安装目录下"><a href="#7-将集群管理程序复制到redis安装目录下" class="headerlink" title="7.将集群管理程序复制到redis安装目录下"></a>7.将集群管理程序复制到redis安装目录下</h4><p>cp /soft/redis-3.0.5/src/redis-trib.rb /usr/local/redis/bin/</p>
+<h4 id="8-创建集群"><a href="#8-创建集群" class="headerlink" title="8.创建集群"></a>8.创建集群</h4><p>/usr/local/redis/bin/redis-trib.rb create –replicas 1 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 </p>
+<pre><code>使用create命令 --replicas 1 参数表示为每个主节点创建一个从节点，其他参数是实例的地址集合
+</code></pre><p>创建成功：</p>
+<p><img src="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/6.png" alt=""></p>
+<h4 id="9-检验测试"><a href="#9-检验测试" class="headerlink" title="9.检验测试"></a>9.检验测试</h4><p>9.1测试存取值</p>
+<p>​    客户端连接集群redis-cli需要带上 -c ，redis-cli -c -p 端口号</p>
+<p><img src="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/1.png" alt=""></p>
+<p>​    发现在几个节点中跳来跳去。</p>
+<p>9.2测试集群节点选举</p>
+<p>查看集群目前状况：/usr/local/redis/bin/redis-cli -c  -p 7000 cluster nodes<br><img src="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/2.png" alt=""></p>
+<p>可以看出7000,7001,7002为master节点，7003,7004,7005为对应从节点</p>
+<p>现在杀掉7001节点的进程，再看看集群状况：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/3.png" alt=""></p>
+<p>可以看到，节点7001为fail状态，它的从节点7004被选举为master节点</p>
+<p>现在我们将7001节点重新启动，看是否会自动加入集群中以及充当master节点还是slave节点。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/rediscluster/4.png" alt=""></p>
+<p>可以看到7001节点恢复了，成为了7004节点的从节点。</p>
+<h3 id="三、附录"><a href="#三、附录" class="headerlink" title="三、附录"></a>三、附录</h3><h5 id="redis配置参数说明"><a href="#redis配置参数说明" class="headerlink" title="redis配置参数说明"></a>redis配置参数说明</h5><p>　　daemonize：如需要在后台运行，把该项的值改为yes</p>
+<p>　　pdifile：把pid文件放在/var/run/redis.pid，可以配置到其他地址</p>
+<p>　　bind：指定redis只接收来自该IP的请求，如果不设置，那么将处理所有请求，在生产环节中最好设置该项</p>
+<p>　　port：监听端口，默认为6379</p>
+<p>　　timeout：设置客户端连接时的超时时间，单位为秒</p>
+<p>　　loglevel：等级分为4级，debug，revbose，notice和warning。生产环境下一般开启notice</p>
+<p>　　logfile：配置log文件地址，默认使用标准输出，即打印在命令行终端的端口上</p>
+<p>　　database：设置数据库的个数，默认使用的数据库是0</p>
+<p>　　save：设置redis进行数据库镜像的频率</p>
+<p>　　rdbcompression：在进行镜像备份时，是否进行压缩</p>
+<p>　　dbfilename：镜像备份文件的文件名</p>
+<p>　　dir：数据库镜像备份的文件放置的路径</p>
+<p>　　slaveof：设置该数据库为其他数据库的从数据库</p>
+<p>　　masterauth：当主数据库连接需要密码验证时，在这里设定</p>
+<p>　　requirepass：设置客户端连接后进行任何其他指定前需要使用的密码</p>
+<p>　　maxclients：限制同时连接的客户端数量</p>
+<p>　　maxmemory：设置redis能够使用的最大内存</p>
+<p>　　appendonly：开启appendonly模式后，redis会把每一次所接收到的写操作都追加到appendonly.aof文件中，当redis重新启动时，会从该文件恢复出之前的状态</p>
+<p>　　appendfsync：设置appendonly.aof文件进行同步的频率</p>
+<p>　　vm_enabled：是否开启虚拟内存支持</p>
+<p>　　vm_swap_file：设置虚拟内存的交换文件的路径</p>
+<p>　　vm_max_momery：设置开启虚拟内存后，redis将使用的最大物理内存的大小，默认为0</p>
+<p>　　vm_page_size：设置虚拟内存页的大小</p>
+<p>　　vm_pages：设置交换文件的总的page数量</p>
+<p>　　vm_max_thrrads：设置vm IO同时使用的线程数量</p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/04/25/redis-cluster搭建（3主3从）/" data-id="cj3iw6wa2001667xd8ctg33j1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/04/25/logback使用配置详解/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    logback使用配置详解
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
+                            <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/31/Docker实践系列2-制作镜像/" class="title">Docker实践系列2-制作镜像</a></p>
+                            <p class="item-date"><time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Docker实践系列1-基本命令/" class="title">Docker实践系列1-基本命令</a></p>
+                            <p class="item-date"><time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/架构/">架构</a></p>
+                            <p class="item-title"><a href="/2017/05/28/一种简单的微服务架构拆分方案/" class="title">一种简单的微服务架构拆分方案</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:31:48.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a></p>
+                            <p class="item-title"><a href="/2017/05/28/Java方法参数传递/" class="title">Java方法参数传递</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:06:25.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 reason<br>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

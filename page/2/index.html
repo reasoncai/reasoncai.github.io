@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Reason&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Reason&#39;s blog">
+<meta property="og:url" content="https://reasoncai.github.io/page/2/index.html">
+<meta property="og:site_name" content="Reason&#39;s blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reason&#39;s blog">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Reason&#39;s blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">Reason</h2>
+            <h3 id="title">Web Developer &amp; Designer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Guangzhou, China</span><br>
+			<h3 id="contact">WeChat&amp;QQ : 403411876</h3>
+            <!--<a id="follow" target="_blank" href="https://github.com/reasoncai/">FOLLOW</a> -->
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                22
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                24
+                <span>tags</span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main">
+    <article id="post-调用外网第三方接口的坑与架构优化方案" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/27/调用外网第三方接口的坑与架构优化方案/">调用外网第三方接口的坑与架构优化方案</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/27/调用外网第三方接口的坑与架构优化方案/">
+            <time datetime="2017-05-27T15:51:14.000Z" itemprop="datePublished">2017-05-27</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/架构/">架构</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-问题背景"><a href="#1-问题背景" class="headerlink" title="1.问题背景"></a>1.问题背景</h3><p>我们的业务系统经常需要调用第三方提供的接口（通常都是公网），常用的做法是将第三方提供的接口抽象成一个服务。这样第三方接口发生变动时，只需要修改这个服务，不用修改所有的调用方，使调用方与第三方接口解耦。</p>
+<p>调用的流程如下图：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/wwdy1.png" alt=""></p>
+<ol>
+<li>业务调用方调用内部service</li>
+<li>内部service跨公网调用第三方接口</li>
+<li>第三方接口返回结果给内部service</li>
+<li>内部service返回结果给业务调用方</li>
+</ol>
+<p>这个过程中会存在一个问题，如下图：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/wwdy2.png" alt=""><br>内部服务可能对上游业务提供了很多服务接口，当有一个接口跨公网第三方调用超时时，可能导致所有接口都不可用，即使大部分接口不依赖于跨公网第三方调用。</p>
+<p>为什么会出现这种情况呢？</p>
+<p>内部服务对业务方提供的N个接口，会共用服务容器内的工作线程（假设有100个工作线程）。</p>
+<p>假设这N个接口的某个接口跨公网依赖于第三方的接口，发生了网络抖动，或者接口超时（不妨设超时时间为5秒）。</p>
+<p>潜台词是，这个工作线程会被占用5秒钟，然后超时返回业务调用方。</p>
+<p>假设这个请求的吞吐量为20qps，言下之意，很短的时间内，所有的100个工作线程都会被卡在这个第三方超时等待上，而其他N-1个原本没有问题的接口，也得不到工作线程处理。</p>
+<h3 id="2-优化方案"><a href="#2-优化方案" class="headerlink" title="2.优化方案"></a>2.优化方案</h3><ul>
+<li>增大工作线程数（不根本解决问题）</li>
+<li>降低超时时间（不根本解决问题）</li>
+<li>垂直拆分，N个接口拆分成若干个服务，使得在出问题时，被牵连的接口尽可能少（依旧不根本解决问题，难道一个服务只提供一个接口吗？）<h4 id="2-1-异步代理法"><a href="#2-1-异步代理法" class="headerlink" title="2.1.异步代理法"></a>2.1.异步代理法</h4></li>
+<li>业务场景：通过OpenID实时获取微信用户基本信息</li>
+<li>解决方案：增加一个代理，向服务屏蔽究竟是“本地实时”还是“异步远程”去获取返回结果<br><img src="http://ooxz0ztfx.bkt.clouddn.com/wwdy5.png" alt=""><br>本地实时流程如上图：</li>
+</ul>
+<ol>
+<li>业务调用方调用内部service</li>
+<li>内部service调用异步代理service</li>
+<li>异步代理service通过OpenID在本地拿取数据</li>
+<li>异步代理service将数据返回内部service</li>
+<li>内部service返回结果给业务调用方</li>
+</ol>
+<p>异步远程流程如上图6-8粗箭头的部分：</p>
+<ol>
+<li>异步代理service定期跨公网调用微信服务</li>
+<li>微信服务返回数据</li>
+<li>刷新本地数据</li>
+</ol>
+<ul>
+<li><p>优点：公网抖动，第三方接口超时，不影响内部接口调用</p>
+</li>
+<li><p>不足：本地返回的不是最新数据（很多业务可以接受数据延时）</p>
+</li>
+</ul>
+<p>有时候，内部service和异步代理service可以合成一个service</p>
+<h4 id="2-2-异步调用法"><a href="#2-2-异步调用法" class="headerlink" title="2.2.异步调用法"></a>2.2.异步调用法</h4><ul>
+<li>业务场景：本地结果，同步第三方服务。例如业务系统调用本地消息中心的短信接口发短信，消息中心记录到本地的数据库后，立刻返回成功给业务系统。实际上消息中心再异步调用外网第三方短信接口。</li>
+<li>解决方案：本地调用成功就返回成功，异步调用第三方接口同步数据（和异步代理有微小差别）<br><img src="http://ooxz0ztfx.bkt.clouddn.com/wwdy6.png" alt=""><br>本地流程如上图1-3：</li>
+</ul>
+<ol>
+<li>业务调用方调用内部service</li>
+<li>内部service写本地数据</li>
+<li>内部service返回结果给业务调用方成功</li>
+</ol>
+<p>异步流程如上图4-5粗箭头的部分：</p>
+<ol>
+<li>异步service定期将本地数据取出（或者通知(可用MQ)也行，实时性好）</li>
+<li>异步调用第三方接口同步数据</li>
+</ol>
+<ul>
+<li>优点：公网抖动，第三方接口超时，不影响内部接口调用</li>
+<li>不足：不是所有业务场景都可以异步同步数据</li>
+</ul>
+<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h3><p>跨公网调用第三方，可能存在的问题：</p>
+<ul>
+<li>公网抖动，第三方服务不稳定，影响自身服务</li>
+<li>一个接口超时，占住工作线程，影响其他接口</li>
+</ul>
+<p>降低影响的优化方案：</p>
+<ul>
+<li>增大工作线程数</li>
+<li>降低超时时间</li>
+<li>服务垂直拆分</li>
+</ul>
+<p>业务需求决定技术方案，结合业务的解决方案：</p>
+<ul>
+<li>业务能接受旧数据：读取本地数据，异步代理定期更新数据(<strong>适用于获取第三方提供的信息且要求的实时性不高的场景</strong>)</li>
+<li>向第三方同步数据：本地写成功就算成功，异步向第三方同步数据（<strong>适用于不需要第三方即时返回结果的场景</strong>）</li>
+</ul>
+<p>拓展方案：</p>
+<ul>
+<li>使用Hystrix的超时机制和断路器</li>
+</ul>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/27/调用外网第三方接口的坑与架构优化方案/" data-id="cj3iw6waa001g67xdt4r11pnj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-ThreadPoolExcutor线程池的使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/23/ThreadPoolExcutor线程池的使用/">ThreadPoolExcutor线程池的使用</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/23/ThreadPoolExcutor线程池的使用/">
+            <time datetime="2017-05-23T15:39:30.000Z" itemprop="datePublished">2017-05-23</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/并发/">并发</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1.基本概念"></a>1.基本概念</h3><p>线程池类为 Java.util.concurrent.ThreadPoolExecutor，常用构造方法为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize,</div><div class="line"><span class="keyword">long</span> keepAliveTime, TimeUnit unit,</div><div class="line">BlockingQueue&lt;Runnable&gt; workQueue,</div><div class="line">RejectedExecutionHandler handler)</div><div class="line">corePoolSize： 线程池维护线程的最少数量</div><div class="line">maximumPoolSize：线程池维护线程的最大数量</div><div class="line">keepAliveTime： 线程池维护线程所允许的空闲时间</div><div class="line">unit： 线程池维护线程所允许的空闲时间的单位</div><div class="line">workQueue： 线程池所使用的缓冲队列</div><div class="line">handler： 线程池对拒绝任务的处理策略</div></pre></td></tr></table></figure></p>
+<p>一个任务通过 execute(Runnable)方法被添加到线程池，任务就是一个 Runnable类型的对象，任务的执行方法就是 Runnable类型对象的run()方法。<br>当一个任务通过execute(Runnable)方法欲添加到线程池时：</p>
+<ul>
+<li>如果此时线程池中的数量小于corePoolSize，即使线程池中的线程都处于空闲状态，也要创建新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的数量等于 corePoolSize，但是缓冲队列 blockQueue未满，那么任务被放入缓冲队列。</li>
+<li>如果此时线程池中的数量大于corePoolSize，缓冲队列workQueue满，并且线程池中的数量小于maximumPoolSize，建新的线程来处理被添加的任务。</li>
+<li>如果此时线程池中的数量大于corePoolSize，缓冲队列workQueue满，并且线程池中的数量等于maximumPoolSize，那么通过 handler所指定的策略来处理此任务。</li>
+</ul>
+<p>也就是：处理任务的优先级为：核心线程corePoolSize、任务队列workQueue、最大线程maximumPoolSize，如果三者都满了，使用handler处理被拒绝的任务。</p>
+<p>当线程池中的线程数量大于 corePoolSize时，如果某线程空闲时间超过keepAliveTime，线程将被终止。这样，线程池可以动态的调整池中的线程数。</p>
+<p>work queue有以下几种实现：</p>
+<ol>
+<li>ArrayBlockingQueue :  有界的数组队列</li>
+<li>LinkedBlockingQueue : 可支持有界/无界的队列，使用链表实现</li>
+<li>PriorityBlockingQueue : 优先队列，可以针对任务排序</li>
+<li>SynchronousQueue : 队列长度为1的队列，和Array有点区别就是：client thread提交到block queue会是一个阻塞过程，直到有一个worker thread连接上来poll task。</li>
+</ol>
+<p>workQueue常用的是：java.util.concurrent.ArrayBlockingQueue</p>
+<p>handler有四个选择：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ThreadPoolExecutor.AbortPolicy()</div><div class="line">抛出java.util.concurrent.RejectedExecutionException异常</div><div class="line">ThreadPoolExecutor.CallerRunsPolicy()</div><div class="line">直接让原先的client thread做为worker线程，进行执行</div><div class="line">ThreadPoolExecutor.DiscardOldestPolicy()</div><div class="line">丢弃最早入队列的的任务</div><div class="line">ThreadPoolExecutor.DiscardPolicy()</div><div class="line">抛弃当前的任务</div></pre></td></tr></table></figure></p>
+<h3 id="2-建议"><a href="#2-建议" class="headerlink" title="2.建议"></a>2.建议</h3><h4 id="2-1-ThreadPoolExecutor允许你提供一个BlockingQueue来持有等待执行的任务。任务排队有3种基本方法：无限队列、有限队列和同步移交。"><a href="#2-1-ThreadPoolExecutor允许你提供一个BlockingQueue来持有等待执行的任务。任务排队有3种基本方法：无限队列、有限队列和同步移交。" class="headerlink" title="2.1.ThreadPoolExecutor允许你提供一个BlockingQueue来持有等待执行的任务。任务排队有3种基本方法：无限队列、有限队列和同步移交。"></a>2.1.ThreadPoolExecutor允许你提供一个BlockingQueue来持有等待执行的任务。任务排队有3种基本方法：无限队列、有限队列和同步移交。</h4><h4 id="2-2-newFixedThreadPool和newSingleThreadExectuor默认使用的是一个无限的-LinkedBlockingQueue。如果所有的工作者线程都处于忙碌状态，任务会在队列中等候。如果任务持续快速到达，超过了它们被执行的速度，队列也会无限制地增加。稳妥的策略是使用有限队列，比如ArrayBlockingQueue或有限的LinkedBlockingQueue以及-PriorityBlockingQueue。"><a href="#2-2-newFixedThreadPool和newSingleThreadExectuor默认使用的是一个无限的-LinkedBlockingQueue。如果所有的工作者线程都处于忙碌状态，任务会在队列中等候。如果任务持续快速到达，超过了它们被执行的速度，队列也会无限制地增加。稳妥的策略是使用有限队列，比如ArrayBlockingQueue或有限的LinkedBlockingQueue以及-PriorityBlockingQueue。" class="headerlink" title="2.2.newFixedThreadPool和newSingleThreadExectuor默认使用的是一个无限的 LinkedBlockingQueue。如果所有的工作者线程都处于忙碌状态，任务会在队列中等候。如果任务持续快速到达，超过了它们被执行的速度，队列也会无限制地增加。稳妥的策略是使用有限队列，比如ArrayBlockingQueue或有限的LinkedBlockingQueue以及 PriorityBlockingQueue。"></a>2.2.newFixedThreadPool和newSingleThreadExectuor默认使用的是一个无限的 LinkedBlockingQueue。如果所有的工作者线程都处于忙碌状态，任务会在队列中等候。如果任务持续快速到达，超过了它们被执行的速度，队列也会无限制地增加。稳妥的策略是使用有限队列，比如ArrayBlockingQueue或有限的LinkedBlockingQueue以及 PriorityBlockingQueue。</h4><h4 id="2-3-对于庞大或无限的池，可以使用SynchronousQueue，完全绕开队列，直接将任务由生产者交给工作者线程"><a href="#2-3-对于庞大或无限的池，可以使用SynchronousQueue，完全绕开队列，直接将任务由生产者交给工作者线程" class="headerlink" title="2.3.对于庞大或无限的池，可以使用SynchronousQueue，完全绕开队列，直接将任务由生产者交给工作者线程"></a>2.3.对于庞大或无限的池，可以使用SynchronousQueue，完全绕开队列，直接将任务由生产者交给工作者线程</h4><h4 id="2-4-可以使用PriorityBlockingQueue通过优先级安排任务"><a href="#2-4-可以使用PriorityBlockingQueue通过优先级安排任务" class="headerlink" title="2.4.可以使用PriorityBlockingQueue通过优先级安排任务"></a>2.4.可以使用PriorityBlockingQueue通过优先级安排任务</h4><h4 id="2-5-善用blockqueue和reject组合"><a href="#2-5-善用blockqueue和reject组合" class="headerlink" title="2.5.善用blockqueue和reject组合."></a>2.5.善用blockqueue和reject组合.</h4><p>这里要重点推荐下CallsRun的Rejected Handler，从字面意思就是让调用者自己来运行。<br>我们经常会在线上使用一些线程池做异步处理 将原本串行的请求都变为了并行操作，但过多的并行会增加系统的负载(比如软中断，上下文切换)。所以肯定需要对线程池做一个size限制。但是为了引入异步操作后，避免因在block queue的等待时间过长，所以需要在队列满的时，执行一个callsRun的策略，并行的操作又转为一个串行处理，这样就可以保证尽量少的延迟影响。</p>
+<p>所以建议：   maximumPoolSize &gt;= corePoolSize =期望的最大线程数  RejectExecutionHandler = CallsRun ,  blockqueue size = 2 * poolSize (为啥是2倍poolSize，主要一个考虑就是瞬间高峰处理，允许一个thread等待一个runnable任务)</p>
+<h4 id="2-6-队列维护"><a href="#2-6-队列维护" class="headerlink" title="2.6.队列维护"></a>2.6.队列维护</h4><p>方法 getQueue() 允许出于监控和调试目的而访问工作队列。强烈反对出于其他任何目的而使用此方法。remove(java.lang.Runnable) 和 purge() 这两种方法可用于在取消大量已排队任务时帮助进行存储回收。</p>
+<h3 id="3-扩展"><a href="#3-扩展" class="headerlink" title="3.扩展"></a>3.扩展</h3><p>ThreadPoolExecutor是可扩展的，通过查看源码可以发现，它提供了几个可以在子类化中改写的方法：beforeExecute,afterExecute,terminated.<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">beforeExecute</span><span class="params">(Thread t, Runnable r)</span> </span>&#123; &#125;  </div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterExecute</span><span class="params">(Runnable r, Throwable t)</span> </span>&#123; &#125;  </div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">terminated</span><span class="params">()</span> </span>&#123; &#125;</div></pre></td></tr></table></figure></p>
+<p>可以注意到，这三个方法都是protected的空方法，摆明了是让子类扩展的嘛。<br>在执行任务的线程中将调用beforeExecute和afterExecute等方法，在这些方法中还可以添加日志、计时、监视或者统计信息收集的功能。无论任务是从run中正常返回，还是抛出一个异常而返回，afterExecute都会被调用。如果任务在完成后带有一个Error，那么就不会调用afterExecute。如果beforeExecute抛出一个RuntimeException，那么任务将不被执行，并且afterExecute也不会被调用。<br>在线程池完成关闭时调用terminated，也就是在所有任务都已经完成并且所有工作者线程也已经关闭后，terminated可以用来释放Executor在其生命周期里分配的各种资源，此外还可以执行发送通知、记录日志或者手机finalize统计等操作。</p>
+<p>下面就以给线程池添加统计信息为例（添加日志和计时等功能）：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.threadPool;  </div><div class="line">  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.BlockingQueue;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.ThreadPoolExecutor;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicLong;  </div><div class="line"><span class="keyword">import</span> java.util.logging.Logger;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimingThreadPool</span> <span class="keyword">extends</span> <span class="title">ThreadPoolExecutor</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ThreadLocal&lt;Long&gt; startTime = <span class="keyword">new</span> ThreadLocal&lt;Long&gt;();  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Logger log = Logger.getAnonymousLogger();  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicLong numTasks = <span class="keyword">new</span> AtomicLong();  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AtomicLong totalTime = <span class="keyword">new</span> AtomicLong();  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimingThreadPool</span><span class="params">(<span class="keyword">int</span> corePoolSize, <span class="keyword">int</span> maximumPoolSize, <span class="keyword">long</span> keepAliveTime, TimeUnit unit,  </span></span></div><div class="line">            BlockingQueue&lt;Runnable&gt; workQueue)  </div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">super</span>(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">beforeExecute</span><span class="params">(Thread t, Runnable r)</span></span>&#123;  </div><div class="line">        <span class="keyword">super</span>.beforeExecute(t, r);  </div><div class="line">        log.info(String.format(<span class="string">"Thread %s: start %s"</span>, t,r));  </div><div class="line">        startTime.set(System.nanoTime());  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterExecute</span><span class="params">(Runnable r, Throwable t)</span></span>&#123;  </div><div class="line">        <span class="keyword">try</span>&#123;  </div><div class="line">            <span class="keyword">long</span> endTime = System.nanoTime();  </div><div class="line">            <span class="keyword">long</span> taskTime = endTime-startTime.get();  </div><div class="line">            numTasks.incrementAndGet();  </div><div class="line">            totalTime.addAndGet(taskTime);  </div><div class="line">            log.info(String.format(<span class="string">"Thread %s: end %s, time=%dns"</span>, t,r,taskTime));  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">finally</span>  </div><div class="line">        &#123;  </div><div class="line">            <span class="keyword">super</span>.afterExecute(r, t);  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">terminated</span><span class="params">()</span>  </span></div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">try</span>  </div><div class="line">        &#123;  </div><div class="line">            log.info(String.format(<span class="string">"Terminated: avg time=%dns"</span>,totalTime.get()/numTasks.get()));  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">finally</span>  </div><div class="line">        &#123;  </div><div class="line">            <span class="keyword">super</span>.terminated();  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>下面写一个测试类，参考运行效果：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.threadPool;  </div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.SynchronousQueue;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.ThreadPoolExecutor;  </div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;  </div><div class="line">  </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CheckTimingThreadPool</span>  </span></div><div class="line">&#123;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span>  </span></div><div class="line">    &#123;  </div><div class="line">        ThreadPoolExecutor  exec = <span class="keyword">new</span> TimingThreadPool(<span class="number">0</span>, Integer.MAX_VALUE,  </div><div class="line">                <span class="number">60L</span>, TimeUnit.SECONDS,  </div><div class="line">                <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());  </div><div class="line">        exec.execute(<span class="keyword">new</span> DoSomething(<span class="number">5</span>));  </div><div class="line">        exec.execute(<span class="keyword">new</span> DoSomething(<span class="number">4</span>));  </div><div class="line">        exec.execute(<span class="keyword">new</span> DoSomething(<span class="number">3</span>));  </div><div class="line">        exec.execute(<span class="keyword">new</span> DoSomething(<span class="number">2</span>));  </div><div class="line">        exec.execute(<span class="keyword">new</span> DoSomething(<span class="number">1</span>));  </div><div class="line">        exec.shutdown();  </div><div class="line">    &#125;  </div><div class="line">  </div><div class="line">&#125;  </div><div class="line">  </div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DoSomething</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> sleepTime;  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DoSomething</span><span class="params">(<span class="keyword">int</span> sleepTime)</span>  </span></div><div class="line">    &#123;  </div><div class="line">        <span class="keyword">this</span>.sleepTime = sleepTime;  </div><div class="line">    &#125;  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span>  </span></div><div class="line">    &#123;  </div><div class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">" is running."</span>);  </div><div class="line">        <span class="keyword">try</span>  </div><div class="line">        &#123;  </div><div class="line">            TimeUnit.SECONDS.sleep(sleepTime);  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">catch</span> (InterruptedException e)  </div><div class="line">        &#123;  </div><div class="line">            e.printStackTrace();  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/23/ThreadPoolExcutor线程池的使用/" data-id="cj3iw6w9n000m67xd13yjpu40" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-58到家数据库军规解读" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/22/58到家数据库军规解读/">58到家数据库军规解读</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/22/58到家数据库军规解读/">
+            <time datetime="2017-05-22T15:44:50.000Z" itemprop="datePublished">2017-05-22</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/转载/">转载</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/SQL/">SQL</a>, <a class="tag-link" href="/tags/数据库/">数据库</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>军规适用场景：并发量大、数据量大的互联网业务<br>军规：介绍内容<br>解读：讲解原因，解读比军规更重要</p>
+<p>一、基础规范</p>
+<p>（1）必须使用InnoDB存储引擎<br>解读：支持事务、行级锁、并发性能更好、CPU及内存缓存页优化使得资源利用率更高</p>
+<p>（2）必须使用UTF8字符集(最好用utf8mb4,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。)<br>解读：万国码，无需转码，无乱码风险。</p>
+<p>（3）数据表、数据字段必须加入中文注释<br>解读：N年后谁tm知道这个r1,r2,r3字段是干嘛的</p>
+<p>（4）禁止使用存储过程、视图、触发器、Event<br>解读：高并发大数据的互联网业务，架构设计思路是“解放数据库CPU，将计算转移到服务层”，并发量大的情况下，这些功能很可能将数据库拖死，业务逻辑放到服务层具备更好的扩展性，能够轻易实现“增机器就加性能”。数据库擅长存储与索引，CPU计算还是上移吧</p>
+<p>（5）禁止存储大文件或者大照片<br>解读：为何要让数据库做它不擅长的事情？大文件和照片存储在文件系统，数据库里存URI多好</p>
+<p>二、命名规范<br>（6）只允许使用内网域名，而不是ip连接数据库</p>
+<p>（7）线上环境、开发环境、测试环境数据库内网域名遵循命名规范<br>业务名称：xxx<br>线上环境：dj.xxx.db<br>开发环境：dj.xxx.rdb<br>测试环境：dj.xxx.tdb<br>从库在名称后加-s标识，备库在名称后加-ss标识<br>线上从库：dj.xxx-s.db<br>线上备库：dj.xxx-sss.db</p>
+<p>（8）库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用</p>
+<p>（9）表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx</p>
+<p>三、表设计规范</p>
+<p>（10）单实例表数目必须小于500</p>
+<p>（11）单表列数目必须小于30</p>
+<p>（12）表必须有主键，例如自增主键<br>解读：</p>
+<p>a）主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用</p>
+<p>b）主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率</p>
+<p>c） 无主键的表删除，在row模式的主从架构，会导致备库夯住</p>
+<p>（13）禁止使用外键，如果有外键完整性约束，需要应用程序控制<br>解读：外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先</p>
+<p>四、字段设计规范</p>
+<p>（14）必须把字段定义为NOT NULL并且提供默认值<br>解读：<br>a）null的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化<br>b）null 这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多<br>c）null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识<br>d）对null 的处理时候，只能采用is null或is not null，而不能采用=、in、&lt;、&lt;&gt;、!=、not in这些操作符号。如：where name!=’shenjian’，如果存在name为null值的记录，查询结果就不会包含name为null值的记录</p>
+<p>（15）禁止使用TEXT、BLOB类型<br>解读：会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能</p>
+<p>（16）禁止使用小数存储货币<br>解读：使用整数吧，小数容易导致钱对不上，可以使单位为分</p>
+<p>（17）必须使用varchar(20)存储手机号<br>解读：<br>a）涉及到区号或者国家代号，可能出现+-()<br>b）手机号会去做数学运算么？<br>c）varchar可以支持模糊查询，例如：like“138%”</p>
+<p>（18）禁止使用ENUM，可使用TINYINT代替<br>解读：<br>a）增加新的ENUM值要做DDL操作<br>b）ENUM的内部实际存储就是整数，你以为自己定义的是字符串？</p>
+<p>五、索引设计规范</p>
+<p>（19）单表索引建议控制在5个以内</p>
+<p>（20）单索引字段数不允许超过5个<br>解读：字段超过5个时，实际已经起不到有效过滤数据的作用了</p>
+<p>（21）禁止在更新十分频繁、区分度不高的属性上建立索引<br>解读：<br>a）更新会变更B+树，更新频繁的字段建立索引会大大降低数据库性能<br>b）“性别”这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似</p>
+<p>（22）建立组合索引，必须把区分度高的字段放在前面<br>解读：能够更加有效的过滤数据</p>
+<p>六、SQL使用规范</p>
+<p>（23）禁止使用SELECT <em>，只获取必要的字段，需要显示说明列属性<br>解读：<br>a）读取不需要的列会增加CPU、IO、NET消耗<br>b）不能有效的利用覆盖索引<br>c）使用SELECT </em>容易在增加或者删除字段后出现程序BUG</p>
+<p>（24）禁止使用INSERT INTO t_xxx VALUES(xxx)，必须显示指定插入的列属性<br>解读：容易在增加或者删除字段后出现程序BUG</p>
+<p>（25）禁止使用属性隐式转换<br>解读：SELECT uid FROM t_user WHERE phone=13812345678 会导致全表扫描，而不能命中phone索引，猜猜为什么？（这个线上问题不止出现过一次，因为phone是varchar类型，SQL语句带入的是整形，故不会命中索引，加个引号就好了：<br>SELECT uid FROM t_user WHERE phone=’13812345678’</p>
+<p>（26）禁止在WHERE条件的属性上使用函数或者表达式<br>解读：SELECT uid FROM t_user WHERE from_unixtime(day)&gt;=’2017-02-15’ 会导致全表扫描<br>正确的写法是：SELECT uid FROM t_user WHERE day&gt;= unix_timestamp(‘2017-02-15 00:00:00’)</p>
+<p>（27）禁止负向查询，以及%开头的模糊查询<br>解读：<br>a）负向查询条件：NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT IN、NOT LIKE等，会导致全表扫描<br>b）%开头的模糊查询，会导致全表扫描</p>
+<p>（28）禁止大表使用JOIN查询，禁止大表使用子查询<br>解读：会产生临时表，消耗较多内存与CPU，极大影响数据库性能</p>
+<p>（29）禁止使用OR条件，必须改为IN查询<br>解读：旧版本Mysql的OR查询是不能命中索引的，即使能命中索引，为何要让数据库耗费更多的CPU帮助实施查询优化呢？</p>
+<p>（30）应用程序必须捕获SQL异常，并有相应处理</p>
+<p>七、行为规范</p>
+<p>（31）禁止使用应用程序配置文件内的帐号手工访问线上数据库</p>
+<p>（32）禁止非DBA对线上数据库进行写操作，修改线上数据需要提交工单，由DBA执行，提交的SQL语句必须经过测试</p>
+<p>（33）分配非DBA以只读帐号，必须通过VPN+跳板机访问授权的从库</p>
+<p>（34）开发、测试、线上环境隔离</p>
+<p>为什么要制定行为规范的军规呢，大伙的公司是不是有这样的情况：<br>任何研发、测试都有连接线上数据库的帐号？</p>
+<p>是不是经常有这类误操作？</p>
+<p>（1）本来只想update一条记录，where条件搞错，update了全部的记录</p>
+<p>（2）本来只想delete几行记录，结果删多了，四下无人，再insert回去</p>
+<p>（3）以为drop的是测试库，结果把线上库drop掉了</p>
+<p>（4）以为操作的是分库x，结果SecureCRT开窗口太多，操作成了分库y</p>
+<p>（5）写错配置文件，压力测试压到线上库了，生成了N多脏数据<br>…</p>
+<p>无数的事情，结果就是打电话给DBA，让他们帮忙擦屁股。<br>…</p>
+<p>所谓的“业务灵活性”都是扯淡，为什么要有行为规范？不让你带刀，不是限制你，而是保护你的安全。要相信DBA是专业的，让专业的人干专业的事情。别把DBA看做你的对立面，多和他们沟通业务场景，沟通请求读写比，沟通访问模式，他们真的能帮助到你，这是我带DBA团队的一些感触。</p>
+<p>总结：大数据量高并发的互联网业务，极大影响数据库性能的都不让用，不让用哟。谁都可能删除全库，能找回数据的，真的只有DBA。</p>
+<p>转自：58沈剑公众号：架构师之路</p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/22/58到家数据库军规解读/" data-id="cj3iw6w90000167xdsb09okqb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-linux-grep命令详解" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/21/linux-grep命令详解/">linux-grep命令详解</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/21/linux-grep命令详解/">
+            <time datetime="2017-05-21T04:30:48.000Z" itemprop="datePublished">2017-05-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/linux/">linux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux命令/">linux命令</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>grep 、sed、awk被称为linux中的”三剑客”。</p>
+<ul>
+<li>grep 更适合单纯的查找或匹配文本</li>
+<li>sed  更适合编辑匹配到的文本</li>
+<li>awk  更适合格式化文本，对文本进行较复杂格式处理</li>
+</ul>
+<p>先说说grep命令能做什么？</p>
+<p>我们可以使用grep命令在文本中查找指定的字符串，就像你在windows中打开txt文件，使用快捷键 “Ctrl+F” 在文本中查找某个字符串一样，说白了，可以把grep理解成字符查找工具。</p>
+<p>grep的全称为： Global search Regular Expression and Print out the line</p>
+<p>全称中的”Global search”为全局搜索之意。</p>
+<p>全称中的”Regular Expression”表示正则表达式。</p>
+<p>所以，从grep的全称中可以了解到，grep是一个可以利用”正则表达式”进行”全局搜索”的工具，grep会在文本文件中按照指定的正则进行全局搜索，并将搜索出的行打印出来。</p>
+<p>Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep有很小不同。egrep是grep的扩展，支持更多的re元字符， fgrep就是fixed grep或fast grep，它们把所有的字母都看作单词，也就是说，正则表达式中的元字符表示回其自身的字面意义，不再特殊。linux使用GNU版本的grep。它功能更强，可以通过-G、-E、-F命令行选项来使用egrep和fgrep的功能。</p>
+<p>当然，不使用正则表达式时也可以使用grep，但是当grep与正则表达式结合在一起时，威力更强大。</p>
+<p>grep的常用选项总结如下</p>
+<ul>
+<li>–color=auto 或者 –color：表示对匹配到的文本着色显示</li>
+<li>-i：在搜索的时候忽略大小写</li>
+<li>-n：显示结果所在行号</li>
+<li>-c：统计匹配到的行数，注意，是匹配到的总行数，不是匹配到的次数</li>
+<li>-o：只显示符合条件的字符串，但是不整行显示，每个符合条件的字符串单独显示一行</li>
+<li>-v：输出不带关键字的行（反向查询，反向匹配）</li>
+<li>-w：匹配整个单词，如果是字符串中包含这个单词，则不作匹配</li>
+<li>－l：查询多文件时只输出包含匹配字符的文件名。</li>
+<li>-Ax：在输出的时候包含结果所在行之后的指定行数，这里指之后的x行，A：after</li>
+<li>-Bx：在输出的时候包含结果所在行之前的指定行数，这里指之前的x行，B：before</li>
+<li>-Cx：在输出的时候包含结果所在行之前和之后的指定行数，这里指之前和之后的x行，C：context</li>
+<li>-e：实现多个选项的匹配，逻辑or关系</li>
+<li>-q：静默模式，不输出任何信息，当我们只关心有没有匹配到，却不关心匹配到什么内容时，我们可以使用此命令，然后，使用”echo $?”查看是否匹配到，0表示匹配到，1表示没有匹配到。</li>
+<li>-P：表示使用兼容perl的正则引擎。</li>
+<li>-E：使用扩展正则表达式，而不是基本正则表达式，在使用”-E”选项时，相当于使用egrep。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">pattern正则表达式主要参数：</div><div class="line">\： 忽略正则表达式中特殊字符的原有含义。</div><div class="line">^：匹配正则表达式的开始行。</div><div class="line">$: 匹配正则表达式的结束行。</div><div class="line">\&lt;：从匹配正则表达 式的行开始。</div><div class="line">\&gt;：到匹配正则表达式的行结束。</div><div class="line">[ ]：单个字符，如[A]即A符合要求 。</div><div class="line">[ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。</div><div class="line">。：所有的单个字符。</div><div class="line">* ：有字符，长度可以为0。</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="grep的常用用法"><a href="#grep的常用用法" class="headerlink" title="grep的常用用法"></a>grep的常用用法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">[root@www ~]<span class="comment"># grep [-acinv] [--color=auto] '搜寻字符串' filename</span></div><div class="line"></div><div class="line">$ grep ‘<span class="built_in">test</span>’ d*</div><div class="line">显示所有以d开头的文件中包含 <span class="built_in">test</span>的行。</div><div class="line">$ grep ‘<span class="built_in">test</span>’ aa bb cc</div><div class="line">显示在aa，bb，cc文件中匹配<span class="built_in">test</span>的行。</div><div class="line">$ grep ‘[a-z]\&#123;5\&#125;’ aa</div><div class="line">显示所有包含每个字符串至少有5个连续小写字符的字符串的行。</div><div class="line">$ grep ‘w\(es\)t.*\1′ aa</div><div class="line">如果west被匹配，则es就被存储到内存中，并标记为1，然后搜索任意个字符(.*)，这些字符后面紧跟着 另外一个es(\1)，找到就显示该行。如果用egrep或grep -E，就不用”\”号进行转义，直接写成’w(es)t.*\1′就可以了。</div></pre></td></tr></table></figure>
+<p>grep 可以使用 –color=auto 来将关键字部分使用颜色显示。 可以用alias 来处理一下可以在 ~/.bashrc 内加上这行：『alias grep=’grep –color=auto’』再以『 source ~/.bashrc 』来立即生效.</p>
+<h4 id="根据文件内容递归查找目录"><a href="#根据文件内容递归查找目录" class="headerlink" title="根据文件内容递归查找目录"></a>根据文件内容递归查找目录</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ grep ‘<span class="built_in">test</span>’ *           <span class="comment">#在当前目录搜索带'test'行的文件</span></div><div class="line"></div><div class="line">$ grep -r ‘<span class="built_in">test</span>’ *        <span class="comment">#在当前目录及其子目录下搜索'test'行的文件</span></div><div class="line">$ grep <span class="_">-l</span> -r ‘<span class="built_in">test</span>’ *     <span class="comment">#在当前目录及其子目录下搜索'test'行的文件，但是不显示匹配的行，只显示匹配的文件</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/21/linux-grep命令详解/" data-id="cj3iw6w9w000x67xdqrb892fr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <article id="post-mongodb并发连接数" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/20/mongodb并发连接数/">mongodb并发连接数</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/20/mongodb并发连接数/">
+            <time datetime="2017-05-19T16:01:49.000Z" itemprop="datePublished">2017-05-20</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/工作笔记/">工作笔记</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/mongodb/">mongodb</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>高并发时生产应用出现mongodb连接超时的异常：<br>com.mongodb.DBPortPool$ConnectionWaitTimeOut: Connection wait timeout after 120000 ms</p>
+<p>查看mongodb服务器当前连接数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#./mongo admin -u admin -p admin</span></div><div class="line">MongoDB shell version: 2.2.0</div><div class="line">connecting to: admin</div><div class="line">&gt;  db.serverStatus().connections;</div><div class="line">&#123; <span class="string">"current"</span> : 174, <span class="string">"available"</span> : 645 &#125;</div></pre></td></tr></table></figure></p>
+<p>不是mongodb自身的原因，查看应用的mongodb的连接池最大连接数connectionsPerHost原来只设了50，调大到200解决。(PS:网上有资料说Mongodb某个版本的java驱动有这个bug)</p>
+<p>附资料：<br>关于MONGODB最大连接数的查看与修改</p>
+<p>在Linux平台下，无论是64位或者32位的MongoDB默认最大连接数都是819，WIN平台不知道，估计也没有人在 WIN平台下使用MongoDB做生产环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">[root@DELL113 mongodb-linux-i686-2.4.1]<span class="comment"># mongo admin -u root -p password</span></div><div class="line">MongoDB shell version: 2.4.1</div><div class="line">connecting to: 192.168.6.42/admin</div><div class="line">&gt; db.serverStatus().connections</div><div class="line">&#123; <span class="string">"current"</span> : 1, <span class="string">"available"</span> : 818, <span class="string">"totalCreated"</span> : NumberLong(1) &#125;</div></pre></td></tr></table></figure></p>
+<p>途中available显示818少了一个，表示空闲的。current表示已经占用了的连接数，两数一加就等于819，如果我现在在连接一个，那么available就是817，current就是2<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[root@DELL113 mongodb-linux-i686-2.4.1]<span class="comment"># ./bin/mongo 192.168.6.42</span></div><div class="line">MongoDB shell version: 2.4.1</div><div class="line">connecting to: 192.168.6.42/<span class="built_in">test</span></div><div class="line">&gt; db.serverStatus().connections</div><div class="line">&#123; <span class="string">"current"</span> : 1, <span class="string">"available"</span> : 818, <span class="string">"totalCreated"</span> : NumberLong(1) &#125;</div><div class="line">&gt; db.serverStatus().connections</div><div class="line">&#123; <span class="string">"current"</span> : 2, <span class="string">"available"</span> : 817, <span class="string">"totalCreated"</span> : NumberLong(2) &#125;</div></pre></td></tr></table></figure></p>
+<p>819个连接数对于一般的站点我认为已经够用，并且都是现连现取现断。但这个连接数也可以修改，只要在启动的时候加入–maxConns即可<br>服务器启动<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[root@lee mongodb-linux-x86_64-2.4.1]<span class="comment"># ./bin/mongod --dbpath=/root/db --maxConns=2000</span></div><div class="line">Wed Apr 3 11:06:21.905 [initandlisten] MongoDB starting : pid=2812 port=27017 dbpath=/root/db 64-bit host=lee</div><div class="line">Wed Apr 3 11:06:21.957 [initandlisten] db version v2.4.1</div><div class="line">Wed Apr 3 11:06:21.957 [initandlisten] git version: 1560959e9ce11a693be8b4d0d160d633eee75110</div><div class="line">Wed Apr 3 11:06:21.957 [initandlisten] build info: Linux ip-10-2-29-40 2.6.21.7-2.ec2.v1.2.fc8xen <span class="comment">#1 SMP Fri Nov 20 17:48:28 EST 2009 x86_64 BOOST_LIB_VERSION=1_49</span></div><div class="line">Wed Apr 3 11:06:21.957 [initandlisten] allocator: tcmalloc</div><div class="line">Wed Apr 3 11:06:21.957 [initandlisten] options: &#123; dbpath: <span class="string">"/root/db"</span>, maxConns: 2000 &#125;</div><div class="line">Wed Apr 3 11:06:21.982 [initandlisten] journal dir=/root/db/journal</div><div class="line">Wed Apr 3 11:06:21.982 [initandlisten] recover : no journal files present, no recovery needed</div><div class="line">Wed Apr 3 11:06:22.297 [initandlisten] preallocateIsFaster=<span class="literal">true</span> 2.62</div><div class="line">Wed Apr 3 11:06:22.717 [initandlisten] --maxConns too high, can only handle 819</div><div class="line">Wed Apr 3 11:06:22.724 [initandlisten] waiting <span class="keyword">for</span> connections on port 27017</div><div class="line">Wed Apr 3 11:06:22.725 [websvr] admin web console waiting <span class="keyword">for</span> connections on port 28017</div><div class="line">Wed Apr 3 11:06:25.126 [initandlisten] connection accepted from 192.168.4.86:53917 <span class="comment">#1 (1 connection now open)</span></div></pre></td></tr></table></figure></p>
+<p>查询最大连接数<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@DELL113 mongodb-linux-i686-2.4.1]<span class="comment"># ./bin/mongo 192.168.6.42</span></div><div class="line">MongoDB shell version: 2.4.1</div><div class="line">connecting to: 192.168.6.42/<span class="built_in">test</span></div><div class="line">&gt; db.serverStatus().connections</div><div class="line">&#123; <span class="string">"current"</span> : 1, <span class="string">"available"</span> : 818, <span class="string">"totalCreated"</span> : NumberLong(1) &#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>发现还是819？其实是Linux默认进程能打开最大文件数有关，可以通过ulimit 解决<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">[root@lee mongodb-linux-x86_64-2.4.1]<span class="comment"># ulimit -n 2500</span></div><div class="line">[root@lee mongodb-linux-x86_64-2.4.1]<span class="comment"># ./bin/mongod --dbpath=/root/db --maxConns=2000</span></div><div class="line">Wed Apr 3 11:11:07.013 [initandlisten] MongoDB starting : pid=2930 port=27017 dbpath=/root/db 64-bit host=lee</div><div class="line">Wed Apr 3 11:11:07.013 [initandlisten] db version v2.4.1</div><div class="line">Wed Apr 3 11:11:07.013 [initandlisten] git version: 1560959e9ce11a693be8b4d0d160d633eee75110</div><div class="line">Wed Apr 3 11:11:07.013 [initandlisten] build info: Linux ip-10-2-29-40 2.6.21.7-2.ec2.v1.2.fc8xen <span class="comment">#1 SMP Fri Nov 20 17:48:28 EST 2009 x86_64 BOOST_LIB_VERSION=1_49</span></div><div class="line">Wed Apr 3 11:11:07.013 [initandlisten] allocator: tcmalloc</div><div class="line">Wed Apr 3 11:11:07.013 [initandlisten] options: &#123; dbpath: <span class="string">"/root/db"</span>, maxConns: 2000 &#125;</div><div class="line">Wed Apr 3 11:11:07.031 [initandlisten] journal dir=/root/db/journal</div><div class="line">Wed Apr 3 11:11:07.031 [initandlisten] recover : no journal files present, no recovery needed</div><div class="line">Wed Apr 3 11:11:07.170 [initandlisten] waiting <span class="keyword">for</span> connections on port 27017</div><div class="line">Wed Apr 3 11:11:07.171 [websvr] admin web console waiting <span class="keyword">for</span> connections on port 28017</div><div class="line">Wed Apr 3 11:11:10.076 [initandlisten] connection accepted from 192.168.4.86:53161 <span class="comment">#1 (1 connection now open)</span></div></pre></td></tr></table></figure></p>
+<p>再查看最大连接数，搞定<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[root@DELL113 mongodb-linux-i686-2.4.1]<span class="comment"># ./bin/mongo 192.168.6.42</span></div><div class="line">MongoDB shell version: 2.4.1</div><div class="line">connecting to: 192.168.6.42/<span class="built_in">test</span></div><div class="line">&gt; db.serverStatus().connections</div><div class="line">&#123; <span class="string">"current"</span> : 1, <span class="string">"available"</span> : 1999, <span class="string">"totalCreated"</span> : NumberLong(1) &#125;</div><div class="line">&gt;</div></pre></td></tr></table></figure></p>
+<p>关于ulimit的更多知识大家可以去网上检索检索</p>
+<p>客户端程序通常是通过DRIVER来链接，由于每次建立链接的成本都挺高，因此都用链接池来实现，SPRING DATA MONGODB中是如下配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">mongo.dbname=cms</div><div class="line"><span class="comment">#线程池的大小</span></div><div class="line">mongo.connectionsPerHost=100</div><div class="line"><span class="comment">#这个*mongo.connectionsPerHost则是如果链接数大于100的等待xttk数</span></div><div class="line">mongo.threadsAllowedToBlockForConnectionMultiplier=4</div><div class="line"><span class="comment">#等待线程的等待时间</span></div><div class="line">mongo.maxWaitTime=1500</div><div class="line">mongo.socketTimeout=1500</div><div class="line">mongo.connectTimeout=1000</div><div class="line">mongo.autoConnectRetry=<span class="literal">true</span></div><div class="line">mongo.socketKeepAlive=<span class="literal">true</span></div><div class="line">mongo.slaveOk=<span class="literal">true</span></div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/20/mongodb并发连接数/" data-id="cj3iw6w9z000y67xdvget4rud" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
+    <nav id="page-nav">
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    </nav>
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
+                            <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/31/Docker实践系列2-制作镜像/" class="title">Docker实践系列2-制作镜像</a></p>
+                            <p class="item-date"><time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/05/30/Docker实践系列1-基本命令/" class="title">Docker实践系列1-基本命令</a></p>
+                            <p class="item-date"><time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/架构/">架构</a></p>
+                            <p class="item-title"><a href="/2017/05/28/一种简单的微服务架构拆分方案/" class="title">一种简单的微服务架构拆分方案</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:31:48.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a></p>
+                            <p class="item-title"><a href="/2017/05/28/Java方法参数传递/" class="title">Java方法参数传递</a></p>
+                            <p class="item-date"><time datetime="2017-05-28T15:06:25.000Z" itemprop="datePublished">2017-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 reason<br>
+        </div>
+    </div>
+</footer>
+        
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
