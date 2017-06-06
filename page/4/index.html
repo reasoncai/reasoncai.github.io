@@ -140,7 +140,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                22
+                23
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -154,6 +154,138 @@
 
             
             <section id="main">
+    <article id="post-Java并发编程的艺术读书笔记-2-并发编程模型" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/">Java并发编程的艺术读书笔记(2)-并发编程模型</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/">
+            <time datetime="2017-05-05T15:37:20.000Z" itemprop="datePublished">2017-05-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/读书笔记/">读书笔记</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/并发/">并发</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-并发编程模型的两个关键问题"><a href="#1-并发编程模型的两个关键问题" class="headerlink" title="1.并发编程模型的两个关键问题"></a>1.并发编程模型的两个关键问题</h3><h4 id="1-1线程之间如何通信。"><a href="#1-1线程之间如何通信。" class="headerlink" title="1.1线程之间如何通信。"></a>1.1线程之间如何通信。</h4><p>通信是指线程之间以何种机制来交换信息。有两种：共享内存和消息传递。在共享内存的并发模型里，线程之间共享程序的公共状态，通过读写内存中的公共状态进行隐式通信。在消息传递的并发模型里，线程之间没有公共状态，线程之间必须通过发送消息来显示进行通信。java的并发采用的是共享内存模型。</p>
+<h4 id="1-2线程之间如何同步。"><a href="#1-2线程之间如何同步。" class="headerlink" title="1.2线程之间如何同步。"></a>1.2线程之间如何同步。</h4><p>同步是指程序中用于控制不同线程间操作发生相对顺序的机制。在共享内存并发模型中，同步是显式进行的。程序员必须显式指定某个方法或某段代码需要在线程之间互斥执行。在消息传递的并发模型里，由于消息的发送必须在消息的接收之前，因此同步是隐式进行的。</p>
+<h3 id="2-happens-before简介"><a href="#2-happens-before简介" class="headerlink" title="2.happens-before简介"></a>2.happens-before简介</h3><p>在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系。这里提到的两个操作既可以是一个线程之内的，也可以是在不同线程之间的。两个操作之间具有happens-before关系，并不意味着前一个操作必须要在后一个操作之前执行。happens-before仅仅要求前一个操作（执行的结果）对后一个操作可见，且前一个操作按顺序排在第二个操作之前（the first is visible to and ordered before the second）。</p>
+<h4 id="2-1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。"><a href="#2-1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。" class="headerlink" title="2.1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。"></a>2.1程序顺序规则：一个线程中的每个操作，happens-before于该线程中的任意后续操作。</h4><h4 id="2-2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。"><a href="#2-2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。" class="headerlink" title="2.2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。"></a>2.2监视器锁规则：对一个锁的解锁，happens-before于随后对这个锁的加锁。</h4><h4 id="2-3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。"><a href="#2-3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。" class="headerlink" title="2.3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。"></a>2.3volatile变量规则：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</h4><h4 id="2-4传递性：如果A-happens-before-B，且B-happens-before-C-那么A-happens-before-C。"><a href="#2-4传递性：如果A-happens-before-B，且B-happens-before-C-那么A-happens-before-C。" class="headerlink" title="2.4传递性：如果A happens-before B，且B happens-before C,那么A happens-before C。"></a>2.4传递性：如果A happens-before B，且B happens-before C,那么A happens-before C。</h4>
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/" data-id="cj3lndrzk000a56xdrlnw6wf1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
     <article id="post-Java并发编程的艺术读书笔记1-并发编程的挑战" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -210,7 +342,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/03/Java并发编程的艺术读书笔记1-并发编程的挑战/" data-id="cj3iw6w9m000k67xdjgt61ceh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/03/Java并发编程的艺术读书笔记1-并发编程的挑战/" data-id="cj3lnds00000k56xdwtshf82u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -341,7 +473,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/03/四层和七层负载均衡的区别/" data-id="cj3iw6wa8001d67xdern5pyyg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/03/四层和七层负载均衡的区别/" data-id="cj3lnds1d001j56xdtz98i9zr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -472,7 +604,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/04/27/20170427/" data-id="cj3iw6w97000567xdmgir08e3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/04/27/20170427/" data-id="cj3lndrz4000156xdj6o8dr4c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -603,138 +735,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/04/26/Springboot中使用AOP统一处理Web请求日志/" data-id="cj3iw6w9p000r67xdpf4alh51" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>-->
-    </div>
-    
-</article>
-
-
-
-    <article id="post-100亿数据平滑数据迁移-不影响服务" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/04/26/100亿数据平滑数据迁移-不影响服务/">100亿数据平滑数据迁移,不影响服务</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/04/26/100亿数据平滑数据迁移-不影响服务/">
-            <time datetime="2017-04-25T16:13:44.000Z" itemprop="datePublished">2017-04-26</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/转载/">转载</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/数据库/">数据库</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>100亿数据平滑数据迁移,不影响服务</p></p>
-            <p class="article-more-link">
-                <a href="/2017/04/26/100亿数据平滑数据迁移-不影响服务/#more">Read More</a>
-            </p>
-        
-        </div>
-  <!--      <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://reasoncai.github.io/2017/04/26/100亿数据平滑数据迁移-不影响服务/" data-id="cj3iw6w8v000067xdfkxbqtrx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/04/26/Springboot中使用AOP统一处理Web请求日志/" data-id="cj3lnds07000p56xdusmfv4tf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -827,6 +828,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
+                            <p class="item-title"><a href="/2017/06/06/Docker实践系列4-Springboot与Docker整合/" class="title">Docker实践系列4-Springboot与Docker整合</a></p>
+                            <p class="item-date"><time datetime="2017-06-06T14:11:47.000Z" itemprop="datePublished">2017-06-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
                             <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
                             <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
                         </div>
@@ -859,15 +869,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a></p>
-                            <p class="item-title"><a href="/2017/05/28/Java方法参数传递/" class="title">Java方法参数传递</a></p>
-                            <p class="item-date"><time datetime="2017-05-28T15:06:25.000Z" itemprop="datePublished">2017-05-28</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -877,7 +878,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -886,7 +887,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -895,7 +896,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -904,7 +905,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 20px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
         </div>
     </div>
 

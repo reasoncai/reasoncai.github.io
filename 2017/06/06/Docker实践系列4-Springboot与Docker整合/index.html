@@ -3,14 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Archive: 2017/5 | Reason&#39;s blog</title>
+    <title>Docker实践系列4-Springboot与Docker整合 | Reason&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Reason&#39;s blog">
-<meta property="og:url" content="https://reasoncai.github.io/archives/2017/05/page/2/index.html">
+    <meta name="description" content="1.添加Dockerfile这个文件放在src/main/resources资源目录下12345FROM javaMAINTAINER &quot;cai&quot;&amp;lt;403411876@qq.com&amp;gt;ADD @project.build.finalName@.jar app.jarEXPOSE 8080CMD java -jar app.jar  使用Docker官方提供的Java镜像，它是基于Open">
+<meta name="keywords" content="DOCKER">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker实践系列4-Springboot与Docker整合">
+<meta property="og:url" content="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/index.html">
 <meta property="og:site_name" content="Reason&#39;s blog">
+<meta property="og:description" content="1.添加Dockerfile这个文件放在src/main/resources资源目录下12345FROM javaMAINTAINER &quot;cai&quot;&amp;lt;403411876@qq.com&amp;gt;ADD @project.build.finalName@.jar app.jarEXPOSE 8080CMD java -jar app.jar  使用Docker官方提供的Java镜像，它是基于Open">
+<meta property="og:updated_time" content="2017-06-06T14:15:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Reason&#39;s blog">
+<meta name="twitter:title" content="Docker实践系列4-Springboot与Docker整合">
+<meta name="twitter:description" content="1.添加Dockerfile这个文件放在src/main/resources资源目录下12345FROM javaMAINTAINER &quot;cai&quot;&amp;lt;403411876@qq.com&amp;gt;ADD @project.build.finalName@.jar app.jarEXPOSE 8080CMD java -jar app.jar  使用Docker官方提供的Java镜像，它是基于Open">
     
 
     
@@ -153,198 +158,177 @@
 </aside>
 
             
-            <section id="main"><div class="timeline timeline-wrap">
-    
-            <div class="timeline-row timeline-row-major">
-                <span class="node"><i class="fa fa-calendar"></i></span>
-                <h1 class="title">2017</h1>
-            </div>
+            <section id="main"><article id="post-Docker实践系列4-Springboot与Docker整合" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
         
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+        
+            <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/23/ThreadPoolExcutor线程池的使用/">ThreadPoolExcutor线程池的使用</a>
+        <h1 class="article-title" itemprop="name">
+            Docker实践系列4-Springboot与Docker整合
         </h1>
     
 
-                <div class="article-meta">
-                    
+                
+                    <div class="article-meta">
+                        
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/05/23/ThreadPoolExcutor线程池的使用/">
-            <time datetime="2017-05-23T15:39:30.000Z" itemprop="datePublished">2017-05-23</time>
+        <a href="/2017/06/06/Docker实践系列4-Springboot与Docker整合/">
+            <time datetime="2017-06-06T14:11:47.000Z" itemprop="datePublished">2017-06-06</time>
         </a>
     </div>
 
 
-                    
+                        
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a>
+        <a class="article-category-link" href="/categories/DOCKER/">DOCKER</a>
     </div>
 
-                    
+                        
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/并发/">并发</a>
+        <a class="tag-link" href="/tags/DOCKER/">DOCKER</a>
     </div>
 
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
+                    </div>
                 
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/22/58到家数据库军规解读/">58到家数据库军规解读</a>
-        </h1>
-    
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="1-添加Dockerfile"><a href="#1-添加Dockerfile" class="headerlink" title="1.添加Dockerfile"></a>1.添加Dockerfile</h4><p>这个文件放在src/main/resources资源目录下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM java</div><div class="line">MAINTAINER "cai"&lt;403411876@qq.com&gt;</div><div class="line">ADD @project.build.finalName@.jar app.jar</div><div class="line">EXPOSE 8080</div><div class="line">CMD java -jar app.jar</div></pre></td></tr></table></figure></p>
+<ul>
+<li>使用Docker官方提供的Java镜像，它是基于Openjdk制作的，也可以使用我们自己基于oracle jdk制作的镜像。</li>
+<li>通过ADD命令将jar包添加到镜像中 。Springboot对maven的“资源过滤”特性进行了一些改进，我们需要使用@project.build.finalName@来获取jar包文件。</li>
+<li>EXPOSE暴露8080端口</li>
+<li>CMD执行启动命令</li>
+</ul>
+<h4 id="2-使用Maven构建Docker镜像。"><a href="#2-使用Maven构建Docker镜像。" class="headerlink" title="2.使用Maven构建Docker镜像。"></a>2.使用Maven构建Docker镜像。</h4><p>Spotify公司开源了一款docker-maven-plugin的Maven插件，我们可使用Maven命令来构建Docker镜像</p>
+<p>将以下配置到pom.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.4.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">imageName</span>&gt;</span>$&#123;project.groupId&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dockerDirectory</span>&gt;</span>$&#123;project.build.outputDirectory&#125;/<span class="tag">&lt;/<span class="name">dockerDirectory</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">resource</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.jar<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<ul>
+<li>imageName:用于指定Docker镜像的完整名称</li>
+<li>dockerDirectory:用于指定Dockerfile文件所在的目录,指定为${project.build.outputDirectory}是为了读取经maven资源过滤后的Dockerfile文件，该文件中的@project.build.finalName@占位符此时已经被替换为实际内容</li>
+<li>resources/resource/directory:用于指定需要复制的跟目录，其中${project.build.directory}表示target目录。</li>
+<li>resources/resource/include:用于指定需要复制的文件。即为Maven打包后生产的jar文件。</li>
+</ul>
+<p>执行mvn docker:build后，在target目录下生成了一个docker目录，该目录中不仅包含classes目录中的所有文件，还包含了一个打包生成的jar文件。随后，docker-maven-plugin插件就在docker目录下执行docker build命令来构建镜像。</p>
+<p>如果打算将构建的镜像推送到Docker registry中，那么pom.xml可以定义其地址<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">docker.registry</span>&gt;</span>127.0.0.1:5000<span class="tag">&lt;/<span class="name">docker.registry</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>将此属性作物imagName的前缀，再将imageName改为<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">imageName</span>&gt;</span>$&#123;docker.registry&#125;/$&#123;project.groupId&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>最后执行 mvn docker:build docker:push命令先构建后推送</p>
+<p>查看命令帮助：mvn docker:help -Ddetail=true</p>
+<h4 id="3-启动Springboot的docker容器"><a href="#3-启动Springboot的docker容器" class="headerlink" title="3.启动Springboot的docker容器"></a>3.启动Springboot的docker容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> docker run <span class="_">-d</span> -p 58080:8080 127.0.0.1:50000/com.cai/hello:1.0.0</span></div></pre></td></tr></table></figure>
+<h4 id="4-调整docker容器内存限制"><a href="#4-调整docker容器内存限制" class="headerlink" title="4.调整docker容器内存限制"></a>4.调整docker容器内存限制</h4><p>查看容器运行情况<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> docker stats</span></div></pre></td></tr></table></figure></p>
+<p>docker run的-m参数调整容器内存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ doceker run \</div><div class="line"><span class="_">-d</span> \</div><div class="line">-p 58080:8080 \</div><div class="line">-m 512m \</div><div class="line">127.0.0.1:50000/com.cai/hello:1.0.0</div></pre></td></tr></table></figure>
 
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/22/58到家数据库军规解读/">
-            <time datetime="2017-05-22T15:44:50.000Z" itemprop="datePublished">2017-05-22</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/转载/">转载</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/SQL/">SQL</a>, <a class="tag-link" href="/tags/数据库/">数据库</a>
-    </div>
-
-                </div>
-            </div>
+        
         </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/21/linux-grep命令详解/">linux-grep命令详解</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/21/linux-grep命令详解/">
-            <time datetime="2017-05-21T04:30:48.000Z" itemprop="datePublished">2017-05-21</time>
-        </a>
-    </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
 
 
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/linux/">linux</a>
-    </div>
 
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/linux命令/">linux命令</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/20/mongodb并发连接数/">mongodb并发连接数</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/20/mongodb并发连接数/">
-            <time datetime="2017-05-19T16:01:49.000Z" itemprop="datePublished">2017-05-20</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/工作笔记/">工作笔记</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/mongodb/">mongodb</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
-        <div class="timeline-row">
-            <span class="node"></span>
-            <div class="content">
-                
-    
-        <h1 itemprop="name">
-            <a class="timeline-article-title" href="/2017/05/10/Spring缓存使用方法(基于注解)/">Spring缓存使用方法(基于注解)</a>
-        </h1>
-    
-
-                <div class="article-meta">
-                    
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/10/Spring缓存使用方法(基于注解)/">
-            <time datetime="2017-05-10T15:24:19.000Z" itemprop="datePublished">2017-05-10</time>
-        </a>
-    </div>
-
-
-                    
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/spring/">spring</a>
-    </div>
-
-                    
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/redis/">redis</a>, <a class="tag-link" href="/tags/spring/">spring</a>, <a class="tag-link" href="/tags/缓存/">缓存</a>
-    </div>
-
-                </div>
-            </div>
-        </div>
-    
 </div>
 
-    <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/archives/2017/05/">&laquo; Prev</a><a class="page-number" href="/archives/2017/05/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2017/05/page/3/">3</a><a class="page-number" href="/archives/2017/05/page/4/">4</a><a class="extend next" rel="next" href="/archives/2017/05/page/3/">Next &raquo;</a>
-    </nav>
+    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj3lndrzo000c56xd1cz4ahjd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">Docker实践系列3-使用DockerRegistry管理镜像</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">
