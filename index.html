@@ -195,6 +195,8 @@
             <h5 id="mysql-利用能连接多个字符串的contat，无"><a href="#mysql-利用能连接多个字符串的contat，无" class="headerlink" title="mysql(利用能连接多个字符串的contat，无||)"></a>mysql(利用能连接多个字符串的contat，无||)</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">where username LIKE concat('%',#&#123;username&#125;,'%')</div><div class="line">where username LIKE concat('%',#&#123;username&#125;)</div><div class="line">where username LIKE "%"#&#123;username&#125;"%"</div></pre></td></tr></table></figure>
 <h5 id="oracle-CONCAT只能连接两个字符串-可以用"><a href="#oracle-CONCAT只能连接两个字符串-可以用" class="headerlink" title="oracle(CONCAT只能连接两个字符串,可以用||)"></a>oracle(CONCAT只能连接两个字符串,可以用||)</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">where username LIKE '%' || #&#123;username&#125; || '%' </div><div class="line">where username LIKE concat('%',concat(#&#123;username&#125;,'%'))（嵌套concat）</div></pre></td></tr></table></figure>
 <h5 id="两者都支持（不推荐，-导致SQL注入）"><a href="#两者都支持（不推荐，-导致SQL注入）" class="headerlink" title="两者都支持（不推荐，$导致SQL注入）"></a>两者都支持（不推荐，$导致SQL注入）</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">where username LIKE '%$&#123;username&#125;%'</div></pre></td></tr></table></figure>
+<p>ps：当mysql的字段名和保留字冲突的时候如key，sql语句中的字段名需要加上反引号``来加以区别，反引号可以用Esc键下面那个按键在英文模式不按shift键打出来，注意，是反引号不是单引号，回车键左边那个是单引号。</p>
+
         
         </div>
   <!--      <footer class="article-footer">
@@ -204,7 +206,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj3u2les30014s1xdijy9o05j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj3u3bflc0012sjxdkmxcknix" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -358,7 +360,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj3u2lerg000cs1xdknsq1wva" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj3u3bfko000csjxdwpjsbmqc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -510,7 +512,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" data-id="cj3u2lerl000gs1xdor2eq1nq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" data-id="cj3u3bfkl000asjxdoa9qlr6z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -700,7 +702,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/31/Docker实践系列2-制作镜像/" data-id="cj3u2ler70004s1xd4budvzmi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/31/Docker实践系列2-制作镜像/" data-id="cj3u3bfkh0006sjxd9j5mu225" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -914,7 +916,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/30/Docker实践系列1-基本命令/" data-id="cj3u2ler10001s1xdfmv1l0an" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/30/Docker实践系列1-基本命令/" data-id="cj3u3bfke0005sjxdpqj0oysb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

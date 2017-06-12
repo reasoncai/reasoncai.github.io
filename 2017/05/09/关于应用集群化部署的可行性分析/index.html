@@ -6,7 +6,7 @@
     <title>关于应用集群化部署的可行性分析 | Reason&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="1.问题背景Center经常在高峰期（一般在下午2点到5点）出现卡顿，请求堵塞在MQ的情况，严重影响业务和用户体验。 2.初步分析目前的部署架构如图所示：可以看出只有一个消费者（Center应用）在处理业务请求。在高峰期，处理速度远小于生产者将请求放入MQ的速度，导致请求在MQ中堆积，不能及时消费处理，结果就是系统响应缓慢，各种接口调用超时。 3.解决方案将Center集群化部署，提高消息的处理能">
-<meta name="keywords" content="并发,负载均衡,高可用,集群">
+<meta name="keywords" content="并发,高可用,负载均衡,集群">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于应用集群化部署的可行性分析">
 <meta property="og:url" content="https://reasoncai.github.io/2017/05/09/关于应用集群化部署的可行性分析/index.html">
@@ -234,7 +234,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/09/关于应用集群化部署的可行性分析/" data-id="cj3u2lesm001us1xdt24vaikv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/09/关于应用集群化部署的可行性分析/" data-id="cj3u3bflt001isjxdp0ch3ix0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

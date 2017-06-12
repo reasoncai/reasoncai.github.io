@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/index.html">
 <meta property="og:site_name" content="Reason&#39;s blog">
 <meta property="og:description" content="mysql(利用能连接多个字符串的contat，无||)123where username LIKE concat(&apos;%&apos;,#&amp;#123;username&amp;#125;,&apos;%&apos;)where username LIKE concat(&apos;%&apos;,#&amp;#123;username&amp;#125;)where username LIKE &quot;%&quot;#&amp;#123;username&amp;#125;&quot;%&quot; oracle(CONC">
-<meta property="og:updated_time" content="2017-06-12T11:43:12.000Z">
+<meta property="og:updated_time" content="2017-06-12T12:03:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis模糊查询like如何写">
 <meta name="twitter:description" content="mysql(利用能连接多个字符串的contat，无||)123where username LIKE concat(&apos;%&apos;,#&amp;#123;username&amp;#125;,&apos;%&apos;)where username LIKE concat(&apos;%&apos;,#&amp;#123;username&amp;#125;)where username LIKE &quot;%&quot;#&amp;#123;username&amp;#125;&quot;%&quot; oracle(CONC">
@@ -199,6 +199,8 @@
             <h5 id="mysql-利用能连接多个字符串的contat，无"><a href="#mysql-利用能连接多个字符串的contat，无" class="headerlink" title="mysql(利用能连接多个字符串的contat，无||)"></a>mysql(利用能连接多个字符串的contat，无||)</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">where username LIKE concat('%',#&#123;username&#125;,'%')</div><div class="line">where username LIKE concat('%',#&#123;username&#125;)</div><div class="line">where username LIKE "%"#&#123;username&#125;"%"</div></pre></td></tr></table></figure>
 <h5 id="oracle-CONCAT只能连接两个字符串-可以用"><a href="#oracle-CONCAT只能连接两个字符串-可以用" class="headerlink" title="oracle(CONCAT只能连接两个字符串,可以用||)"></a>oracle(CONCAT只能连接两个字符串,可以用||)</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">where username LIKE '%' || #&#123;username&#125; || '%' </div><div class="line">where username LIKE concat('%',concat(#&#123;username&#125;,'%'))（嵌套concat）</div></pre></td></tr></table></figure>
 <h5 id="两者都支持（不推荐，-导致SQL注入）"><a href="#两者都支持（不推荐，-导致SQL注入）" class="headerlink" title="两者都支持（不推荐，$导致SQL注入）"></a>两者都支持（不推荐，$导致SQL注入）</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">where username LIKE '%$&#123;username&#125;%'</div></pre></td></tr></table></figure>
+<p>ps：当mysql的字段名和保留字冲突的时候如key，sql语句中的字段名需要加上反引号``来加以区别，反引号可以用Esc键下面那个按键在英文模式不按shift键打出来，注意，是反引号不是单引号，回车键左边那个是单引号。</p>
+
         
         </div>
   <!--      <footer class="article-footer">
@@ -208,7 +210,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj3u2les30014s1xdijy9o05j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj3u3bflc0012sjxdkmxcknix" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
