@@ -140,7 +140,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                24
+                25
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -154,6 +154,220 @@
 
             
             <section id="main">
+    <article id="post-Docker实践系列1-基本命令" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/30/Docker实践系列1-基本命令/">Docker实践系列1-基本命令</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/30/Docker实践系列1-基本命令/">
+            <time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/DOCKER/">DOCKER</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/DOCKER/">DOCKER</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h2 id="1-如何使用Docker"><a href="#1-如何使用Docker" class="headerlink" title="1.如何使用Docker"></a>1.如何使用Docker</h2><h3 id="1-1-Docker镜像常用操作"><a href="#1-1-Docker镜像常用操作" class="headerlink" title="1.1.Docker镜像常用操作"></a>1.1.Docker镜像常用操作</h3><h4 id="1-1-1-列出本地可用镜像"><a href="#1-1-1-列出本地可用镜像" class="headerlink" title="1.1.1.列出本地可用镜像"></a>1.1.1.列出本地可用镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker images</div></pre></td></tr></table></figure>
+<h4 id="1-1-2-拉取镜像"><a href="#1-1-2-拉取镜像" class="headerlink" title="1.1.2.拉取镜像"></a>1.1.2.拉取镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker pull centos</div></pre></td></tr></table></figure>
+<p>执行以上命令后，docker客户端将连接docker hub，并自动从centos镜像仓库中下载最新版本的centos镜像。下载完后可再次通过docker images命令列出镜像：</p>
+<table>
+<thead>
+<tr>
+<th>REPOSITORY</th>
+<th>TAG</th>
+<th>IMAGE ID</th>
+<th>CREATED</th>
+<th>SIZE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>centos</td>
+<td>lastest</td>
+<td>d0e7f81ca65c</td>
+<td>3 months ago</td>
+<td>196.6 MB</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>IMAGE ID:表示镜像的标识符，具备唯一性。这里看到的是一串12位的字符串，实际上它是64位完整镜像ID的缩略表达形式。</li>
+</ul>
+<h4 id="1-1-3-搜索镜像"><a href="#1-1-3-搜索镜像" class="headerlink" title="1.1.3.搜索镜像"></a>1.1.3.搜索镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker search centos</div></pre></td></tr></table></figure>
+<h4 id="1-1-4-删除镜像"><a href="#1-1-4-删除镜像" class="headerlink" title="1.1.4.删除镜像"></a>1.1.4.删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker rmi centos</div><div class="line">$ docker rmi <span class="_">-f</span> centos <span class="comment">#强制删除有容器在跑的镜像</span></div><div class="line">$ docker rmi <span class="_">-f</span> `docker images <span class="_">-a</span> -q` <span class="comment">#一次性删除所有镜像</span></div></pre></td></tr></table></figure>
+<p>使用以上命令在Docker hub中搜索centos镜像。</p>
+<h4 id="1-1-5-导出与导入镜像"><a href="#1-1-5-导出与导入镜像" class="headerlink" title="1.1.5.导出与导入镜像"></a>1.1.5.导出与导入镜像</h4><p>使用以下命令导出centos镜像为一个tar文件（镜像包）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker save centos &gt; centos.tar</div></pre></td></tr></table></figure></p>
+<p>若不指定导出的tar文件路径，则导出的centos.tar文件在当前目录上。</p>
+<p>导出的centos.tar镜像包文件可随时在另一台Docker机器上导入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker load &lt; centos.tar</div></pre></td></tr></table></figure></p>
+<p>当我们获取了centos镜像后，就能基于该镜像启动相应的容器。</p>
+<h3 id="1-2-Docker容器常用操作"><a href="#1-2-Docker容器常用操作" class="headerlink" title="1.2.Docker容器常用操作"></a>1.2.Docker容器常用操作</h3><h4 id="1-2-1-创建并启动容器"><a href="#1-2-1-创建并启动容器" class="headerlink" title="1.2.1.创建并启动容器"></a>1.2.1.创建并启动容器</h4><p>使用以下命令在运行centos镜像，从而创建并启动centos容器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -i -t centos /bin/bash</div></pre></td></tr></table></figure></p>
+<p>需要注意的是该命令实际上首先从本地获取centos镜像，若本地没有，则从docker hub拉取centos镜像并放入本地，随后才根据镜像创建并启动centos容器。</p>
+<ul>
+<li>-i选项：表示启动容器后，打开标准输入设备（STDIN）,可使用键盘进行输入。</li>
+<li>-t选项：表示启动容器后，分配一个伪终端（pseudo-TTY）,将于服务器建立一个会话。</li>
+<li>centos参数：表示需要运行的镜像名称，标准格式为centos:latest,若为latest版本，则可省略。</li>
+<li>/bin/bash参数：表示运行容器中的bash应用程序，因为我们此时并不需要运行其他程序，只想进入到容器中。<h4 id="1-2-2-列出容器"><a href="#1-2-2-列出容器" class="headerlink" title="1.2.2.列出容器"></a>1.2.2.列出容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker ps</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>CONTAINER ID</th>
+<th>IMAGE</th>
+<th>COMMAND</th>
+<th>CREATED</th>
+<th>STATUS</th>
+<th>PROTS</th>
+<th>NAMES</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>21e21e1j212j</td>
+<td>centos</td>
+<td>“/bin/bash”</td>
+<td>8 hours age</td>
+<td>Up 5 seconds</td>
+<td></td>
+<td>ekdsaf_dfds</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>COMMAND:表示启动容器时运行的命令。</li>
+<li>NAMES:表示容器的名称，由docker引擎自动生成，也可以在docker run命令中通过–name选项来指定。</li>
+</ul>
+<h4 id="1-2-3-进入容器"><a href="#1-2-3-进入容器" class="headerlink" title="1.2.3.进入容器"></a>1.2.3.进入容器</h4><p>使用以下命令进入运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker attach 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>只能进入运行中的容器，不能进入已停止的容器。此外，当打开多个终端并进入容器时，在一个终端中执行了某命令，该命令自动同步到其他终端中。例如在一个终端中执行了exit命令，将从终端中退出容器，此时其他终端也会自动退出容器。</p>
+<h4 id="1-2-4-执行命令"><a href="#1-2-4-执行命令" class="headerlink" title="1.2.4.执行命令"></a>1.2.4.执行命令</h4><p>使用以下命令向运行中的容器执行具体的命令(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">exec</span> -i -t 21e21e1j212j ls <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+<h4 id="1-2-5-停止容器"><a href="#1-2-5-停止容器" class="headerlink" title="1.2.5.停止容器"></a>1.2.5.停止容器</h4><p>使用以下命令停止运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker stop 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>使用该命令可对容器发送SIGTERM信号，将等待一段很短的时间，再对容器发送SIGKILL信号，立刻终止容器。</p>
+<h4 id="1-2-6-终止容器"><a href="#1-2-6-终止容器" class="headerlink" title="1.2.6.终止容器"></a>1.2.6.终止容器</h4><p>使用以下命令终止运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">kill</span> 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>对容器发送SIGKILL信号，立刻终止容器</p>
+<h4 id="1-2-7-启动容器"><a href="#1-2-7-启动容器" class="headerlink" title="1.2.7.启动容器"></a>1.2.7.启动容器</h4><p>使用以下命令启动已停止的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker start 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<h4 id="1-2-8-重启容器"><a href="#1-2-8-重启容器" class="headerlink" title="1.2.8.重启容器"></a>1.2.8.重启容器</h4><p>使用以下命令重启运行中的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker restart 21e21e1j212j</div></pre></td></tr></table></figure></p>
+<p>该命令实际上首先执行了docker stop，再执行docker start.</p>
+<h4 id="1-2-9-删除容器"><a href="#1-2-9-删除容器" class="headerlink" title="1.2.9.删除容器"></a>1.2.9.删除容器</h4><p>使用以下命令删除已停止的容器(需指定容器ID或容器名称)：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ docker rm 21e21e1j212j</div><div class="line">$ docker rm <span class="_">-f</span> 21e21e1j212j <span class="comment">#强制删除运行中的容器</span></div><div class="line">或 $ docker rm <span class="_">-f</span> `docker ps <span class="_">-a</span> -q` <span class="comment">#一次性删除所有容器</span></div></pre></td></tr></table></figure></p>
+<h4 id="1-2-10-导出与导入容器"><a href="#1-2-10-导出与导入容器" class="headerlink" title="1.2.10.导出与导入容器"></a>1.2.10.导出与导入容器</h4><p>使用以下命令导出容器为一个tar文件（容器包）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">export</span> 21e21e1j212j &gt; centos.tar</div></pre></td></tr></table></figure></p>
+<p>导出的centos.tar容器包可随时在另一个docker机器上导入为镜像，命令为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker import centos.tar cai/centos:latest</div></pre></td></tr></table></figure></p>
+<p>需要注意的是，我们之前用docker load 命令（从镜像包中导入镜像）与现在用docker import(从容器包中导入镜像)都可以导入镜像，区别是容器包不包含任何历史记录，相当于容器的当前快照，镜像包则包含所有的历史记录，因此镜像包的体积较大。</p>
+<h3 id="1-3-Docker命令汇总"><a href="#1-3-Docker命令汇总" class="headerlink" title="1.3.Docker命令汇总"></a>1.3.Docker命令汇总</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker <span class="built_in">help</span></div></pre></td></tr></table></figure>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/30/Docker实践系列1-基本命令/" data-id="cj41a614u0005ekxd1i027tsq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
     <article id="post-一种简单的微服务架构拆分方案" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -225,7 +439,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/28/一种简单的微服务架构拆分方案/" data-id="cj3u3bflp001esjxdbj1cnjxm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/28/一种简单的微服务架构拆分方案/" data-id="cj41a6160001iekxdr806978m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -376,7 +590,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/28/Java方法参数传递/" data-id="cj3u3bfkz000rsjxdixwz8ht4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/28/Java方法参数传递/" data-id="cj41a615b000lekxdsok7d9dk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -579,7 +793,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/27/调用外网第三方接口的坑与架构优化方案/" data-id="cj3u3bfly001osjxdk9150mxb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/27/调用外网第三方接口的坑与架构优化方案/" data-id="cj41a617b003yekxd4ja1gsv3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -734,191 +948,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/23/ThreadPoolExcutor线程池的使用/" data-id="cj3u3bfl9000xsjxdof9m0y30" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>-->
-    </div>
-    
-</article>
-
-
-
-    <article id="post-58到家数据库军规解读" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/22/58到家数据库军规解读/">58到家数据库军规解读</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/22/58到家数据库军规解读/">
-            <time datetime="2017-05-22T15:44:50.000Z" itemprop="datePublished">2017-05-22</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/转载/">转载</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/SQL/">SQL</a>, <a class="tag-link" href="/tags/数据库/">数据库</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>军规适用场景：并发量大、数据量大的互联网业务<br>军规：介绍内容<br>解读：讲解原因，解读比军规更重要</p>
-<p>一、基础规范</p>
-<p>（1）必须使用InnoDB存储引擎<br>解读：支持事务、行级锁、并发性能更好、CPU及内存缓存页优化使得资源利用率更高</p>
-<p>（2）必须使用UTF8字符集(最好用utf8mb4,utf8mb4是utf8的超集，emoji表情以及部分不常见汉字在utf8下会表现为乱码，故需要升级至utf8mb4。)<br>解读：万国码，无需转码，无乱码风险。</p>
-<p>（3）数据表、数据字段必须加入中文注释<br>解读：N年后谁tm知道这个r1,r2,r3字段是干嘛的</p>
-<p>（4）禁止使用存储过程、视图、触发器、Event<br>解读：高并发大数据的互联网业务，架构设计思路是“解放数据库CPU，将计算转移到服务层”，并发量大的情况下，这些功能很可能将数据库拖死，业务逻辑放到服务层具备更好的扩展性，能够轻易实现“增机器就加性能”。数据库擅长存储与索引，CPU计算还是上移吧</p>
-<p>（5）禁止存储大文件或者大照片<br>解读：为何要让数据库做它不擅长的事情？大文件和照片存储在文件系统，数据库里存URI多好</p>
-<p>二、命名规范<br>（6）只允许使用内网域名，而不是ip连接数据库</p>
-<p>（7）线上环境、开发环境、测试环境数据库内网域名遵循命名规范<br>业务名称：xxx<br>线上环境：dj.xxx.db<br>开发环境：dj.xxx.rdb<br>测试环境：dj.xxx.tdb<br>从库在名称后加-s标识，备库在名称后加-ss标识<br>线上从库：dj.xxx-s.db<br>线上备库：dj.xxx-sss.db</p>
-<p>（8）库名、表名、字段名：小写，下划线风格，不超过32个字符，必须见名知意，禁止拼音英文混用</p>
-<p>（9）表名t_xxx，非唯一索引名idx_xxx，唯一索引名uniq_xxx</p>
-<p>三、表设计规范</p>
-<p>（10）单实例表数目必须小于500</p>
-<p>（11）单表列数目必须小于30</p>
-<p>（12）表必须有主键，例如自增主键<br>解读：</p>
-<p>a）主键递增，数据行写入可以提高插入性能，可以避免page分裂，减少表碎片提升空间和内存的使用</p>
-<p>b）主键要选择较短的数据类型， Innodb引擎普通索引都会保存主键的值，较短的数据类型可以有效的减少索引的磁盘空间，提高索引的缓存效率</p>
-<p>c） 无主键的表删除，在row模式的主从架构，会导致备库夯住</p>
-<p>（13）禁止使用外键，如果有外键完整性约束，需要应用程序控制<br>解读：外键会导致表与表之间耦合，update与delete操作都会涉及相关联的表，十分影响sql 的性能，甚至会造成死锁。高并发情况下容易造成数据库性能，大数据高并发业务场景数据库使用以性能优先</p>
-<p>四、字段设计规范</p>
-<p>（14）必须把字段定义为NOT NULL并且提供默认值<br>解读：<br>a）null的列使索引/索引统计/值比较都更加复杂，对MySQL来说更难优化<br>b）null 这种类型MySQL内部需要进行特殊处理，增加数据库处理记录的复杂性；同等条件下，表中有较多空字段的时候，数据库的处理性能会降低很多<br>c）null值需要更多的存储空，无论是表还是索引中每行中的null的列都需要额外的空间来标识<br>d）对null 的处理时候，只能采用is null或is not null，而不能采用=、in、&lt;、&lt;&gt;、!=、not in这些操作符号。如：where name!=’shenjian’，如果存在name为null值的记录，查询结果就不会包含name为null值的记录</p>
-<p>（15）禁止使用TEXT、BLOB类型<br>解读：会浪费更多的磁盘和内存空间，非必要的大量的大字段查询会淘汰掉热数据，导致内存命中率急剧降低，影响数据库性能</p>
-<p>（16）禁止使用小数存储货币<br>解读：使用整数吧，小数容易导致钱对不上，可以使单位为分</p>
-<p>（17）必须使用varchar(20)存储手机号<br>解读：<br>a）涉及到区号或者国家代号，可能出现+-()<br>b）手机号会去做数学运算么？<br>c）varchar可以支持模糊查询，例如：like“138%”</p>
-<p>（18）禁止使用ENUM，可使用TINYINT代替<br>解读：<br>a）增加新的ENUM值要做DDL操作<br>b）ENUM的内部实际存储就是整数，你以为自己定义的是字符串？</p>
-<p>五、索引设计规范</p>
-<p>（19）单表索引建议控制在5个以内</p>
-<p>（20）单索引字段数不允许超过5个<br>解读：字段超过5个时，实际已经起不到有效过滤数据的作用了</p>
-<p>（21）禁止在更新十分频繁、区分度不高的属性上建立索引<br>解读：<br>a）更新会变更B+树，更新频繁的字段建立索引会大大降低数据库性能<br>b）“性别”这种区分度不大的属性，建立索引是没有什么意义的，不能有效过滤数据，性能与全表扫描类似</p>
-<p>（22）建立组合索引，必须把区分度高的字段放在前面<br>解读：能够更加有效的过滤数据</p>
-<p>六、SQL使用规范</p>
-<p>（23）禁止使用SELECT <em>，只获取必要的字段，需要显示说明列属性<br>解读：<br>a）读取不需要的列会增加CPU、IO、NET消耗<br>b）不能有效的利用覆盖索引<br>c）使用SELECT </em>容易在增加或者删除字段后出现程序BUG</p>
-<p>（24）禁止使用INSERT INTO t_xxx VALUES(xxx)，必须显示指定插入的列属性<br>解读：容易在增加或者删除字段后出现程序BUG</p>
-<p>（25）禁止使用属性隐式转换<br>解读：SELECT uid FROM t_user WHERE phone=13812345678 会导致全表扫描，而不能命中phone索引，猜猜为什么？（这个线上问题不止出现过一次，因为phone是varchar类型，SQL语句带入的是整形，故不会命中索引，加个引号就好了：<br>SELECT uid FROM t_user WHERE phone=’13812345678’</p>
-<p>（26）禁止在WHERE条件的属性上使用函数或者表达式<br>解读：SELECT uid FROM t_user WHERE from_unixtime(day)&gt;=’2017-02-15’ 会导致全表扫描<br>正确的写法是：SELECT uid FROM t_user WHERE day&gt;= unix_timestamp(‘2017-02-15 00:00:00’)</p>
-<p>（27）禁止负向查询，以及%开头的模糊查询<br>解读：<br>a）负向查询条件：NOT、!=、&lt;&gt;、!&lt;、!&gt;、NOT IN、NOT LIKE等，会导致全表扫描<br>b）%开头的模糊查询，会导致全表扫描</p>
-<p>（28）禁止大表使用JOIN查询，禁止大表使用子查询<br>解读：会产生临时表，消耗较多内存与CPU，极大影响数据库性能</p>
-<p>（29）禁止使用OR条件，必须改为IN查询<br>解读：旧版本Mysql的OR查询是不能命中索引的，即使能命中索引，为何要让数据库耗费更多的CPU帮助实施查询优化呢？</p>
-<p>（30）应用程序必须捕获SQL异常，并有相应处理</p>
-<p>七、行为规范</p>
-<p>（31）禁止使用应用程序配置文件内的帐号手工访问线上数据库</p>
-<p>（32）禁止非DBA对线上数据库进行写操作，修改线上数据需要提交工单，由DBA执行，提交的SQL语句必须经过测试</p>
-<p>（33）分配非DBA以只读帐号，必须通过VPN+跳板机访问授权的从库</p>
-<p>（34）开发、测试、线上环境隔离</p>
-<p>为什么要制定行为规范的军规呢，大伙的公司是不是有这样的情况：<br>任何研发、测试都有连接线上数据库的帐号？</p>
-<p>是不是经常有这类误操作？</p>
-<p>（1）本来只想update一条记录，where条件搞错，update了全部的记录</p>
-<p>（2）本来只想delete几行记录，结果删多了，四下无人，再insert回去</p>
-<p>（3）以为drop的是测试库，结果把线上库drop掉了</p>
-<p>（4）以为操作的是分库x，结果SecureCRT开窗口太多，操作成了分库y</p>
-<p>（5）写错配置文件，压力测试压到线上库了，生成了N多脏数据<br>…</p>
-<p>无数的事情，结果就是打电话给DBA，让他们帮忙擦屁股。<br>…</p>
-<p>所谓的“业务灵活性”都是扯淡，为什么要有行为规范？不让你带刀，不是限制你，而是保护你的安全。要相信DBA是专业的，让专业的人干专业的事情。别把DBA看做你的对立面，多和他们沟通业务场景，沟通请求读写比，沟通访问模式，他们真的能帮助到你，这是我带DBA团队的一些感触。</p>
-<p>总结：大数据量高并发的互联网业务，极大影响数据库性能的都不让用，不让用哟。谁都可能删除全库，能找回数据的，真的只有DBA。</p>
-<p>转自：58沈剑公众号：架构师之路</p>
-
-        
-        </div>
-  <!--      <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://reasoncai.github.io/2017/05/22/58到家数据库军规解读/" data-id="cj3u3bfk50001sjxdr2ii3ieb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/23/ThreadPoolExcutor线程池的使用/" data-id="cj41a615g000rekxdiqwst7il" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1011,6 +1041,15 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" class="title">如何安全地暂停-恢复-终止线程(wait/notify)</a></p>
+                            <p class="item-date"><time datetime="2017-06-17T12:47:13.000Z" itemprop="datePublished">2017-06-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
                             <p class="item-title"><a href="/2017/06/12/mybatis模糊查询like如何写/" class="title">mybatis模糊查询like如何写</a></p>
                             <p class="item-date"><time datetime="2017-06-12T04:38:42.000Z" itemprop="datePublished">2017-06-12</time></p>
                         </div>
@@ -1043,15 +1082,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
-                            <p class="item-title"><a href="/2017/05/30/Docker实践系列1-基本命令/" class="title">Docker实践系列1-基本命令</a></p>
-                            <p class="item-date"><time datetime="2017-05-30T09:00:24.000Z" itemprop="datePublished">2017-05-30</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1070,7 +1100,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -1079,7 +1109,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1088,7 +1118,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 20px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
         </div>
     </div>
 
