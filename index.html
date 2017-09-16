@@ -202,7 +202,7 @@
 <ul>
 <li><p>优点：接口中定义的”变量”, 其实就是常量, 接口中的”变量”默认都是 “public static final”类型，即为常量，因此接口可以省略”public static final”而直接写成 “type variable”，在interface和class中定义相同的常量, interface生成的class文件比class生成的class文件会更小, 而且更简洁, 效率更高。</p>
 </li>
-<li><p>缺点：接口定义常量, 虽不能实例化, 但能被实现。<br>因此有这么一种设计模式”The constant interface pattern”. 所谓的”常量接口模式”,  就是其他类要使用接口中定义的常量,<br>就实现该接口. 我认为这是对接口的烂用。 接口中定义的常量应为所有类频繁使用的常量, 但并不是每个类都使用了接口中定义的所有常量,<br>因而导入了不必要的常量到这个类中, 并且导入后这个类的子类也会基础导入的常量, 这样会导致混乱, 应当避免此种用法。</p>
+<li><p>缺点：接口定义常量, 虽不能实例化, 但能被实现。因此有这么一种设计模式”The constant interface pattern”. 所谓的”常量接口模式”,  就是其他类要使用接口中定义的常量, 就实现该接口. 我认为这是对接口的烂用。 接口中定义的常量应为所有类频繁使用的常量, 但并不是每个类都使用了接口中定义的所有常量, 因而导入了不必要的常量到这个类中, 并且导入后这个类的子类也会基础导入的常量, 这样会导致混乱, 应当避免此种用法。</p>
 </li>
 </ul>
 <h5 id="2-定义在普通的class中"><a href="#2-定义在普通的class中" class="headerlink" title="2.定义在普通的class中"></a>2.定义在普通的class中</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Constants</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Constants</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> A = <span class="number">90</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> B = <span class="number">80</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> C = <span class="number">60</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -232,7 +232,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="cj7njk3dn000645xddsrfespe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="cj7njlll1000f4cxdy64z93yi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -374,7 +374,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" data-id="cj7njk3ew001k45xd4uknguu6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" data-id="cj7njllma001s4cxd43xmsfw4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -502,7 +502,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj7njk3ev001i45xd77i9u3xq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj7njlllp00154cxd25stalr5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -656,7 +656,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj7njk3dr000a45xd8mrdfo6p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj7njllkx000c4cxd8n222qe1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -808,7 +808,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" data-id="cj7njk3dk000445xdlcf1me3x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" data-id="cj7njllku000a4cxdzgh34lsn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
