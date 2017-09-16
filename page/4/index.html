@@ -140,7 +140,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                25
+                26
                 <span>posts</span>
             </div>
             <div class="article-info-block">
@@ -154,6 +154,154 @@
 
             
             <section id="main">
+    <article id="post-关于应用集群化部署的可行性分析" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/05/09/关于应用集群化部署的可行性分析/">关于应用集群化部署的可行性分析</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/05/09/关于应用集群化部署的可行性分析/">
+            <time datetime="2017-05-09T07:59:10.000Z" itemprop="datePublished">2017-05-09</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/架构/">架构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/并发/">并发</a>, <a class="tag-link" href="/tags/负载均衡/">负载均衡</a>, <a class="tag-link" href="/tags/集群/">集群</a>, <a class="tag-link" href="/tags/高可用/">高可用</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="1-问题背景"><a href="#1-问题背景" class="headerlink" title="1.问题背景"></a>1.问题背景</h3><p>Center经常在高峰期（一般在下午2点到5点）出现卡顿，请求堵塞在MQ的情况，严重影响业务和用户体验。</p>
+<h3 id="2-初步分析"><a href="#2-初步分析" class="headerlink" title="2.初步分析"></a>2.初步分析</h3><p>目前的部署架构如图所示：<br><img src="http://ooxz0ztfx.bkt.clouddn.com/pssnow.png" alt=""><br>可以看出只有一个消费者（Center应用）在处理业务请求。在高峰期，处理速度远小于生产者将请求放入MQ的速度，导致请求在MQ中堆积，不能及时消费处理，结果就是系统响应缓慢，各种接口调用超时。</p>
+<h3 id="3-解决方案"><a href="#3-解决方案" class="headerlink" title="3.解决方案"></a>3.解决方案</h3><p>将Center集群化部署，提高消息的处理能力，并增强服务的高可用性。如图所示，目前先再部署多一个，后面根据业务的增长可以水平再扩展到N个。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/pssfuture.png" alt=""></p>
+<h3 id="4-解决方案的可行性分析"><a href="#4-解决方案的可行性分析" class="headerlink" title="4.解决方案的可行性分析"></a>4.解决方案的可行性分析</h3><p>Center可以轻松地水平扩展主要依赖于以下几点：</p>
+<ul>
+<li><strong>请求消息的无状态性</strong></li>
+</ul>
+<p>无状态服务(stateless service)指的是对单次请求的处理，不依赖其他请求，也就是说，处理一次请求所需的全部信息，要么都包含在这个请求里，要么可以从外部获取到（比如说数据库），服务器本身不存储任何信息 。</p>
+<ul>
+<li><strong>请求消息的无序性</strong></li>
+</ul>
+<p>无序性指的是请求消息不必按顺序依次消费处理。Center使用线程池来处理请求可以得出这个结论，因为每个线程获得CPU时间是随机的，所以对请求的处理是无序的。</p>
+<ul>
+<li><strong>其他</strong></li>
+</ul>
+<p>Center自身没有任何的定时任务需要执行，不用考虑定时任务重复执行的问题。</p>
+<h3 id="5-方案实施"><a href="#5-方案实施" class="headerlink" title="5.方案实施"></a>5.方案实施</h3><h4 id="5-1单机多应用部署"><a href="#5-1单机多应用部署" class="headerlink" title="5.1单机多应用部署"></a>5.1单机多应用部署</h4><p>即拷贝多一份完整应用，并修改相关的脚本<br>此方案的优点是简单，不用占用新服务器资源，IP没有变化，不用考虑外部接口对IP的限制问题。缺点是共用服务器资源，性能效果没有最优。</p>
+<h4 id="5-2多机部署"><a href="#5-2多机部署" class="headerlink" title="5.2多机部署"></a>5.2多机部署</h4><p>在新的服务器上部署。此方案的优点是独占服务器资源，缺点是IP变化了，要考虑外部接口对IP限制的问题。</p>
+<h3 id="6-拓展：高可用部署"><a href="#6-拓展：高可用部署" class="headerlink" title="6.拓展：高可用部署"></a>6.拓展：高可用部署</h3><p>考虑到业务的日益增长，当前的瓶颈是Center的处理速度,以后的瓶颈可能是Web服务器，MQ，数据库,网络等等，对此提供一份部署方案参考。<br><img src="http://ooxz0ztfx.bkt.clouddn.com/pssha2.png" alt=""></p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/05/09/关于应用集群化部署的可行性分析/" data-id="cj7njftl2001q3fxdyzxupqm6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
     <article id="post-npm-install安装时忘记-save解决方法" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -205,7 +353,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/07/npm-install安装时忘记-save解决方法/" data-id="cj41a615q0015ekxdmu70j7mf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/07/npm-install安装时忘记-save解决方法/" data-id="cj7njftkq001e3fxdjku0oxc3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -344,7 +492,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/06/Java序列化小结/" data-id="cj41a6157000eekxd4zo3j24g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/06/Java序列化小结/" data-id="cj7njftk4000o3fxda904j9zq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -476,7 +624,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/" data-id="cj41a6159000gekxdu3iwmym6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/05/Java并发编程的艺术读书笔记-2-并发编程模型/" data-id="cj7njftjy000g3fxdwasg8b85" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -608,138 +756,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/03/Java并发编程的艺术读书笔记1-并发编程的挑战/" data-id="cj41a615c000mekxdn0vokgmp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>-->
-    </div>
-    
-</article>
-
-
-
-    <article id="post-四层和七层负载均衡的区别" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/05/03/四层和七层负载均衡的区别/">四层和七层负载均衡的区别</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/05/03/四层和七层负载均衡的区别/">
-            <time datetime="2017-05-03T07:54:56.000Z" itemprop="datePublished">2017-05-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/转载/">转载</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/tcp-ip/">tcp/ip</a>, <a class="tag-link" href="/tags/负载均衡/">负载均衡</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p>负载均衡设备也常被称为”四到七层交换机”，那么四层和七层两者到底区别在哪里？</p></p>
-            <p class="article-more-link">
-                <a href="/2017/05/03/四层和七层负载均衡的区别/#more">Read More</a>
-            </p>
-        
-        </div>
-  <!--      <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://reasoncai.github.io/2017/05/03/四层和七层负载均衡的区别/" data-id="cj41a6166001pekxda2uo1g9t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/05/03/Java并发编程的艺术读书笔记1-并发编程的挑战/" data-id="cj7njftjr000c3fxdryen54ga" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -816,7 +833,7 @@
 
 
     <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
 </section>
             
@@ -827,6 +844,15 @@
         <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
+                            <p class="item-title"><a href="/2017/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
+                            <p class="item-date"><time datetime="2017-09-16T16:30:58.000Z" itemprop="datePublished">2017-09-17</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -864,15 +890,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
-                            <p class="item-title"><a href="/2017/05/31/Docker实践系列2-制作镜像/" class="title">Docker实践系列2-制作镜像</a></p>
-                            <p class="item-date"><time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -882,7 +899,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编码习惯/">编码习惯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -891,7 +908,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
