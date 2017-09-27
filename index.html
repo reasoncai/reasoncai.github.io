@@ -140,11 +140,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                26
+                27
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                26
+                27
                 <span>tags</span>
             </div>
         </div>
@@ -154,6 +154,157 @@
 
             
             <section id="main">
+    <article id="post-Java8-Optional的使用" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/09/28/Java8-Optional的使用/">Java8-Optional的使用</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/09/28/Java8-Optional的使用/">
+            <time datetime="2017-09-27T16:34:14.000Z" itemprop="datePublished">2017-09-28</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/JAVA基础/编码习惯/">编码习惯</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/java8/">java8</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h3><p>去掉烦人的NPE异常和非NULL判断代码</p>
+<h3 id="1-三种构造函数"><a href="#1-三种构造函数" class="headerlink" title="1.三种构造函数"></a>1.三种构造函数</h3><ul>
+<li>Optional.of(obj)  要求传入的对象不能为null,否则立刻报NPE异常</li>
+<li><p>Optional.ofNullable(obj)  传 null 进到就得到 Optional.empty(), 非 null 就调用 Optional.of(obj)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">源码</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Optional&lt;T&gt; <span class="title">ofNullable</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value == <span class="keyword">null</span> ? empty() : of(value);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Optional.empty() 顾名思义value为null</p>
+</li>
+</ul>
+<h3 id="2-常用方法"><a href="#2-常用方法" class="headerlink" title="2.常用方法"></a>2.常用方法</h3><h4 id="2-1-存在即返回，否则返回默认值oreElse-T-other"><a href="#2-1-存在即返回，否则返回默认值oreElse-T-other" class="headerlink" title="2.1.存在即返回，否则返回默认值oreElse(T other)"></a>2.1.存在即返回，否则返回默认值oreElse(T other)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">源码</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * Return the value if present, otherwise return &#123;<span class="doctag">@code</span> other&#125;.</div><div class="line">     *</div><div class="line">     * <span class="doctag">@param</span> other the value to be returned if there is no value present, may</div><div class="line">     * be null</div><div class="line">     * <span class="doctag">@return</span> the value, if present, otherwise &#123;<span class="doctag">@code</span> other&#125;</div><div class="line">     */</div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">orElse</span><span class="params">(T other)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> value != <span class="keyword">null</span> ? value : other;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h4 id="2-2存在即返回-无则由函数（函数式编程）来产生orElseGet-Supplier-lt-extends-T-gt-other"><a href="#2-2存在即返回-无则由函数（函数式编程）来产生orElseGet-Supplier-lt-extends-T-gt-other" class="headerlink" title="2.2存在即返回, 无则由函数（函数式编程）来产生orElseGet(Supplier&lt;? extends T&gt; other)"></a>2.2存在即返回, 无则由函数（函数式编程）来产生orElseGet(Supplier&lt;? extends T&gt; other)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * Return the value if present, otherwise invoke &#123;@code other&#125; and return</div><div class="line"> * the result of that invocation.</div><div class="line"> *</div><div class="line"> * @param other a &#123;@code Supplier&#125; whose result is returned if no value</div><div class="line"> * is present</div><div class="line"> * @return the value if present otherwise the result of &#123;@code other.get()&#125;</div><div class="line"> * @throws NullPointerException if value is not present and &#123;@code other&#125; is</div><div class="line"> * null</div><div class="line"> */</div><div class="line">public T orElseGet(Supplier&lt;? extends T&gt; other) &#123;</div><div class="line">    return value != null ? value : other.get();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="2-3存在则返回，无则抛出异常"><a href="#2-3存在则返回，无则抛出异常" class="headerlink" title="2.3存在则返回，无则抛出异常"></a>2.3存在则返回，无则抛出异常</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * Return the contained value, if present, otherwise throw an exception</div><div class="line">  * to be created by the provided supplier.</div><div class="line">  *</div><div class="line">  * <span class="doctag">@apiNote</span> A method reference to the exception constructor with an empty</div><div class="line">  * argument list can be used as the supplier. For example,</div><div class="line">  * &#123;<span class="doctag">@code</span> IllegalStateException::new&#125;</div><div class="line">  *</div><div class="line">  * <span class="doctag">@param</span> &lt;X&gt; Type of the exception to be thrown</div><div class="line">  * <span class="doctag">@param</span> exceptionSupplier The supplier which will return the exception to</div><div class="line">  * be thrown</div><div class="line">  * <span class="doctag">@return</span> the present value</div><div class="line">  * <span class="doctag">@throws</span> X if there is no value present</div><div class="line">  * <span class="doctag">@throws</span> NullPointerException if no value is present and</div><div class="line">  * &#123;<span class="doctag">@code</span> exceptionSupplier&#125; is null</div><div class="line">  */</div><div class="line"> <span class="keyword">public</span> &lt;X extends Throwable&gt; <span class="function">T <span class="title">orElseThrow</span><span class="params">(Supplier&lt;? extends X&gt; exceptionSupplier)</span> <span class="keyword">throws</span> X </span>&#123;</div><div class="line">     <span class="keyword">if</span> (value != <span class="keyword">null</span>) &#123;</div><div class="line">         <span class="keyword">return</span> value;</div><div class="line">     &#125; <span class="keyword">else</span> &#123;</div><div class="line">         <span class="keyword">throw</span> exceptionSupplier.get();</div><div class="line">     &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="2-4若存在则进行一些操作"><a href="#2-4若存在则进行一些操作" class="headerlink" title="2.4若存在则进行一些操作"></a>2.4若存在则进行一些操作</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * If a value is present, invoke the specified consumer with the value,</div><div class="line">  * otherwise do nothing.</div><div class="line">  *</div><div class="line">  * <span class="doctag">@param</span> consumer block to be executed if a value is present</div><div class="line">  * <span class="doctag">@throws</span> NullPointerException if value is present and &#123;<span class="doctag">@code</span> consumer&#125; is</div><div class="line">  * null</div><div class="line">  */</div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ifPresent</span><span class="params">(Consumer&lt;? <span class="keyword">super</span> T&gt; consumer)</span> </span>&#123;</div><div class="line">     <span class="keyword">if</span> (value != <span class="keyword">null</span>)</div><div class="line">         consumer.accept(value);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="2-5map函数"><a href="#2-5map函数" class="headerlink" title="2.5map函数"></a>2.5map函数</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span>&lt;U&gt; Optional&lt;U&gt; <span class="title">map</span><span class="params">(Function&lt;? <span class="keyword">super</span> T, ? extends U&gt; mapper)</span> </span>&#123;</div><div class="line">    Objects.requireNonNull(mapper);</div><div class="line">    <span class="keyword">if</span> (!isPresent())</div><div class="line">        <span class="keyword">return</span> empty();</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> Optional.ofNullable(mapper.apply(value));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.optional;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Optional;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/9/27.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OptionalTest</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">        Student student = getNull();</div><div class="line">        Student defaultStudent = getStudent();</div><div class="line">        Optional&lt;Student&gt; studentOptional = Optional.ofNullable(defaultStudent);</div><div class="line">        Student student1 = studentOptional.orElse(getDefaultStudent());</div><div class="line">        System.out.println(student1);</div><div class="line">        Student student2 = studentOptional.orElseGet(() -&gt; getFuntionStudent());</div><div class="line">        System.out.println(student2);</div><div class="line">        Student student3 = studentOptional.orElseThrow(() -&gt; <span class="keyword">new</span> Exception(<span class="string">"空抛出自定义异常"</span>));</div><div class="line">        System.out.println(student3.toString());</div><div class="line"></div><div class="line">        <span class="comment">//若存在则进行某种操作（这里将名字改为modify）</span></div><div class="line">        studentOptional.ifPresent((x) -&gt; &#123;</div><div class="line">            x.setName(<span class="string">"modify"</span>);</div><div class="line">        &#125;);</div><div class="line">        System.out.println(studentOptional.get());</div><div class="line"></div><div class="line">        <span class="comment">//map函数(这里将获取名字并转大写)无限级联</span></div><div class="line">        String s = studentOptional.map(a -&gt; a.getName()).map(b -&gt; b.toUpperCase()).orElse(<span class="keyword">null</span>);</div><div class="line">        System.out.println(s);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Student <span class="title">getStudent</span><span class="params">()</span> </span>&#123;</div><div class="line">        Student student = <span class="keyword">new</span> Student();</div><div class="line">        student.setName(<span class="string">"normal"</span>);</div><div class="line">        student.setAge(<span class="number">10</span>);</div><div class="line">        <span class="keyword">return</span> student;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Student <span class="title">getNull</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Student <span class="title">getDefaultStudent</span><span class="params">()</span> </span>&#123;</div><div class="line">        Student student = <span class="keyword">new</span> Student();</div><div class="line">        student.setName(<span class="string">"default"</span>);</div><div class="line">        student.setAge(<span class="number">1</span>);</div><div class="line">        <span class="keyword">return</span> student;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Student <span class="title">getFuntionStudent</span><span class="params">()</span> </span>&#123;</div><div class="line">        Student student = <span class="keyword">new</span> Student();</div><div class="line">        student.setName(<span class="string">"Funtion"</span>);</div><div class="line">        student.setAge(<span class="number">129000</span>);</div><div class="line">        <span class="keyword">return</span> student;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>当student不为null时输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Student&#123;name=&apos;normal&apos;, age=10&#125;</div><div class="line">Student&#123;name=&apos;normal&apos;, age=10&#125;</div><div class="line">Student&#123;name=&apos;normal&apos;, age=10&#125;</div><div class="line">Student&#123;name=&apos;modify&apos;, age=10&#125;</div><div class="line">MODIFY</div></pre></td></tr></table></figure></p>
+<p>当student为null时输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Student&#123;name=&apos;default&apos;, age=1&#125;</div><div class="line">Student&#123;name=&apos;Funtion&apos;, age=129000&#125;</div><div class="line">Exception in thread &quot;main&quot; java.lang.Exception: 空抛出自定义异常</div><div class="line">	at com.cai.javademo.optional.OptionalTest.lambda$main$1(OptionalTest.java:17)</div><div class="line">	at java.util.Optional.orElseThrow(Optional.java:290)</div><div class="line">	at com.cai.javademo.optional.OptionalTest.main(OptionalTest.java:17)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)</div><div class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)</div><div class="line">	at java.lang.reflect.Method.invoke(Method.java:498)</div><div class="line">	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:147)</div></pre></td></tr></table></figure></p>
+<h3 id="3-总结"><a href="#3-总结" class="headerlink" title="3.总结"></a>3.总结</h3><ul>
+<li>尽量不用isPresent()和get(),因为这样做与以前直接判断==null?没有什么区别。且用get()方法前要用isPresent()判断是否为null，过于啰嗦。</li>
+<li>不要将Optional 类型用作属性或是方法参数，Optional 类型不可被序列化, 用作字段类型会出问题的。</li>
+</ul>
+<p>其实说了那么多，还不如看看jdk源码java.util.Optional来的简单。。。。。。</p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2017/09/28/Java8-Optional的使用/" data-id="cj839790u000ctyxd7he93ar4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
     <article id="post-Java常量定义在interface中好还是定义在class好" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -232,7 +383,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="cj7njlll1000f4cxdy64z93yi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="cj839790x000ftyxdbeins8fo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -374,7 +525,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" data-id="cj7njllma001s4cxd43xmsfw4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" data-id="cj8397923001utyxdgi9cgkml" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -502,7 +653,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj7njlllp00154cxd25stalr5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cj839791j0017tyxdfbx0q9dx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -656,159 +807,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj7njllkx000c4cxd8n222qe1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>-->
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Docker实践系列3-使用DockerRegistry管理镜像" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/">Docker实践系列3-使用DockerRegistry管理镜像</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/">
-            <time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/DOCKER/">DOCKER</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/DOCKER/">DOCKER</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <ul>
-<li>Docker Hub相当于maven中央仓库</li>
-<li>Docker Registry相当于局域网的mavan仓库（nexus）</li>
-</ul>
-<h3 id="1-使用DockerHub"><a href="#1-使用DockerHub" class="headerlink" title="1.使用DockerHub"></a>1.使用DockerHub</h3><ol>
-<li>注册登录docker hub</li>
-<li>在docker hub上创建仓库</li>
-<li>推送本地镜像到docker hub</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker push cai/java</div></pre></td></tr></table></figure>
-<p>输出没有授权，需要登录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker login</div></pre></td></tr></table></figure>
-<h3 id="2-搭建Docker-Registry"><a href="#2-搭建Docker-Registry" class="headerlink" title="2.搭建Docker Registry"></a>2.搭建Docker Registry</h3><h4 id="2-1-启动Docker-Registry"><a href="#2-1-启动Docker-Registry" class="headerlink" title="2.1.启动Docker Registry"></a>2.1.启动Docker Registry</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -d -p 50000:50000 -v ~/docker-registry:/tmp/registry registry</div></pre></td></tr></table></figure>
-<ul>
-<li>-d:表示将在后台启动该容器。</li>
-<li>-p:表示端口映射。左边的为宿主机的端口，右边的为容器内部需要暴露的端口</li>
-<li>-v:推送的镜像文件会放在容器的/tmp/registry,这样设置能可通过宿主机访问已推送的镜像，对镜像文件备份。</li>
-</ul>
-<p>还可以通过访问127.0.0.1:50000/v1/search，搜索docker registry中的镜像仓库。</p>
-<h4 id="2-2-重命名镜像标签"><a href="#2-2-重命名镜像标签" class="headerlink" title="2.2.重命名镜像标签"></a>2.2.重命名镜像标签</h4><p>由于cai/java镜像默认的注册中心为Docker Hub，我们使用docker push命令推送的目标地址实际上都是docker hub，因此cai/java镜像的完整名称应为docker.io/cai/java。如果我们打算将cai/java镜像推送至本地的docker registry，则需将镜像名称修改为127.0.0.1:5000/cai/java。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker tag fwfdfw21213e2 127.0.0.1:5000/cai/java</div></pre></td></tr></table></figure>
-<h4 id="2-3-推送镜像"><a href="#2-3-推送镜像" class="headerlink" title="2.3.推送镜像"></a>2.3.推送镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker push 127.0.0.1:5000/cai/java</div></pre></td></tr></table></figure>
-<p>一般情况下，我们可将Docker Registry与Nginx集成，将它们部署在一台稳定的服务器上，通过Nginx反向代理的方式来调用Docker Registry,并将IP绑定到一个内部域名上，比如docker-registry.xxx.com。</p>
-
-        
-        </div>
-  <!--      <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://reasoncai.github.io/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" data-id="cj7njllku000a4cxdzgh34lsn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cj839790n0006tyxdu94zfqoo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -900,6 +899,15 @@
                     <li>
                         
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/JAVA基础/">JAVA基础</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/categories/JAVA基础/编码习惯/">编码习惯</a></p>
+                            <p class="item-title"><a href="/2017/09/28/Java8-Optional的使用/" class="title">Java8-Optional的使用</a></p>
+                            <p class="item-date"><time datetime="2017-09-27T16:34:14.000Z" itemprop="datePublished">2017-09-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
                             <p class="item-title"><a href="/2017/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
                             <p class="item-date"><time datetime="2017-09-16T16:30:58.000Z" itemprop="datePublished">2017-09-17</time></p>
@@ -933,15 +941,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
-                            <p class="item-title"><a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" class="title">Docker实践系列3-使用DockerRegistry管理镜像</a></p>
-                            <p class="item-date"><time datetime="2017-06-04T15:51:56.000Z" itemprop="datePublished">2017-06-04</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -951,7 +950,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编码习惯/">编码习惯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/DOCKER/">DOCKER</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/">JAVA基础</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA基础/编码习惯/">编码习惯</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/java框架/">java框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux/">linux</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/spring/">spring</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/中间件/">中间件</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作日记/">工作日记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/工作笔记/">工作笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/架构/">架构</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编码习惯/">编码习惯</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/转载/Spring-Boot/">Spring Boot</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -960,7 +959,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -969,7 +968,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AOP/">AOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DOCKER/">DOCKER</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SPRING-CLOUD/">SPRING CLOUD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java8/">java8</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux命令/">linux命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongodb/">mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tcp-ip/">tcp/ip</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/序列化/">序列化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓存/">缓存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/负载均衡/">负载均衡</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/集群/">集群</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/高可用/">高可用</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -978,7 +977,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
+            <a href="/tags/AOP/" style="font-size: 10px;">AOP</a> <a href="/tags/DOCKER/" style="font-size: 16.67px;">DOCKER</a> <a href="/tags/SPRING-CLOUD/" style="font-size: 10px;">SPRING CLOUD</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/java8/" style="font-size: 10px;">java8</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/linux命令/" style="font-size: 10px;">linux命令</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/redis/" style="font-size: 13.33px;">redis</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/tcp-ip/" style="font-size: 10px;">tcp/ip</a> <a href="/tags/多线程/" style="font-size: 16.67px;">多线程</a> <a href="/tags/并发/" style="font-size: 20px;">并发</a> <a href="/tags/序列化/" style="font-size: 10px;">序列化</a> <a href="/tags/数据库/" style="font-size: 13.33px;">数据库</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/缓存/" style="font-size: 10px;">缓存</a> <a href="/tags/负载均衡/" style="font-size: 13.33px;">负载均衡</a> <a href="/tags/集群/" style="font-size: 10px;">集群</a> <a href="/tags/高可用/" style="font-size: 10px;">高可用</a>
         </div>
     </div>
 
