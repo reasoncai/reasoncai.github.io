@@ -154,6 +154,148 @@
 
             
             <section id="main">
+    <article id="post-如何安全地暂停-恢复-终止线程-wait-notify" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2019/06/17/如何安全地暂停-恢复-终止线程-wait-notify/">如何安全地暂停-恢复-终止线程(wait/notify)</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2019/06/17/如何安全地暂停-恢复-终止线程-wait-notify/">
+            <time datetime="2019-06-17T12:47:13.000Z" itemprop="datePublished">2019-06-17</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/并发/">并发</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="1-过期的suspend-resume-stop"><a href="#1-过期的suspend-resume-stop" class="headerlink" title="1.过期的suspend(),resume(),stop()"></a>1.过期的suspend(),resume(),stop()</h4><p>这三个方法完成了线程的暂停、恢复和终止工作。但是是过期的方法，不建议使用。原因：以suspend()方法为例，在调用后，线程不会释放已经占用的资源（比如锁），而是占有着资源进入睡眠状态，这样容易引起死锁问题。同样，stop()方法在终止一个线程的时候不会保证线程的资源正常释放，通常是没有给予线程完成资源释放的工作的机会，因此会导致程序可能工作在不确定状态下。</p>
+<h4 id="2-用标志位或中断来替代stop"><a href="#2-用标志位或中断来替代stop" class="headerlink" title="2.用标志位或中断来替代stop()"></a>2.用标志位或中断来替代stop()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.concurency;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 安全地终止线程</div><div class="line"> * Created by reason on 19/6/17.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shutdown</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Runner runner1 = <span class="keyword">new</span> Runner();</div><div class="line">        Thread countThread = <span class="keyword">new</span> Thread(runner1);</div><div class="line">        countThread.start();</div><div class="line">        <span class="comment">//方法1：中断</span></div><div class="line">        <span class="comment">//睡眠1秒，main线程对countThread进行中断，使其能感知中断而结束</span></div><div class="line">        TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">        countThread.interrupt();</div><div class="line"></div><div class="line">        Runner runner2 = <span class="keyword">new</span> Runner();</div><div class="line">        countThread = <span class="keyword">new</span> Thread(runner2);</div><div class="line">        countThread.start();</div><div class="line">        <span class="comment">//方法2：设置标志位（推荐）</span></div><div class="line">        <span class="comment">//睡眠1秒，main线程对countThread进行取消，使其感知on为false而结束</span></div><div class="line">        TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">        runner2.cancel();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">long</span> i;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> on = <span class="keyword">true</span>;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">while</span>(on &amp;&amp; !Thread.currentThread().isInterrupted())&#123;</div><div class="line">                i ++;</div><div class="line">            &#125;</div><div class="line">            System.out.println(<span class="string">"count i = "</span> + i);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</div><div class="line">            on = <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="3-用等待-通知机制-wait-notify-来替代suspend-和resume"><a href="#3-用等待-通知机制-wait-notify-来替代suspend-和resume" class="headerlink" title="3.用等待/通知机制(wait/notify)来替代suspend()和resume()"></a>3.用等待/通知机制(wait/notify)来替代suspend()和resume()</h4><h5 id="等待-通知的编程范式"><a href="#等待-通知的编程范式" class="headerlink" title="等待/通知的编程范式"></a>等待/通知的编程范式</h5><ul>
+<li>等待方遵循如下原则：</li>
+</ul>
+<p>1）获取对象的锁</p>
+<p>2）如果条件不满足，那么调用对象的wait()方法，被通知后仍要检查条件。</p>
+<p>3）条件满足则执行对应的逻辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">对应的伪代码如下：</div><div class="line">synchronized(对象)&#123;</div><div class="line">    while(条件不满足)&#123;</div><div class="line">        对象.wait();</div><div class="line">    &#125;</div><div class="line">    对应的处理逻辑</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>通知方遵循如下原则：</li>
+</ul>
+<p>1）获取对象的锁</p>
+<p>2）改变条件</p>
+<p>3）通知所有等待在对象上的线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">对应的伪代码如下：</div><div class="line">synchronized(对象)&#123;</div><div class="line">    改变条件</div><div class="line">    对象.notifyAll();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h5 id="3-1不带超时时间"><a href="#3-1不带超时时间" class="headerlink" title="3.1不带超时时间"></a>3.1不带超时时间</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.concurency;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Date;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/6/17.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitNotify</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object lock = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Thread waitThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Wait(), <span class="string">"WaitThread"</span>);</div><div class="line">        waitThread.start();</div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        Thread notifyThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Notify(), <span class="string">"NotifyThread"</span>);</div><div class="line">        notifyThread.start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Wait</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">                <span class="comment">//当条件不满足时，继续wait,同时释放了lock的锁</span></div><div class="line">                <span class="keyword">while</span> (flag)&#123;</div><div class="line">                    System.out.println(Thread.currentThread() + <span class="string">" flag is true. wait @ "</span>+ <span class="keyword">new</span> Date());</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        lock.wait();</div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//条件满足时，完成工作</span></div><div class="line">                System.out.println(Thread.currentThread() + <span class="string">" flag is false. running @ "</span>+ <span class="keyword">new</span> Date());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Notify</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                <span class="comment">//获取lock的锁，然后进行通知，通知时不会释放lock的锁</span></div><div class="line">                <span class="comment">//直到当前线程释放了lock后，waitThread才能从wait方法中返回</span></div><div class="line">                System.out.println(Thread.currentThread()+<span class="string">" hold lock.notify @ "</span>+<span class="keyword">new</span> Date());</div><div class="line">                flag = <span class="keyword">false</span>;</div><div class="line">                lock.notifyAll();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">2000</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//Thread.yield();</span></div><div class="line">            <span class="comment">//再次加锁</span></div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                System.out.println(Thread.currentThread()+<span class="string">" hold lock again. @"</span>+<span class="keyword">new</span> Date());</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">1000</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Thread[WaitThread,5,main] flag is true. wait @ Sat Jun 17 20:33:34 CST 2017</div><div class="line">Thread[NotifyThread,5,main] hold lock.notify @ Sat Jun 17 20:33:35 CST 2017</div><div class="line">Thread[NotifyThread,5,main] hold lock again. @Sat Jun 17 20:33:37 CST 2017</div><div class="line">Thread[WaitThread,5,main] flag is false. running @ Sat Jun 17 20:33:38 CST 2017</div></pre></td></tr></table></figure></p>
+<h5 id="3-2等待超时模式"><a href="#3-2等待超时模式" class="headerlink" title="3.2等待超时模式"></a>3.2等待超时模式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.concurency;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Date;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/6/17.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitNotifyTimeOut</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object lock = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Thread waitThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Wait(), <span class="string">"WaitThread"</span>);</div><div class="line">        waitThread.start();</div><div class="line">        <span class="comment">//睡眠时间大于超时时间，使其超时</span></div><div class="line">        Thread.sleep(<span class="number">5000</span>);</div><div class="line">        Thread notifyThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Notify(), <span class="string">"NotifyThread"</span>);</div><div class="line">        notifyThread.start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Wait</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="comment">//超时时间</span></div><div class="line">        <span class="keyword">private</span> <span class="keyword">long</span> remaining = <span class="number">2000</span> ;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">                    <span class="keyword">long</span> future = System.currentTimeMillis() + remaining;</div><div class="line">                    <span class="keyword">while</span>(<span class="keyword">true</span> &amp;&amp; remaining &gt; <span class="number">0</span>) &#123;</div><div class="line">                        System.out.println(Thread.currentThread() + <span class="string">" wait @ "</span> + <span class="keyword">new</span> Date() + flag);</div><div class="line">                        <span class="keyword">try</span> &#123;</div><div class="line">                            <span class="comment">//设置2秒超时返回</span></div><div class="line">                            lock.wait(remaining);</div><div class="line">                            remaining = future - System.currentTimeMillis();</div><div class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                System.out.println(Thread.currentThread() + <span class="string">" running @ "</span>+ <span class="keyword">new</span> Date()+flag);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Notify</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                <span class="comment">//获取lock的锁，然后进行通知，通知时不会释放lock的锁</span></div><div class="line">                <span class="comment">//直到当前线程释放了lock后，waitThread才能从wait方法中返回</span></div><div class="line">                System.out.println(Thread.currentThread()+<span class="string">" hold lock.notify @ "</span>+<span class="keyword">new</span> Date());</div><div class="line">                flag = <span class="keyword">false</span>;</div><div class="line">                lock.notifyAll();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">1000</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Thread[WaitThread,5,main] wait @ Sat Jun 17 20:36:07 CST 2017true</div><div class="line">Thread[WaitThread,5,main] running @ Sat Jun 17 20:36:09 CST 2017true</div><div class="line">Thread[NotifyThread,5,main] hold lock.notify @ Sat Jun 17 20:36:12 CST 2017</div></pre></td></tr></table></figure></p>
+
+        
+        </div>
+  <!--      <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://reasoncai.github.io/2019/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" data-id="ck2v8n09u001oesxd9ulprsyv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+
+        </footer>-->
+    </div>
+    
+</article>
+
+
+
     <article id="post-Java8-Optional的使用" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -234,7 +376,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/09/28/Java8-Optional的使用/" data-id="cjct8xd7m0006kxxdpeexaefc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/09/28/Java8-Optional的使用/" data-id="ck2v8n08z000fesxd6zce5m6y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -388,149 +530,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="cjct8xd80000gkxxd8ltsm0i6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-
-        </footer>-->
-    </div>
-    
-</article>
-
-
-
-    <article id="post-如何安全地暂停-恢复-终止线程-wait-notify" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/">如何安全地暂停-恢复-终止线程(wait/notify)</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/">
-            <time datetime="2017-06-17T12:47:13.000Z" itemprop="datePublished">2017-06-17</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/多线程/">多线程</a>, <a class="tag-link" href="/tags/并发/">并发</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h4 id="1-过期的suspend-resume-stop"><a href="#1-过期的suspend-resume-stop" class="headerlink" title="1.过期的suspend(),resume(),stop()"></a>1.过期的suspend(),resume(),stop()</h4><p>这三个方法完成了线程的暂停、恢复和终止工作。但是是过期的方法，不建议使用。原因：以suspend()方法为例，在调用后，线程不会释放已经占用的资源（比如锁），而是占有着资源进入睡眠状态，这样容易引起死锁问题。同样，stop()方法在终止一个线程的时候不会保证线程的资源正常释放，通常是没有给予线程完成资源释放的工作的机会，因此会导致程序可能工作在不确定状态下。</p>
-<h4 id="2-用标志位或中断来替代stop"><a href="#2-用标志位或中断来替代stop" class="headerlink" title="2.用标志位或中断来替代stop()"></a>2.用标志位或中断来替代stop()</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.concurency;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 安全地终止线程</div><div class="line"> * Created by reason on 17/6/17.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shutdown</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Runner runner1 = <span class="keyword">new</span> Runner();</div><div class="line">        Thread countThread = <span class="keyword">new</span> Thread(runner1);</div><div class="line">        countThread.start();</div><div class="line">        <span class="comment">//方法1：中断</span></div><div class="line">        <span class="comment">//睡眠1秒，main线程对countThread进行中断，使其能感知中断而结束</span></div><div class="line">        TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">        countThread.interrupt();</div><div class="line"></div><div class="line">        Runner runner2 = <span class="keyword">new</span> Runner();</div><div class="line">        countThread = <span class="keyword">new</span> Thread(runner2);</div><div class="line">        countThread.start();</div><div class="line">        <span class="comment">//方法2：设置标志位（推荐）</span></div><div class="line">        <span class="comment">//睡眠1秒，main线程对countThread进行取消，使其感知on为false而结束</span></div><div class="line">        TimeUnit.SECONDS.sleep(<span class="number">1</span>);</div><div class="line">        runner2.cancel();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">long</span> i;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">boolean</span> on = <span class="keyword">true</span>;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">while</span>(on &amp;&amp; !Thread.currentThread().isInterrupted())&#123;</div><div class="line">                i ++;</div><div class="line">            &#125;</div><div class="line">            System.out.println(<span class="string">"count i = "</span> + i);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">cancel</span><span class="params">()</span> </span>&#123;</div><div class="line">            on = <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="3-用等待-通知机制-wait-notify-来替代suspend-和resume"><a href="#3-用等待-通知机制-wait-notify-来替代suspend-和resume" class="headerlink" title="3.用等待/通知机制(wait/notify)来替代suspend()和resume()"></a>3.用等待/通知机制(wait/notify)来替代suspend()和resume()</h4><h5 id="等待-通知的编程范式"><a href="#等待-通知的编程范式" class="headerlink" title="等待/通知的编程范式"></a>等待/通知的编程范式</h5><ul>
-<li>等待方遵循如下原则：</li>
-</ul>
-<p>1）获取对象的锁</p>
-<p>2）如果条件不满足，那么调用对象的wait()方法，被通知后仍要检查条件。</p>
-<p>3）条件满足则执行对应的逻辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">对应的伪代码如下：</div><div class="line">synchronized(对象)&#123;</div><div class="line">    while(条件不满足)&#123;</div><div class="line">        对象.wait();</div><div class="line">    &#125;</div><div class="line">    对应的处理逻辑</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<ul>
-<li>通知方遵循如下原则：</li>
-</ul>
-<p>1）获取对象的锁</p>
-<p>2）改变条件</p>
-<p>3）通知所有等待在对象上的线程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">对应的伪代码如下：</div><div class="line">synchronized(对象)&#123;</div><div class="line">    改变条件</div><div class="line">    对象.notifyAll();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h5 id="3-1不带超时时间"><a href="#3-1不带超时时间" class="headerlink" title="3.1不带超时时间"></a>3.1不带超时时间</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.concurency;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Date;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/6/17.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitNotify</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object lock = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Thread waitThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Wait(), <span class="string">"WaitThread"</span>);</div><div class="line">        waitThread.start();</div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        Thread notifyThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Notify(), <span class="string">"NotifyThread"</span>);</div><div class="line">        notifyThread.start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Wait</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">                <span class="comment">//当条件不满足时，继续wait,同时释放了lock的锁</span></div><div class="line">                <span class="keyword">while</span> (flag)&#123;</div><div class="line">                    System.out.println(Thread.currentThread() + <span class="string">" flag is true. wait @ "</span>+ <span class="keyword">new</span> Date());</div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        lock.wait();</div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">//条件满足时，完成工作</span></div><div class="line">                System.out.println(Thread.currentThread() + <span class="string">" flag is false. running @ "</span>+ <span class="keyword">new</span> Date());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Notify</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                <span class="comment">//获取lock的锁，然后进行通知，通知时不会释放lock的锁</span></div><div class="line">                <span class="comment">//直到当前线程释放了lock后，waitThread才能从wait方法中返回</span></div><div class="line">                System.out.println(Thread.currentThread()+<span class="string">" hold lock.notify @ "</span>+<span class="keyword">new</span> Date());</div><div class="line">                flag = <span class="keyword">false</span>;</div><div class="line">                lock.notifyAll();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">2000</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//Thread.yield();</span></div><div class="line">            <span class="comment">//再次加锁</span></div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                System.out.println(Thread.currentThread()+<span class="string">" hold lock again. @"</span>+<span class="keyword">new</span> Date());</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">1000</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Thread[WaitThread,5,main] flag is true. wait @ Sat Jun 17 20:33:34 CST 2017</div><div class="line">Thread[NotifyThread,5,main] hold lock.notify @ Sat Jun 17 20:33:35 CST 2017</div><div class="line">Thread[NotifyThread,5,main] hold lock again. @Sat Jun 17 20:33:37 CST 2017</div><div class="line">Thread[WaitThread,5,main] flag is false. running @ Sat Jun 17 20:33:38 CST 2017</div></pre></td></tr></table></figure></p>
-<h5 id="3-2等待超时模式"><a href="#3-2等待超时模式" class="headerlink" title="3.2等待超时模式"></a>3.2等待超时模式</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.cai.javademo.concurency;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.Date;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by reason on 17/6/17.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WaitNotifyTimeOut</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> flag = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Object lock = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</div><div class="line">        Thread waitThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Wait(), <span class="string">"WaitThread"</span>);</div><div class="line">        waitThread.start();</div><div class="line">        <span class="comment">//睡眠时间大于超时时间，使其超时</span></div><div class="line">        Thread.sleep(<span class="number">5000</span>);</div><div class="line">        Thread notifyThread = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Notify(), <span class="string">"NotifyThread"</span>);</div><div class="line">        notifyThread.start();</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Wait</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line">        <span class="comment">//超时时间</span></div><div class="line">        <span class="keyword">private</span> <span class="keyword">long</span> remaining = <span class="number">2000</span> ;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock) &#123;</div><div class="line">                    <span class="keyword">long</span> future = System.currentTimeMillis() + remaining;</div><div class="line">                    <span class="keyword">while</span>(<span class="keyword">true</span> &amp;&amp; remaining &gt; <span class="number">0</span>) &#123;</div><div class="line">                        System.out.println(Thread.currentThread() + <span class="string">" wait @ "</span> + <span class="keyword">new</span> Date() + flag);</div><div class="line">                        <span class="keyword">try</span> &#123;</div><div class="line">                            <span class="comment">//设置2秒超时返回</span></div><div class="line">                            lock.wait(remaining);</div><div class="line">                            remaining = future - System.currentTimeMillis();</div><div class="line">                        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                            e.printStackTrace();</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                System.out.println(Thread.currentThread() + <span class="string">" running @ "</span>+ <span class="keyword">new</span> Date()+flag);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Notify</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="comment">//加锁,拥有lock的Monitor</span></div><div class="line">            <span class="keyword">synchronized</span> (lock)&#123;</div><div class="line">                <span class="comment">//获取lock的锁，然后进行通知，通知时不会释放lock的锁</span></div><div class="line">                <span class="comment">//直到当前线程释放了lock后，waitThread才能从wait方法中返回</span></div><div class="line">                System.out.println(Thread.currentThread()+<span class="string">" hold lock.notify @ "</span>+<span class="keyword">new</span> Date());</div><div class="line">                flag = <span class="keyword">false</span>;</div><div class="line">                lock.notifyAll();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    Thread.sleep(<span class="number">1000</span>);</div><div class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Thread[WaitThread,5,main] wait @ Sat Jun 17 20:36:07 CST 2017true</div><div class="line">Thread[WaitThread,5,main] running @ Sat Jun 17 20:36:09 CST 2017true</div><div class="line">Thread[NotifyThread,5,main] hold lock.notify @ Sat Jun 17 20:36:12 CST 2017</div></pre></td></tr></table></figure></p>
-
-        
-        </div>
-  <!--      <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://reasoncai.github.io/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" data-id="cjct8xd99001ukxxd85cn0luo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="ck2v8n090000hesxdiuqyy7pi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -658,7 +658,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="cjct8xd8m0019kxxd0hxvvsrj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/12/mybatis模糊查询like如何写/" data-id="ck2v8n09h0017esxda1wym7zo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -812,7 +812,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="cjct8xd7y000fkxxd3blr19nv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2017/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="ck2v8n08u000aesxdiirkkk91" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -904,6 +904,15 @@
                     <li>
                         
                         <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2019/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" class="title">如何安全地暂停-恢复-终止线程(wait/notify)</a></p>
+                            <p class="item-date"><time datetime="2019-06-17T12:47:13.000Z" itemprop="datePublished">2019-06-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/java基础/">java基础</a></p>
                             <p class="item-title"><a href="/2017/09/28/Java8-Optional的使用/" class="title">Java8-Optional的使用</a></p>
                             <p class="item-date"><time datetime="2017-09-28T15:45:26.000Z" itemprop="datePublished">2017-09-28</time></p>
@@ -916,15 +925,6 @@
                             <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
                             <p class="item-title"><a href="/2017/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
                             <p class="item-date"><time datetime="2017-09-16T16:30:58.000Z" itemprop="datePublished">2017-09-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" class="title">如何安全地暂停-恢复-终止线程(wait/notify)</a></p>
-                            <p class="item-date"><time datetime="2017-06-17T12:47:13.000Z" itemprop="datePublished">2017-06-17</time></p>
                         </div>
                     </li>
                 
@@ -964,7 +964,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
@@ -994,7 +994,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2018 reason<br>
+            &copy; 2019 reason<br>
         </div>
     </div>
 </footer>
