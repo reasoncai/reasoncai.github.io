@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Docker实践系列2-制作镜像 | Reason&#39;s blog</title>
+    <title>Docker实践系列4-Springboot与Docker整合 | Reason&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="1.手工制作Java镜像 从docker hub中获取一份centos镜像到本地，准备oracle jdk的压缩包放在宿主机的/software目录下。 启动centos容器  1$ docker run -i -t -v /software:/mnt/software centos /bin/bash -v选项，即数据卷（DataVolume），用于将宿主机上的磁盘挂载到容器中。格式为“宿主机路">
+    <meta name="description" content="1.添加Dockerfile这个文件放在src/main/resources资源目录下12345FROM javaMAINTAINER &quot;cai&quot;&amp;lt;403411876@qq.com&amp;gt;ADD @project.build.finalName@.jar app.jarEXPOSE 8080CMD java -jar app.jar  使用Docker官方提供的Java镜像，它是基于Open">
 <meta name="keywords" content="DOCKER">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker实践系列2-制作镜像">
-<meta property="og:url" content="https://reasoncai.github.io/2017/05/31/Docker实践系列2-制作镜像/index.html">
+<meta property="og:title" content="Docker实践系列4-Springboot与Docker整合">
+<meta property="og:url" content="https://reasoncai.github.io/2019/06/06/Docker实践系列4-Springboot与Docker整合/index.html">
 <meta property="og:site_name" content="Reason&#39;s blog">
-<meta property="og:description" content="1.手工制作Java镜像 从docker hub中获取一份centos镜像到本地，准备oracle jdk的压缩包放在宿主机的/software目录下。 启动centos容器  1$ docker run -i -t -v /software:/mnt/software centos /bin/bash -v选项，即数据卷（DataVolume），用于将宿主机上的磁盘挂载到容器中。格式为“宿主机路">
-<meta property="og:updated_time" content="2017-06-04T15:56:03.000Z">
+<meta property="og:description" content="1.添加Dockerfile这个文件放在src/main/resources资源目录下12345FROM javaMAINTAINER &quot;cai&quot;&amp;lt;403411876@qq.com&amp;gt;ADD @project.build.finalName@.jar app.jarEXPOSE 8080CMD java -jar app.jar  使用Docker官方提供的Java镜像，它是基于Open">
+<meta property="og:updated_time" content="2019-11-12T02:52:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker实践系列2-制作镜像">
-<meta name="twitter:description" content="1.手工制作Java镜像 从docker hub中获取一份centos镜像到本地，准备oracle jdk的压缩包放在宿主机的/software目录下。 启动centos容器  1$ docker run -i -t -v /software:/mnt/software centos /bin/bash -v选项，即数据卷（DataVolume），用于将宿主机上的磁盘挂载到容器中。格式为“宿主机路">
+<meta name="twitter:title" content="Docker实践系列4-Springboot与Docker整合">
+<meta name="twitter:description" content="1.添加Dockerfile这个文件放在src/main/resources资源目录下12345FROM javaMAINTAINER &quot;cai&quot;&amp;lt;403411876@qq.com&amp;gt;ADD @project.build.finalName@.jar app.jarEXPOSE 8080CMD java -jar app.jar  使用Docker官方提供的Java镜像，它是基于Open">
     
 
     
@@ -158,7 +158,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Docker实践系列2-制作镜像" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Docker实践系列4-Springboot与Docker整合" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -166,7 +166,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Docker实践系列2-制作镜像
+            Docker实践系列4-Springboot与Docker整合
         </h1>
     
 
@@ -175,8 +175,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/05/31/Docker实践系列2-制作镜像/">
-            <time datetime="2017-05-31T15:39:55.000Z" itemprop="datePublished">2017-05-31</time>
+        <a href="/2019/06/06/Docker实践系列4-Springboot与Docker整合/">
+            <time datetime="2019-06-06T14:11:47.000Z" itemprop="datePublished">2019-06-06</time>
         </a>
     </div>
 
@@ -201,68 +201,32 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="1-手工制作Java镜像"><a href="#1-手工制作Java镜像" class="headerlink" title="1.手工制作Java镜像"></a>1.手工制作Java镜像</h3><ol>
-<li>从docker hub中获取一份centos镜像到本地，准备oracle jdk的压缩包放在宿主机的/software目录下。</li>
-<li>启动centos容器</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -i -t -v /software:/mnt/software centos /bin/bash</div></pre></td></tr></table></figure>
-<p>-v选项，即数据卷（DataVolume），用于将宿主机上的磁盘挂载到容器中。格式为“宿主机路径:容器路径”，宿主机路径可以为相对路径，容器路径必须为绝对路径，此外，多次使用-v选项，可以同时挂载多个宿主机路径到容器中。</p>
-<ol>
-<li><p>进入容器后，执行命令,安装JDK</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#验证是否挂载成功</span></div><div class="line">ll /mnt/software</div><div class="line"><span class="comment">#解压jdk压缩包</span></div><div class="line">tar -zxf /mnt/software/jdk-8u91-linux-x64.tar.gz -C /opt</div><div class="line"><span class="comment">#查看解压文件夹</span></div><div class="line">ll /opt</div><div class="line"><span class="comment">#为了便于访问与升级，建立一个软连接，用于快速访问JDK跟目录</span></div><div class="line">ln <span class="_">-s</span> /opt/jdk1.8.0_91 /opt/jdk</div><div class="line">ll /opt/jdk</div><div class="line"><span class="comment">#验证JDK是否安装成功</span></div><div class="line">/opt/jdk/bin/java -version</div></pre></td></tr></table></figure>
-</li>
-<li><p>提交镜像</p>
-</li>
-</ol>
-<p>再打开一个终端，查看当前运行中的容器<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ docker ps</div><div class="line"><span class="comment">#提交容器为一个新的镜像</span></div><div class="line">docker commit be3dsddwewq2 cai/java</div><div class="line"><span class="comment">#验证查看本地是否保护cai/java镜像</span></div><div class="line">$ docker images</div></pre></td></tr></table></figure></p>
-<ol>
-<li>验证镜像</li>
-</ol>
-<p>用刚才创建的镜像启动一个容器，若容器能成功输出java版本号，则说明镜像是可用的。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run --rm cai/java /opt/jdk/bin/java -version</div></pre></td></tr></table></figure></p>
-<p>-rm选项，表示当容器退出时可自动删除容器，也就是运行完java -version命令后，容器自动退出。当我们不想保留该容器，自动执行docker rm操作，将自己删除。</p>
-<h3 id="2-使用Dockerfile构建镜像"><a href="#2-使用Dockerfile构建镜像" class="headerlink" title="2.使用Dockerfile构建镜像"></a>2.使用Dockerfile构建镜像</h3><h4 id="2-1-Dockerfile基本结构"><a href="#2-1-Dockerfile基本结构" class="headerlink" title="2.1.Dockerfile基本结构"></a>2.1.Dockerfile基本结构</h4><p>Dockerfile实际上是一个编写Docker镜像的脚本，该脚本有一个固定的格式。我们首先创建一个空白的文本文件，文件名为Dockerfile。其实叫其他名字也可以，只是Dockerfile是默认的文件名而已。</p>
-<ol>
-<li>设置基础镜像</li>
-</ol>
-<p>当前构建的镜像必须继承于某个“基础镜像”,例如基于centos最新版镜像：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">FROM centos:latest</div></pre></td></tr></table></figure>
-<p>FROM指令有固定的格式，即“仓库名:标签名”,若使用最新版本，则latest可以省略。</p>
-<ol>
-<li>设置维护者信息</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MAINTAINER &quot;CAI&quot;&lt;403411876@qq.com&gt;</div></pre></td></tr></table></figure>
-<ol>
-<li>设置需要添加到容器的文件</li>
-</ol>
-<p>例如我们从Oracle官网下载的JDK压缩包，可使用ADD指令将此文件添加到容器的指定目录中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD jdk-8u91-linux-x64.tar.gz /opt</div></pre></td></tr></table></figure>
+            <h4 id="1-添加Dockerfile"><a href="#1-添加Dockerfile" class="headerlink" title="1.添加Dockerfile"></a>1.添加Dockerfile</h4><p>这个文件放在src/main/resources资源目录下<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM java</div><div class="line">MAINTAINER "cai"&lt;403411876@qq.com&gt;</div><div class="line">ADD @project.build.finalName@.jar app.jar</div><div class="line">EXPOSE 8080</div><div class="line">CMD java -jar app.jar</div></pre></td></tr></table></figure></p>
 <ul>
-<li>ADD指令的第一个参数为宿主机的来源路径（可用相对路径），第二个参数是容器的目标路径（必须为绝对路径）。ADD指令将自动解压来源路径中的压缩包，将解压后的文件复制到目标路径中。此外我们一般将Dockerfile文件与需要添加到容器的文件放在同一目录下，这样有助于编写来源路径。</li>
-<li>还有一个与ADD指令功能类似的COPY指令，只是后者只能完成简单的复制，而没有自动解压的功能。</li>
+<li>使用Docker官方提供的Java镜像，它是基于Openjdk制作的，也可以使用我们自己基于oracle jdk制作的镜像。</li>
+<li>通过ADD命令将jar包添加到镜像中 。Springboot对maven的“资源过滤”特性进行了一些改进，我们需要使用@project.build.finalName@来获取jar包文件。</li>
+<li>EXPOSE暴露8080端口</li>
+<li>CMD执行启动命令</li>
 </ul>
-<ol>
-<li>设置镜像制作过程中需要执行的命令</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">RUN ln -s /opt/jdk1.8.0_91 /opt/jdk</div></pre></td></tr></table></figure>
-<p>如果需要执行多条命令，我们可以使用多行RUN命令，但如果将多条指令通过\命令换行符合并成一条，这样将减少所构建的镜像的体积。原因是，在镜像中每执行一条命令，都会形成新的“镜像层”，我们需要尽可能减少镜像层，从而减少镜像体积。</p>
-<ol>
-<li>设置容器启动时需要执行的命令</li>
-</ol>
-<p>我们在使用docker run命令时，可在命令的最后一段添加一个容器启动时需要执行的命令，在Dockerfile中也有相对应的CMD指令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CMD /opt/jdk/bin/java -version</div></pre></td></tr></table></figure>
+<h4 id="2-使用Maven构建Docker镜像。"><a href="#2-使用Maven构建Docker镜像。" class="headerlink" title="2.使用Maven构建Docker镜像。"></a>2.使用Maven构建Docker镜像。</h4><p>Spotify公司开源了一款docker-maven-plugin的Maven插件，我们可使用Maven命令来构建Docker镜像</p>
+<p>将以下配置到pom.xml文件</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.4.10<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">imageName</span>&gt;</span>$&#123;project.groupId&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">dockerDirectory</span>&gt;</span>$&#123;project.build.outputDirectory&#125;/<span class="tag">&lt;/<span class="name">dockerDirectory</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">resource</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.jar<span class="tag">&lt;/<span class="name">include</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
 <ul>
-<li>如果使用docker run命令时指定了需要执行的命令，那么该命令将覆盖Dockerfile中通过CMD设置的命令。</li>
-<li>还有一个类似的ENTRYPOINT指令，他所执行的指令不能被docker run命令所覆盖。</li>
-<li>CMD指令要么没有，要么只有一条，CMD指令还能与ENTRYPOINT指令联合使用。</li>
+<li>imageName:用于指定Docker镜像的完整名称</li>
+<li>dockerDirectory:用于指定Dockerfile文件所在的目录,指定为${project.build.outputDirectory}是为了读取经maven资源过滤后的Dockerfile文件，该文件中的@project.build.finalName@占位符此时已经被替换为实际内容</li>
+<li>resources/resource/directory:用于指定需要复制的跟目录，其中${project.build.directory}表示target目录。</li>
+<li>resources/resource/include:用于指定需要复制的文件。即为Maven打包后生产的jar文件。</li>
 </ul>
-<h4 id="2-2-使用Dockerfile构建镜像"><a href="#2-2-使用Dockerfile构建镜像" class="headerlink" title="2.2.使用Dockerfile构建镜像"></a>2.2.使用Dockerfile构建镜像</h4><p>Dockerfile内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">FROM centos:latest</div><div class="line">MAINTAINER &quot;CAI&quot;&lt;403411876@qq.com&gt;</div><div class="line">ADD jdk-8u91-linux-x64.tar.gz /opt</div><div class="line">RUN ln -s /opt/jdk1.8.0_91 /opt/jdk</div><div class="line">CMD /opt/jdk/bin/java -version</div></pre></td></tr></table></figure></p>
-<p>使用docker build 命令读取Dockerfile文件，并构建一个镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker bulid -t cai/java .</div></pre></td></tr></table></figure>
-<p>-t选项指定镜像的名称，并读取当前的目录(即.目录)中的Dockerfile文件。</p>
-<p>通过docker images发现这次构建的镜像与之前手工构建的镜像所包括的仓库名与标签名完全相同，之前的都被更新为<none>了。用以下命令修改执行的仓库名和标签名</none></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker tag eirj313213 cai/java:1.0</div></pre></td></tr></table></figure>
-<p>Dockerfile也提供设置环境变量的指令，ENV<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">FROM centos:latest</div><div class="line">MAINTAINER &quot;CAI&quot;&lt;403411876@qq.com&gt;</div><div class="line">ADD jdk-8u91-linux-x64.tar.gz /opt</div><div class="line">RUN ln -s /opt/jdk1.8.0_91 /opt/jdk</div><div class="line">ENV JAVA_HOME /opt/jdk</div><div class="line">ENV PATH $JAVA_HOME/bin:$PATH</div><div class="line">CMD java -version</div></pre></td></tr></table></figure></p>
-<h4 id="2-3-Dockerfile的其他指令"><a href="#2-3-Dockerfile的其他指令" class="headerlink" title="2.3.Dockerfile的其他指令"></a>2.3.Dockerfile的其他指令</h4>
+<p>执行mvn docker:build后，在target目录下生成了一个docker目录，该目录中不仅包含classes目录中的所有文件，还包含了一个打包生成的jar文件。随后，docker-maven-plugin插件就在docker目录下执行docker build命令来构建镜像。</p>
+<p>如果打算将构建的镜像推送到Docker registry中，那么pom.xml可以定义其地址<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">docker.registry</span>&gt;</span>127.0.0.1:5000<span class="tag">&lt;/<span class="name">docker.registry</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>将此属性作物imagName的前缀，再将imageName改为<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">imageName</span>&gt;</span>$&#123;docker.registry&#125;/$&#123;project.groupId&#125;/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>最后执行 mvn docker:build docker:push命令先构建后推送</p>
+<p>查看命令帮助：mvn docker:help -Ddetail=true</p>
+<h4 id="3-启动Springboot的docker容器"><a href="#3-启动Springboot的docker容器" class="headerlink" title="3.启动Springboot的docker容器"></a>3.启动Springboot的docker容器</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> docker run <span class="_">-d</span> -p 58080:8080 127.0.0.1:50000/com.cai/hello:1.0.0</span></div></pre></td></tr></table></figure>
+<h4 id="4-调整docker容器内存限制"><a href="#4-调整docker容器内存限制" class="headerlink" title="4.调整docker容器内存限制"></a>4.调整docker容器内存限制</h4><p>查看容器运行情况<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="meta">$</span><span class="bash"> docker stats</span></div></pre></td></tr></table></figure></p>
+<p>docker run的-m参数调整容器内存</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ doceker run \</div><div class="line"><span class="_">-d</span> \</div><div class="line">-p 58080:8080 \</div><div class="line">-m 512m \</div><div class="line">127.0.0.1:50000/com.cai/hello:1.0.0</div></pre></td></tr></table></figure>
+
         
         </div>
   <!--      <footer class="article-footer">
@@ -272,7 +236,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/05/31/Docker实践系列2-制作镜像/" data-id="ck2v8n08r0006esxdo51fy2t3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2019/06/06/Docker实践系列4-Springboot与Docker整合/" data-id="ck2v9h0bo000bhqxdbknrbdqh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -347,19 +311,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2019/06/12/mybatis模糊查询like如何写/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    Docker实践系列3-使用DockerRegistry管理镜像
+                    mybatis模糊查询like如何写
                 
             </div>
         </a>
     
     
-        <a href="/2017/05/30/Docker实践系列1-基本命令/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Docker实践系列1-基本命令</div>
+            <div class="article-nav-title">Docker实践系列3-使用DockerRegistry管理镜像</div>
         </a>
     
 </nav>
@@ -387,6 +351,24 @@
                     <li>
                         
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/java基础/">java基础</a></p>
+                            <p class="item-title"><a href="/2019/09/28/Java8-Optional的使用/" class="title">Java8-Optional的使用</a></p>
+                            <p class="item-date"><time datetime="2019-09-28T15:45:26.000Z" itemprop="datePublished">2019-09-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
+                            <p class="item-title"><a href="/2019/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
+                            <p class="item-date"><time datetime="2019-09-16T16:30:58.000Z" itemprop="datePublished">2019-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
                             <p class="item-category"></p>
                             <p class="item-title"><a href="/2019/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" class="title">如何安全地暂停-恢复-终止线程(wait/notify)</a></p>
                             <p class="item-date"><time datetime="2019-06-17T12:47:13.000Z" itemprop="datePublished">2019-06-17</time></p>
@@ -396,27 +378,9 @@
                     <li>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/java基础/">java基础</a></p>
-                            <p class="item-title"><a href="/2017/09/28/Java8-Optional的使用/" class="title">Java8-Optional的使用</a></p>
-                            <p class="item-date"><time datetime="2017-09-28T15:45:26.000Z" itemprop="datePublished">2017-09-28</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
-                            <p class="item-title"><a href="/2017/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
-                            <p class="item-date"><time datetime="2017-09-16T16:30:58.000Z" itemprop="datePublished">2017-09-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/06/12/mybatis模糊查询like如何写/" class="title">mybatis模糊查询like如何写</a></p>
-                            <p class="item-date"><time datetime="2017-06-12T04:38:42.000Z" itemprop="datePublished">2017-06-12</time></p>
+                            <p class="item-title"><a href="/2019/06/12/mybatis模糊查询like如何写/" class="title">mybatis模糊查询like如何写</a></p>
+                            <p class="item-date"><time datetime="2019-06-12T04:38:42.000Z" itemprop="datePublished">2019-06-12</time></p>
                         </div>
                     </li>
                 
@@ -424,8 +388,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
-                            <p class="item-title"><a href="/2017/06/06/Docker实践系列4-Springboot与Docker整合/" class="title">Docker实践系列4-Springboot与Docker整合</a></p>
-                            <p class="item-date"><time datetime="2017-06-06T14:11:47.000Z" itemprop="datePublished">2017-06-06</time></p>
+                            <p class="item-title"><a href="/2019/06/06/Docker实践系列4-Springboot与Docker整合/" class="title">Docker实践系列4-Springboot与Docker整合</a></p>
+                            <p class="item-date"><time datetime="2019-06-06T14:11:47.000Z" itemprop="datePublished">2019-06-06</time></p>
                         </div>
                     </li>
                 
@@ -447,7 +411,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 

@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Java常量定义在interface中好还是定义在class好 | Reason&#39;s blog</title>
+    <title>Docker实践系列3-使用DockerRegistry管理镜像 | Reason&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="项目中经常需要定义一些常量，定义方法有以下几种： 1.定义在interface中12345public interface Constants &amp;#123;    int A = 90;    int B = 80;    int C = 60;&amp;#125;  优点：接口中定义的”变量”, 其实就是常量, 接口中的”变量”默认都是 “public static final”类型，即为常量，因此接口">
-<meta name="keywords" content="java">
+    <meta name="description" content="Docker Hub相当于maven中央仓库 Docker Registry相当于局域网的mavan仓库（nexus）  1.使用DockerHub 注册登录docker hub 在docker hub上创建仓库 推送本地镜像到docker hub  1$ docker push cai/java 输出没有授权，需要登录 1$ docker login 2.搭建Docker Registry2.">
+<meta name="keywords" content="DOCKER">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java常量定义在interface中好还是定义在class好">
-<meta property="og:url" content="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/index.html">
+<meta property="og:title" content="Docker实践系列3-使用DockerRegistry管理镜像">
+<meta property="og:url" content="https://reasoncai.github.io/2019/06/04/Docker实践系列3-使用DockerRegistry管理镜像/index.html">
 <meta property="og:site_name" content="Reason&#39;s blog">
-<meta property="og:description" content="项目中经常需要定义一些常量，定义方法有以下几种： 1.定义在interface中12345public interface Constants &amp;#123;    int A = 90;    int B = 80;    int C = 60;&amp;#125;  优点：接口中定义的”变量”, 其实就是常量, 接口中的”变量”默认都是 “public static final”类型，即为常量，因此接口">
-<meta property="og:updated_time" content="2018-01-24T15:44:53.000Z">
+<meta property="og:description" content="Docker Hub相当于maven中央仓库 Docker Registry相当于局域网的mavan仓库（nexus）  1.使用DockerHub 注册登录docker hub 在docker hub上创建仓库 推送本地镜像到docker hub  1$ docker push cai/java 输出没有授权，需要登录 1$ docker login 2.搭建Docker Registry2.">
+<meta property="og:updated_time" content="2019-11-12T02:52:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java常量定义在interface中好还是定义在class好">
-<meta name="twitter:description" content="项目中经常需要定义一些常量，定义方法有以下几种： 1.定义在interface中12345public interface Constants &amp;#123;    int A = 90;    int B = 80;    int C = 60;&amp;#125;  优点：接口中定义的”变量”, 其实就是常量, 接口中的”变量”默认都是 “public static final”类型，即为常量，因此接口">
+<meta name="twitter:title" content="Docker实践系列3-使用DockerRegistry管理镜像">
+<meta name="twitter:description" content="Docker Hub相当于maven中央仓库 Docker Registry相当于局域网的mavan仓库（nexus）  1.使用DockerHub 注册登录docker hub 在docker hub上创建仓库 推送本地镜像到docker hub  1$ docker push cai/java 输出没有授权，需要登录 1$ docker login 2.搭建Docker Registry2.">
     
 
     
@@ -158,7 +158,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Java常量定义在interface中好还是定义在class好" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Docker实践系列3-使用DockerRegistry管理镜像" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -166,7 +166,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Java常量定义在interface中好还是定义在class好
+            Docker实践系列3-使用DockerRegistry管理镜像
         </h1>
     
 
@@ -175,8 +175,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/09/17/Java常量定义在interface中好还是定义在class好/">
-            <time datetime="2017-09-16T16:30:58.000Z" itemprop="datePublished">2017-09-17</time>
+        <a href="/2019/06/04/Docker实践系列3-使用DockerRegistry管理镜像/">
+            <time datetime="2019-06-04T15:51:56.000Z" itemprop="datePublished">2019-06-04</time>
         </a>
     </div>
 
@@ -184,13 +184,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/编码习惯/">编码习惯</a>
+        <a class="article-category-link" href="/categories/DOCKER/">DOCKER</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/java/">java</a>
+        <a class="tag-link" href="/tags/DOCKER/">DOCKER</a>
     </div>
 
                     </div>
@@ -201,31 +201,29 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>项目中经常需要定义一些常量，定义方法有以下几种：</p>
-<h5 id="1-定义在interface中"><a href="#1-定义在interface中" class="headerlink" title="1.定义在interface中"></a>1.定义在interface中</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Constants</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> A = <span class="number">90</span>;</div><div class="line">    <span class="keyword">int</span> B = <span class="number">80</span>;</div><div class="line">    <span class="keyword">int</span> C = <span class="number">60</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+            <ul>
+<li>Docker Hub相当于maven中央仓库</li>
+<li>Docker Registry相当于局域网的mavan仓库（nexus）</li>
+</ul>
+<h3 id="1-使用DockerHub"><a href="#1-使用DockerHub" class="headerlink" title="1.使用DockerHub"></a>1.使用DockerHub</h3><ol>
+<li>注册登录docker hub</li>
+<li>在docker hub上创建仓库</li>
+<li>推送本地镜像到docker hub</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker push cai/java</div></pre></td></tr></table></figure>
+<p>输出没有授权，需要登录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker login</div></pre></td></tr></table></figure>
+<h3 id="2-搭建Docker-Registry"><a href="#2-搭建Docker-Registry" class="headerlink" title="2.搭建Docker Registry"></a>2.搭建Docker Registry</h3><h4 id="2-1-启动Docker-Registry"><a href="#2-1-启动Docker-Registry" class="headerlink" title="2.1.启动Docker Registry"></a>2.1.启动Docker Registry</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker run -d -p 50000:50000 -v ~/docker-registry:/tmp/registry registry</div></pre></td></tr></table></figure>
 <ul>
-<li><p>优点：接口中定义的”变量”, 其实就是常量, 接口中的”变量”默认都是 “public static final”类型，即为常量，因此接口可以省略”public static final”而直接写成 “type variable”，在interface和class中定义相同的常量, interface生成的class文件比class生成的class文件会更小, 而且更简洁, 效率更高。</p>
-</li>
-<li><p>缺点：接口定义常量, 虽不能实例化, 但能被实现。因此有这么一种设计模式”The constant interface pattern”. 所谓的”常量接口模式”,  就是其他类要使用接口中定义的常量, 就实现该接口. 我认为这是对接口的烂用。 接口中定义的常量应为所有类频繁使用的常量, 但并不是每个类都使用了接口中定义的所有常量, 因而导入了不必要的常量到这个类中, 并且导入后这个类的子类也会基础导入的常量, 这样会导致混乱, 应当避免此种用法。</p>
-</li>
+<li>-d:表示将在后台启动该容器。</li>
+<li>-p:表示端口映射。左边的为宿主机的端口，右边的为容器内部需要暴露的端口</li>
+<li>-v:推送的镜像文件会放在容器的/tmp/registry,这样设置能可通过宿主机访问已推送的镜像，对镜像文件备份。</li>
 </ul>
-<h5 id="2-定义在普通的class中"><a href="#2-定义在普通的class中" class="headerlink" title="2.定义在普通的class中"></a>2.定义在普通的class中</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Constants</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Constants</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> A = <span class="number">90</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> B = <span class="number">80</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> C = <span class="number">60</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li><p>优点：final类修饰类防止被继承，私用构造方法防止实例化。</p>
-</li>
-<li><p>缺点：代码量比用接口的多。</p>
-</li>
-</ul>
-<h5 id="3-定义在抽象类中"><a href="#3-定义在抽象类中" class="headerlink" title="3.定义在抽象类中"></a>3.定义在抽象类中</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Constants</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> A = <span class="number">90</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> B = <span class="number">80</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> C = <span class="number">60</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>优点：抽象类防止实例化。</li>
-<li>缺点：”abstract class”的目的是为了让其他类继承, 因此语意别扭, 同样具有interface定义常量的缺点–即可以被继承。</li>
-</ul>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>个人推荐用方法1-interface定义常量，代码更加简洁，生成的class文件更小, jvm不用考虑类的附加特性, 如方法重载等, 因而更为高效。当然方法2更加严谨。</li>
-<li>建议使用常量的地方以 “接口.常量名” 的方式使用。不要使用静态导入import static XXX，因为代码的可读性会下降。</li>
-<li>不要使用”常量接口模式”, 此模式会导致类中的常量混乱, 增加维护难度。</li>
-</ul>
+<p>还可以通过访问127.0.0.1:50000/v1/search，搜索docker registry中的镜像仓库。</p>
+<h4 id="2-2-重命名镜像标签"><a href="#2-2-重命名镜像标签" class="headerlink" title="2.2.重命名镜像标签"></a>2.2.重命名镜像标签</h4><p>由于cai/java镜像默认的注册中心为Docker Hub，我们使用docker push命令推送的目标地址实际上都是docker hub，因此cai/java镜像的完整名称应为docker.io/cai/java。如果我们打算将cai/java镜像推送至本地的docker registry，则需将镜像名称修改为127.0.0.1:5000/cai/java。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker tag fwfdfw21213e2 127.0.0.1:5000/cai/java</div></pre></td></tr></table></figure>
+<h4 id="2-3-推送镜像"><a href="#2-3-推送镜像" class="headerlink" title="2.3.推送镜像"></a>2.3.推送镜像</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ docker push 127.0.0.1:5000/cai/java</div></pre></td></tr></table></figure>
+<p>一般情况下，我们可将Docker Registry与Nginx集成，将它们部署在一台稳定的服务器上，通过Nginx反向代理的方式来调用Docker Registry,并将IP绑定到一个内部域名上，比如docker-registry.xxx.com。</p>
 
         
         </div>
@@ -236,7 +234,7 @@
 
 </div>
 
-    <a data-url="https://reasoncai.github.io/2017/09/17/Java常量定义在interface中好还是定义在class好/" data-id="ck2v8n090000hesxdiuqyy7pi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://reasoncai.github.io/2019/06/04/Docker实践系列3-使用DockerRegistry管理镜像/" data-id="ck2v9h0bl0009hqxd33fctfxu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -311,19 +309,19 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/09/28/Java8-Optional的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2019/06/06/Docker实践系列4-Springboot与Docker整合/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Newer</strong>
             <div class="article-nav-title">
                 
-                    Java8-Optional的使用
+                    Docker实践系列4-Springboot与Docker整合
                 
             </div>
         </a>
     
     
-        <a href="/2017/06/12/mybatis模糊查询like如何写/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2019/05/31/Docker实践系列2-制作镜像/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">mybatis模糊查询like如何写</div>
+            <div class="article-nav-title">Docker实践系列2-制作镜像</div>
         </a>
     
 </nav>
@@ -351,6 +349,24 @@
                     <li>
                         
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/java基础/">java基础</a></p>
+                            <p class="item-title"><a href="/2019/09/28/Java8-Optional的使用/" class="title">Java8-Optional的使用</a></p>
+                            <p class="item-date"><time datetime="2019-09-28T15:45:26.000Z" itemprop="datePublished">2019-09-28</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
+                            <p class="item-title"><a href="/2019/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
+                            <p class="item-date"><time datetime="2019-09-16T16:30:58.000Z" itemprop="datePublished">2019-09-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
                             <p class="item-category"></p>
                             <p class="item-title"><a href="/2019/06/17/如何安全地暂停-恢复-终止线程-wait-notify/" class="title">如何安全地暂停-恢复-终止线程(wait/notify)</a></p>
                             <p class="item-date"><time datetime="2019-06-17T12:47:13.000Z" itemprop="datePublished">2019-06-17</time></p>
@@ -360,27 +376,9 @@
                     <li>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/java基础/">java基础</a></p>
-                            <p class="item-title"><a href="/2017/09/28/Java8-Optional的使用/" class="title">Java8-Optional的使用</a></p>
-                            <p class="item-date"><time datetime="2017-09-28T15:45:26.000Z" itemprop="datePublished">2017-09-28</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/categories/编码习惯/">编码习惯</a></p>
-                            <p class="item-title"><a href="/2017/09/17/Java常量定义在interface中好还是定义在class好/" class="title">Java常量定义在interface中好还是定义在class好</a></p>
-                            <p class="item-date"><time datetime="2017-09-16T16:30:58.000Z" itemprop="datePublished">2017-09-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/06/12/mybatis模糊查询like如何写/" class="title">mybatis模糊查询like如何写</a></p>
-                            <p class="item-date"><time datetime="2017-06-12T04:38:42.000Z" itemprop="datePublished">2017-06-12</time></p>
+                            <p class="item-title"><a href="/2019/06/12/mybatis模糊查询like如何写/" class="title">mybatis模糊查询like如何写</a></p>
+                            <p class="item-date"><time datetime="2019-06-12T04:38:42.000Z" itemprop="datePublished">2019-06-12</time></p>
                         </div>
                     </li>
                 
@@ -388,8 +386,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/DOCKER/">DOCKER</a></p>
-                            <p class="item-title"><a href="/2017/06/06/Docker实践系列4-Springboot与Docker整合/" class="title">Docker实践系列4-Springboot与Docker整合</a></p>
-                            <p class="item-date"><time datetime="2017-06-06T14:11:47.000Z" itemprop="datePublished">2017-06-06</time></p>
+                            <p class="item-title"><a href="/2019/06/06/Docker实践系列4-Springboot与Docker整合/" class="title">Docker实践系列4-Springboot与Docker整合</a></p>
+                            <p class="item-date"><time datetime="2019-06-06T14:11:47.000Z" itemprop="datePublished">2019-06-06</time></p>
                         </div>
                     </li>
                 
@@ -411,7 +409,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 
